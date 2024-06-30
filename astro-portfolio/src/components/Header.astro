@@ -1,11 +1,13 @@
 ---
-//import Navbar from './Navbar.astro';
+import Navbar from './Navbar.astro';
+import SocialButtons from './SocialButtons.astro'
 ---
 
 <header>
-    <!-- <Navbar /> -->
+    <Navbar />
         <h1 class="title">Yanina Unrein</h1>
         <h2 class="subtitle">FullStack Developer</h2>
+        <SocialButtons className="social-buttons" />
 </header>
 
 <style>
@@ -45,8 +47,8 @@
     color: #ffffff; 
    }
    
-   body.open .title, body.open .subtitle {
-    opacity: 0; /* Oculta los títulos cuando el navbar está abierto */
+   body.open .title, body.open .subtitle, body.open .social-buttons  {
+        display: none;
    }
 
    @media(min-width:1440px){
