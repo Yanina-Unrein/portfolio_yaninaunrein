@@ -1,0 +1,49 @@
+---
+import Github from './icons/Github.astro'
+import Linkedin from './icons/Linkedin.astro'
+
+const { class: className, ...rest } = Astro.props
+---
+
+
+<div class:list={['social-buttons', className]} {...rest}>
+    <a href="https://github.com/Yanina-Unrein" target="_blank"><Github /></a>
+    <a href="https://www.linkedin.com/in/yaninaunrein/" target="_blank"><Linkedin /></a>
+</div>
+
+<style>
+     .social-buttons{
+        display: flex;
+        gap: 30px;
+        padding: 20px;
+        position: relative;
+        z-index: 3;
+    }
+
+    .social-buttons a{
+        display: inline-flex;
+        text-decoration: none;
+        font-size: 18px;
+        width: 30px;
+        height: 40px;
+        color: #000;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        margin: 15px;
+    }
+    .social-buttons a::before{
+        content: "";
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+        border-radius: 50%;
+        z-index: -1;
+        transition: 0.3s ease-in;
+    }
+
+    .social-buttons a:hover::before{
+        transform: scale(0);
+    }
+</style>
