@@ -1,8 +1,75 @@
 <div class="sobremi-container">
-   
-</div>
+    <h2 class="title">Sobre Mí</h2>
+    <p class="description">Soy una apasionada por la programación, los videojuegos, mangas, animes y gatos. Soy proactiva, comprometida, autodidacta y me gusta siempre dar lo mejor de mí en todo, por más simple o compleja que se pueda tornar la situación.</p>
+    <figure class="img-container">
+     <img src="../../public/img/sobre_mi.jpg" alt="ilustración de una joven en su escritorio utilizando la computadora con dos gatos situados sobre el escritorio">
+    </figure>
+    <h3 class="subtitle">Técnica en Desarrollo Web y Aplicaciones Digitales</h3>
+    <p class="description">Me encuentro estudiando la Tecnicatura en Desarrollo Web en la Universidad de Entre Ríos y en continuo aprendizaje con cursos, bootcamp o de forma autodidacta. En julio del 2024 me recibí de la Tecnicatura en Desarrollo Web y Aplicaciones Digitales en el Instituto Superior Politécnico Córdoba.</p>
+ </div>
 
 <style>
-   
+   .sobremi-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #fff;
+        padding: 50px;
+        gap: 30px;
+   }
+
+   .title{
+        font-size: 2rem;
+        padding: 20px 0;
+        display: inline-block;
+        position: relative;
+   }
+
+   .title::before {
+        content: '';
+        position: absolute;
+        bottom: 0.80px; /* Ajusta la posición vertical del subrayado */
+        left: 0;
+        width: 15%; /* Ajusta la longitud del subrayado */
+        border-bottom: 4px solid #F9C1DC; /* Estilo del subrayado */
+        white-space: nowrap; /* Mantiene el texto en una sola línea */
+   }
+
+   .description{
+    font-size: 1.3rem;
+    line-height: 1.6;
+    padding: 20px 0;
+   }
     
+   .img-container{ 
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+   }
+
+   .img-container img{
+        max-width: 100%;
+        height: auto;
+        display: block;
+   }
+
+   .subtitle{
+    color: #F9C1DC;
+    text-align: center;
+   }
+
+   @media(min-width:768px){
+    .title::before {
+        width: 5%;
+    }
+   }
+
+   @media(min-width:1024px){
+    .sobremi-container{
+        padding: 50px 80px;
+    }
+   }
 </style>
