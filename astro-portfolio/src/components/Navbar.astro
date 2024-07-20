@@ -8,6 +8,7 @@ import SocialButtons from './SocialButtons.astro'
     };
 </script>
 
+<header>
   <button class="navbar-burger" onclick="toggleMenu()"></button>
       <div class="menu">
         <nav>
@@ -20,7 +21,8 @@ import SocialButtons from './SocialButtons.astro'
         </div>
         </nav>     
       </div>
-  
+</header>
+
   <style>
   button {
     border: 0;
@@ -172,10 +174,54 @@ import SocialButtons from './SocialButtons.astro'
       height: 70px;
     }
   }
-  
-  @media(min-width:1440px){
-    .menu a{
-      font-size: 1.8rem;
-    }
+
+  @media(min-width: 1024px) {
+  .navbar-burger {
+    display: none;
   }
+
+  .menu {
+      display: flex;
+      position: fixed;
+      height: auto;
+      visibility: visible;
+      width: auto;
+      opacity: 1;
+      justify-content: center;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+      border: none;
+      border-radius: 10px;
+      margin: 30px;
+      padding: 10px;
+    }
+
+    .menu nav {
+      flex-direction: row;
+      background: none;
+    }
+
+    .menu a {
+      width: auto;
+      color: #ffff;
+      padding: 10px 20px;
+    }
+
+    .menu a::after {
+      bottom: 3px;
+    }
+
+    .icon{
+      width: 35px;
+      height: 35px;
+    }
+
+    .social-buttons {
+      display: none;
+    }
+}
 </style>

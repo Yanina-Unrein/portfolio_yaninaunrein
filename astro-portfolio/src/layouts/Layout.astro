@@ -7,7 +7,7 @@ interface Props {
 const { title, description } = Astro.props;
 
 
-import Header from '../components/Header.astro';
+import Navbar from '../components/Navbar.astro';
 ---
 
 <!doctype html>
@@ -24,7 +24,7 @@ import Header from '../components/Header.astro';
 		<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 	</head>
 	<body>
-		<Header />
+		<Navbar />
 		<slot />
 	</body>
 </html>
