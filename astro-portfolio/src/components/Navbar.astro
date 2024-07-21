@@ -12,8 +12,9 @@ import SocialButtons from './SocialButtons.astro'
   <button class="navbar-burger" onclick="toggleMenu()"></button>
       <div class="menu">
         <nav>
+          <a href="#hero" style="animation-delay: 0.1s"><img class="icon" src="../../public/icons/home-icon.png">Inicio</a>
           <a href="#sobremi" style="animation-delay: 0.1s"><img class="icon" src="../../public/icons/user-icon.png">Sobre Mi</a>
-          <a href="#" style="animation-delay: 0.2s"><img class="icon" src="../../public/icons/code-icon.png">Proyectos</a>
+          <a href="#proyectos" style="animation-delay: 0.2s"><img class="icon" src="../../public/icons/code-icon.png">Proyectos</a>
           <a href="#" style="animation-delay: 0.3s"><img class="icon" src="../../public/icons/studios-icon.png">Tecnologías</a>
           <a href="#" style="animation-delay: 0.5s"><img class="icon" src="../../public/icons/contacto-icon.png">Contacto</a>
           <div class="social-buttons">
@@ -60,15 +61,12 @@ import SocialButtons from './SocialButtons.astro'
     left: 0;
     display: grid;
     place-items: center;
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     background-image: url("../../public/icons/menu.svg");
     background-repeat: no-repeat;
     background-position: center;
-    background-color: #F9C1DC;
-    border-radius: 100%;
     margin: 20px;
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
   }
   
   body.open .navbar-burger {
@@ -108,7 +106,7 @@ import SocialButtons from './SocialButtons.astro'
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0 20px;
+    padding: 70px 30px;
   }
   
   .menu a {
@@ -203,6 +201,7 @@ import SocialButtons from './SocialButtons.astro'
     .menu nav {
       flex-direction: row;
       background: none;
+      padding: 0;
     }
 
     .menu a {

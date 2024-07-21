@@ -1,0 +1,32 @@
+<section id="proyectos" class="projects-container">
+    <h2 class="title">Proyectos</h2>
+</section>
+
+<style>
+    .projects-container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: 50px;  
+        background-color: #13151a;
+        align-items: center;
+    }
+
+    .title{
+        font-size: 2rem;
+        padding: 20px 0;
+        display: inline-block;
+        position: relative;
+        color: #fff;
+    }
+
+    .title::before {
+        content: '';
+        position: absolute;
+        bottom: 0.80px; 
+        left: 0;
+        width: 20%; 
+        border-bottom: 4px solid #F9C1DC; 
+        white-space: nowrap; 
+    }
+</style>

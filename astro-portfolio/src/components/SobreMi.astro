@@ -1,6 +1,9 @@
 <section id="sobremi" class="sobremi-section">
      <div class="sobreMi-container">
           <h2 class="title">Sobre Mí</h2>
+          <figure class="personal-img">
+               <img src="../../public/img/opcion2.jpeg" alt="">
+          </figure>
           <p class="description">Soy una apasionada por la programación, los videojuegos, mangas, animes y gatos. Soy proactiva, comprometida, autodidacta y me gusta siempre dar lo mejor de mí en todo, por más simple o compleja que se pueda tornar la situación.</p>
           <figure class="img-container">
            <img src="../../public/img/sobre_mi.png" alt="ilustración de una joven en su escritorio utilizando la computadora con dos gatos situados sobre el escritorio">
@@ -8,12 +11,20 @@
           <h3 class="subtitle">Técnica en Desarrollo Web y Aplicaciones Digitales</h3>
           <p class="description">Me encuentro estudiando la Tecnicatura en Desarrollo Web en la Universidad de Entre Ríos y en continuo aprendizaje con cursos, bootcamp o de forma autodidacta. En julio del 2024 me recibí de la Tecnicatura en Desarrollo Web y Aplicaciones Digitales en el Instituto Superior Politécnico Córdoba.</p>
      </div> 
+     <div class="cv-container">
+          <span>Si estás interesado en conocer más sobre mí, puedes descargar mi Curriculum Vitae a continuación:</span>
+          <a href="https://drive.google.com/file/d/1s4V4XGx-iITWHwULUHnnhvLRi4UObwuo/view?usp=sharing" target="_blank">Descargar CV</a>
+     </div>
 </section>
 
 <style>
      .sobremi-section{   
-        padding: 50px;  
-        background-color: #13151a;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+          padding: 50px;  
+          background-color: #13151a;
      }
 
      .sobreMi-container{
@@ -22,6 +33,44 @@
           justify-content: center;
           color: #fff;
           gap: 30px;
+     }
+
+     .personal-img{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          margin: auto;
+          width: 200px;
+          height: 200px;  
+          position: relative;
+          z-index: 1;  
+     }
+
+     .personal-img::before {
+          content: '';
+          position: absolute;
+          top: 101px;
+          left: 99px;
+          width: 110%;
+          height: 110%;
+          border-radius: 50%;
+          border: 3px solid transparent;
+          border-top: 3px solid #FF3CAC; /* Color del borde superior para el gradiente */
+          border-right: 3px solid #784BA0; /* Color del borde derecho para el gradiente */
+          border-bottom: 3px solid #2B86C5; /* Color del borde inferior para el gradiente */
+          box-sizing: border-box;
+          transform: translate(-50%, -50%);
+          animation: spin 2s linear infinite;
+          z-index: 0;  
+     }
+ 
+     .personal-img img{
+          width: 100%;
+          height: auto;
+          border-radius: 100%;
+          position: relative;
+          z-index: 1;  
      }
 
      .title{
@@ -68,6 +117,38 @@
           text-align: center;
      }
 
+     .cv-container{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 30px;
+          padding: 30px 0;
+     }
+     .cv-container span{
+          text-align: center;
+          color: #fff;
+          font-size: 0.90rem;
+     }
+     .cv-container a{
+          width: 200px;
+          text-align: center;
+          color: #fff;
+          font-size: 1.2rem;
+          font-weight: 600;
+          text-decoration: none;
+          background-color: #F9C1DC;
+          padding: 15px;
+          border-radius: 20px;
+          box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+          cursor: pointer;
+          transition: background-color 0.3s ease, transform 0.3s ease, background-image 0.3s ease;
+     }
+     .cv-container a:hover {
+          background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+          transform: scale(1.1); 
+     }
+
      /* Ocultar elementos del contenedor sobremi cuando el navbar está abierto */
      body.open .title,
      body.open .description,
@@ -80,15 +161,46 @@
           .title::before {
                width: 5%;
           }
+          .sobreMi-container{
+               max-width: 500px;       
+          }
      }
 
      @media(min-width:1024px){
-          .sobremi-section{
-               padding: 50px 80px;              
+          .sobreMi-container{
+               max-width: 950px;       
           }
 
           .title::before {
                width: 18%;
           }
+
+          .personal-img{
+               width: 300px;
+               height: 300px;
+          }
+
+          .description{
+               font-size: 1.3rem;
+          }
+
+          .personal-img::before{
+               top: 150px;
+               left: 150px;
+          }
+
+          .cv-container a{
+               font-size: 1.4rem;
+          }
      }
+
+     @keyframes spin {
+          0% {
+          transform: translate(-50%, -50%) rotate(0deg);
+          }
+          100% {
+          transform: translate(-50%, -50%) rotate(360deg);
+          }
+     }
+
 </style>
