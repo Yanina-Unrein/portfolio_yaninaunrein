@@ -1,20 +1,54 @@
-<section id="proyectos" class="projects-container">
-    <h2 class="title">Proyectos</h2>
+---
+import CardProject from "./CardProject.astro";
+---
+
+<section id="proyectos" class="projects-section">
+    <div class="projects-container">
+        <div class="title-container">
+            <h2 class="title">Proyectos</h2>
+            <h3 class="sub-title">Trabajos seleccionados</h3>
+        </div>   
+        <div class="cards-container">
+            <CardProject className="card-project" />
+        </div>
+    </div>
 </section>
 
 <style>
-    .projects-container {
+    .projects-section {
         display: flex;
+        -webkit-box-pack: center;
         justify-content: center;
-        flex-direction: column;
-        padding: 50px;  
-        background-color: #13151a;
+        -webkit-box-align: center;
         align-items: center;
+        background-color: #13151a;
+        align-items: center;       
+    }
+
+    .projects-container {
+        width: 90%;
+        max-width: 1900px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        -webkit-box-align: center;
+        align-items: center;
+        row-gap: 40px;
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    .title-container {
+        display: flex;
+        flex-direction: column;
+        -webkit-box-align: center;
+        align-items: center;
+        gap: 30px;
     }
 
     .title{
         font-size: 2rem;
-        padding: 20px 0;
+        padding: 5px 0;
         display: inline-block;
         position: relative;
         color: #fff;
@@ -28,5 +62,32 @@
         width: 20%; 
         border-bottom: 4px solid #F9C1DC; 
         white-space: nowrap; 
+    }
+
+    .sub-title{
+        color: #fff;
+        font-size: 0.85rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    .cards-container {
+        width: 100%;
+        max-width: 1100px;
+        display: grid;
+        grid-template-columns: auto;
+        place-content: center;
+        justify-items: center;
+        gap: 30px 20px;
+    }
+
+    body.open .title, body.open .sub-title, body.open .card-project  {
+        display: none;
+   }
+
+    @media(min-width: 950px){
+        .cards-container{
+            grid-template-columns: 1fr 1fr;
+        }
     }
 </style>

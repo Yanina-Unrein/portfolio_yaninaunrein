@@ -1,12 +1,205 @@
+---
+import Github from "./icons/Github.astro"
+const { class: className, ...rest } = Astro.props
 
-<a href="">
-    <div>
-        <figure>
-            <img src="" alt="">
-        </figure>
-        <div>
-            <h4></h4>
-            <p></p>
-        </div>
-    </div>
-</a>
+const PROJECT = [
+    {
+        image: '/cardsImg/avocadoFeed.jpg',
+        image2: '/cardsImg/logo-palta.png',
+        title: 'Avocado',
+        description: 'Red Social de Recetas realizado para la Tecnicatura en Desarrollo Web y Aplicaciones Digitales.',
+        github: 'https://github.com/Nervios-de-Acero/Avocado-Frontend',
+    },
+    {
+        image: '/cardsImg/avocadoFeed.jpg',
+        image2: '/cardsImg/logo-palta.png',
+        title: 'Avocado',
+        description: 'Red Social de Recetas',
+        github: 'https://github.com/Nervios-de-Acero/Avocado-Frontend',
+    },
+    {
+        image: '/cardsImg/avocadoFeed.jpg',
+        image2: '/cardsImg/logo-palta.png',
+        title: 'Avocado',
+        description: 'Red Social de Recetas',
+        github: 'https://github.com/Nervios-de-Acero/Avocado-Frontend',
+    },
+]
+---
+
+
+{
+    PROJECT.map(({ image, image2, title, description, github }) => (
+        <article class="card-container">
+            <div class="card">
+                <div class="wrapper">
+                    <img src={image} class="cover-image" />
+                </div>
+                <img src={image2} class="character" />                           
+            </div>
+            <div class="description-container">
+                <h4 class="title">{title}</h4>
+                <p class="description">{description}</p>
+            </div>
+            <div class="description-container">
+                <a class="icon-git" href={github} target="_blank">
+                    <Github />
+                </a>
+            </div>  
+        </article>
+    ))
+}
+
+
+<style> 
+    .card-container{
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+    }
+    
+    .card {
+        width: 300px;
+        height: 300px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        perspective: 8000px;       
+    }
+
+    .cover-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .wrapper {
+        transition: all 0.5s;
+        position: absolute;
+        width: 100%;
+        z-index: -1;
+    }
+
+    .card:hover .wrapper {
+        transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+        box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+        -webkit-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+    }
+
+    .wrapper::before,
+    .wrapper::after {
+        content: "";
+        opacity: 0;
+        width: 100%;
+        height: 80px;
+        transition: all 0.5s;
+        position: absolute;
+        left: 0;
+    }
+    .wrapper::before {
+        top: 0;
+        height: 100%;
+        background-image: linear-gradient(
+            to top,
+            transparent 46%,
+            rgba(12, 13, 19, 0.5) 68%,
+            rgba(12, 13, 19) 97%
+        );
+    }
+    .wrapper::after {
+        bottom: 0;
+        opacity: 1;
+        background-image: linear-gradient(
+            to bottom,
+            transparent 46%,
+            rgba(12, 13, 19, 0.5) 68%,
+            rgba(12, 13, 19) 97%
+        );
+    }
+
+    .card:hover .wrapper::before,
+    .wrapper::after {
+        opacity: 1;
+    }
+
+    .card:hover .wrapper::after {
+        height: 120px;
+    }
+
+    .character {
+        width: 50%;
+        height: auto;
+        opacity: 0;
+        transition: all 0.5s;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .card:hover .character {
+        opacity: 1;
+        transform: translate3d(0%, -30%, 100px);
+    }
+
+    .description-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+        color: #fff;
+        padding: 10px;
+    }
+
+    .title{
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: all .2s;
+        padding: 5px;
+    }
+
+    .description{
+        font-size: 0.90rem;
+        text-align: center;
+    }
+
+    .icon-git{
+        display: inline-flex;
+        text-decoration: none;
+        width: 40px;
+        height: 40px;
+        color: #000;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .icon-git::before{
+        content: "";
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        transition: 0.3s ease-in;
+    }
+
+    .icon-git:hover::before{
+        transform: scale(0);
+    }
+    
+
+    @media(min-width: 500px){
+        .card-container{
+            width: 400px;
+        }
+
+        .card {
+        width: 400px;
+        height: 350px;
+        }
+    }
+</style>
