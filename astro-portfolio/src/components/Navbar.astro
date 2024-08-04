@@ -8,11 +8,13 @@ import SocialButtons from './SocialButtons.astro'
     };
 </script>
 
+<header>
   <button class="navbar-burger" onclick="toggleMenu()"></button>
       <div class="menu">
         <nav>
+          <a href="#hero" style="animation-delay: 0.1s"><img class="icon" src="../../public/icons/home-icon.png">Inicio</a>
           <a href="#sobremi" style="animation-delay: 0.1s"><img class="icon" src="../../public/icons/user-icon.png">Sobre Mi</a>
-          <a href="#" style="animation-delay: 0.2s"><img class="icon" src="../../public/icons/code-icon.png">Proyectos</a>
+          <a href="#proyectos" style="animation-delay: 0.2s"><img class="icon" src="../../public/icons/code-icon.png">Proyectos</a>
           <a href="#" style="animation-delay: 0.3s"><img class="icon" src="../../public/icons/studios-icon.png">Tecnologías</a>
           <a href="#" style="animation-delay: 0.5s"><img class="icon" src="../../public/icons/contacto-icon.png">Contacto</a>
           <div class="social-buttons">
@@ -20,7 +22,8 @@ import SocialButtons from './SocialButtons.astro'
         </div>
         </nav>     
       </div>
-  
+</header>
+
   <style>
   button {
     border: 0;
@@ -58,15 +61,12 @@ import SocialButtons from './SocialButtons.astro'
     left: 0;
     display: grid;
     place-items: center;
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     background-image: url("../../public/icons/menu.svg");
     background-repeat: no-repeat;
     background-position: center;
-    background-color: #F9C1DC;
-    border-radius: 100%;
     margin: 20px;
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
   }
   
   body.open .navbar-burger {
@@ -106,7 +106,7 @@ import SocialButtons from './SocialButtons.astro'
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0 20px;
+    padding: 70px 30px;
   }
   
   .menu a {
@@ -167,15 +167,59 @@ import SocialButtons from './SocialButtons.astro'
   }
 
   @media(min-width:768px){
-    ..navbar-burger{
+    .navbar-burger{
       width: 70px;
       height: 70px;
     }
   }
-  
-  @media(min-width:1440px){
-    .menu a{
-      font-size: 1.8rem;
-    }
+
+  @media(min-width: 1024px) {
+  .navbar-burger {
+    display: none;
   }
+
+  .menu {
+      display: flex;
+      position: fixed;
+      height: auto;
+      visibility: visible;
+      width: auto;
+      opacity: 1;
+      justify-content: center;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+      border: none;
+      border-radius: 10px;
+      margin: 30px;
+    }
+
+    .menu nav {
+      flex-direction: row;
+      background: none;
+      padding: 0;
+    }
+
+    .menu a {
+      width: auto;
+      color: #ffff;
+      padding: 10px 20px;
+    }
+
+    .menu a::after {
+      bottom: 3px;
+    }
+
+    .icon{
+      width: 35px;
+      height: 35px;
+    }
+
+    .social-buttons {
+      display: none;
+    }
+}
 </style>

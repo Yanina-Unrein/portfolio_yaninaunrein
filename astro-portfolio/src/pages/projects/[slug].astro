@@ -1,0 +1,39 @@
+---
+import { PROJECTS } from '../../data/projects_detail';
+
+export async function getStaticPaths() {
+  // Genera un array de rutas posibles a partir de los slugs en PROJECTS
+  const paths = PROJECTS.map((project) => ({
+    params: { slug: project.slug },
+  }));
+
+  return {
+    paths,
+    fallback: false, // Cambia a 'true' o 'blocking' si quieres manejar rutas no generadas de otra manera
+  };
+}
+
+const { slug } = Astro.params;
+const project = PROJECTS.find(proj => proj.slug === slug);
+
+if (!project) {
+  throw new Error(`No se encontró el proyecto con el slug: ${slug}`);
+}
+---
+
+{!project ? (
+    <div>
+        <h1>Proyecto no encontrado</h1>
+        <p>No se encontró ningún proyecto con el slug: {slug}</p>
+    </div>
+) : (
+    <article>
+        <h1>{project.title}</h1>
+        <img src={project.image} alt={`${project.title} cover`} />
+        <p>{project.description}</p>
+    </article>
+)}
+
+<style>
+    /* Añade estilos según tus necesidades */
+</style>

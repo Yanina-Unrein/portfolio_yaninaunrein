@@ -1,15 +1,37 @@
 ---
-import SocialButtons from './SocialButtons.astro'
+import SocialButtons from './SocialButtons.astro';
+
 ---
 
-<section class="hero">
-    <div class="background"></div>
-    <div class="container-title">
-        <h1 class="title">Yanina Unrein</h1>
-        <h2 class="subtitle">FullStack Developer</h2>
-        <SocialButtons className="social-buttons" />
-    </div>
+<section id="hero" class="hero">
+  <div class="background"></div>
+  <div class="container-title">
+    <span class="name">Hola, soy Yanina Unrein <span class="hand-icon">👋</span></span>
+    <h1 class="title">FrontEnd</h1>
+    <h2 class="subtitle">Developer</h2>
+    <SocialButtons class="social-buttons" />
+  </div>
 </section>
+
+<script type="module">
+    import { gsap } from 'https://cdn.skypack.dev/gsap';
+  
+    function initAnimation() {
+      gsap.set(['.name', '.title', '.subtitle'], { y: 100, opacity: 0, visibility: 'hidden' });
+  
+      gsap.to(['.name', '.title', '.subtitle'], {
+        opacity: 1,
+        y: 0,
+        visibility: 'visible',
+        ease: 'power3.out',
+        duration: 1.5,
+        stagger: 0.3,
+        delay: 0.2,
+      });
+    }
+  
+    document.addEventListener('DOMContentLoaded', initAnimation);
+</script>
 
 <style>
     .hero {
@@ -49,9 +71,8 @@ import SocialButtons from './SocialButtons.astro'
     }
 
    .title {
-    font-size: 2.3rem;
+    font-size: 4rem;
     font-weight: 800;
-    text-transform: uppercase;
     background-color: #FF3CAC;
     background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
     -webkit-background-clip: text;
@@ -61,23 +82,71 @@ import SocialButtons from './SocialButtons.astro'
 
    .subtitle {
     margin: 0;
-    font-size: 1.6rem; 
+    font-size: 2.5rem; 
     font-weight: 800;
     color: #ffffff; 
    }
+
+   .name{
+        color: #fff;
+        font-weight: 600;
+        font-size: 1.3rem;
+   }
    
-   body.open .title, body.open .subtitle, body.open .social-buttons  {
+   body.open .title, body.open .subtitle, body.open .name, body.open .social-buttons  {
         display: none;
    }
 
+   .hand-icon {
+        animation: wave  2.5s infinite;
+        transform-origin: 70% 70%;
+        display: inline-block;
+    }
 
-   @media(min-width:1440px){
+   @media(min-width:768px){
     .title{
-        font-size: 4rem;
+        font-size: 5rem;
+        letter-spacing: -6px;
     }
     .subtitle{
-        font-size: 2.8rem;
+        font-size: 3rem;
+    }
+    }
+
+   @media(min-width:1024px){
+    .title{
+        font-size: 8rem;
+        letter-spacing: -6px;
+    }
+    .subtitle{
+        font-size: 3.5rem;
     }
     
+    @keyframes wave {
+        0% {
+            transform: rotate(0deg);
+        }
+        10% {
+            transform: rotate(14deg);
+        }
+        20% {
+            transform: rotate(-8deg);
+        }
+        30% {
+            transform: rotate(14deg);
+        }
+        40% {
+            transform: rotate(-4deg);
+        }
+        50% {
+            transform: rotate(10deg);
+        }
+        60% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(0deg);
+        }
+    }
   }
 </style>

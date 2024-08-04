@@ -1,0 +1,84 @@
+---
+const { image, title, description, link, classList = [] } = Astro.props;
+---
+
+<article class="card-container">
+    <div class="card">
+        <figure class="img-container">
+            <img src={image} class="cover-image" alt={`${title} cover`} />
+        </figure>
+        <div class="description-container">
+            <h4 class="title">{title}</h4>
+            <p class="description">{description}</p>
+        </div>
+        <div class="description-container">
+           <a class="link-false" href={link} target="_blank">Ver más</a>
+        </div>  
+    </div>  
+</article>
+
+<style>
+    .card-container{      
+        width: 300px;
+        margin: 10px;
+    }
+
+    .card{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        width: 300px;
+        height: auto;
+    }
+
+    .img-container{
+        width: 300px;        
+    }
+    .img-container img{
+        width: 100%;
+        height: auto;
+        border-radius: 20px;    
+    }
+    
+    .description-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+        color: #fff;
+        padding: 10px;
+    }
+
+    .title{
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: all .2s;
+        padding: 5px;
+    }
+
+    .description{
+        font-size: 0.90rem;
+        text-align: center;
+    }
+
+    .link-false{
+        color: #61aee5;
+        font-weight: 600;
+        transition: 0.3s ease-in;
+    }
+    .link-detail-proyect{
+        text-decoration: none;
+    }
+    .link-false:hover{
+        transform: translateY(-10px);
+        color: #FF3CAC;
+    }
+
+
+</style>

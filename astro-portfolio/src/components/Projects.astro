@@ -1,0 +1,135 @@
+---
+import CardProject from "./CardProject.astro";
+import { PROJECTS } from '../data/projects_detail';
+import CardColaboracion from "./cardColaboracion.astro";
+import { PROJECTSC } from "../data/projects_colaborate";
+---
+
+<section id="proyectos" class="projects-section">
+    <div class="projects-container">
+        <div class="title-container">
+            <h2 class="title">Proyectos</h2>
+            <h3 class="sub-title">Trabajos seleccionados</h3>
+        </div>   
+        <div class="cards-container">
+            {PROJECTS.map(project => (
+                <CardProject classList={['card-project', 'project-element']} {...project} />
+            ))}
+        </div>
+        <div class="title-container">
+            <h3 class="sub-title">Colaboraciones</h3>
+            <div class="cards-container">
+                {PROJECTSC.map(project => (
+                    <CardColaboracion classlist={['card-project', 'project-element']} {...project} />
+                ))}
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Animación para los títulos
+      gsap.from(['.title', '.sub-title'], {
+        opacity: 0,
+        y: 50,
+        ease: 'power2',
+        duration: 1.2,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: '#proyectos',
+          start: 'top 70%',
+          end: 'bottom top',
+        },
+      });
+
+      // Animación para las tarjetas de proyectos
+      gsap.from('.project-element','card-project', {
+        opacity: 0,
+        y: 100,
+        ease: 'power3',
+        duration: 1.5,
+        stagger: 0.3,
+        scrollTrigger: {
+          trigger: '#proyectos',
+          start: 'top 75%',
+          end: 'bottom top',
+        },
+      });
+    });
+  </script>
+
+<style>
+    .projects-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #13151a;
+    }
+
+    .projects-container {
+        width: 90%;
+        max-width: 1900px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 40px;
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    .title-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .title {
+        font-size: 2rem;
+        padding: 5px 0;
+        display: inline-block;
+        position: relative;
+        color: #fff;
+    }
+
+    .title::before {
+        content: '';
+        position: absolute;
+        bottom: 0.80px; 
+        left: 0;
+        width: 20%; 
+        border-bottom: 4px solid #F9C1DC; 
+        white-space: nowrap; 
+    }
+
+    .sub-title {
+        color: #fff;
+        font-size: 0.85rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    .cards-container {
+        width: 100%;
+        max-width: 1100px;
+        display: grid;
+        grid-template-columns: auto;
+        place-content: center;
+        justify-items: center;
+        gap: 30px 20px;
+    }
+
+    body.open .title, body.open .sub-title, body.open .card-project {
+        display: none;
+    }
+
+    @media(min-width: 950px){
+        .cards-container {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+</style>

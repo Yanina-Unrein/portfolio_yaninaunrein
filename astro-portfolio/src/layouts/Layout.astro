@@ -7,7 +7,7 @@ interface Props {
 const { title, description } = Astro.props;
 
 
-import Header from '../components/Header.astro';
+import Navbar from '../components/Navbar.astro';
 ---
 
 <!doctype html>
@@ -19,14 +19,16 @@ import Header from '../components/Header.astro';
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js" defer></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/ScrollTrigger.min.js" defer></script>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 	</head>
 	<body>
-		<Header />
+		<Navbar />
 		<slot />
-	</body>
+	</body>	
 </html>
 <style is:global>
 	*{
