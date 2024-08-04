@@ -16,6 +16,11 @@ import ExperienceItems from "./ExperienceItems.astro";
         )
         }   
     </ol>
+    <div class="section-logo">
+        <figure class="logo-container">
+            <img src="../../public/cardsImg/portfolio/logo-portfolio.png" alt="">
+        </figure>
+    </div>
 </section>
 
 
@@ -44,7 +49,7 @@ import ExperienceItems from "./ExperienceItems.astro";
         stagger: 0.3,
         scrollTrigger: {
           trigger: '#proyectos',
-          start: 'top 70%',
+          start: 'top 50%',
           end: 'bottom top',
         },
       });
@@ -88,16 +93,35 @@ import ExperienceItems from "./ExperienceItems.astro";
         position: relative;
         margin-bottom: 2rem; /* Ajusta el espaciado según sea necesario */
     }
+
+    .section-logo{
+        display: flex;
+        justify-content: end;
+    }
+    .logo-container{
+        width: 150px;
+        height: 150px;
+    }
+    .logo-container img{
+        width: 100%;
+        height: auto;
+        filter: drop-shadow(0 0 10px rgba(84, 84, 84, 0.8));
+    }
+
+    body.open .experience-section {
+     visibility: hidden;
+    }
+
     
     @media(min-width:768px){
         .experience-section{
-            padding: 80px;
+            padding: 60px 80px;
         }
     }
 
     @media(min-width:1024px){
         .experience-section{
-            padding: 80px 150px;
+            padding: 60px 150px;
         }
     }
 </style>
