@@ -1,55 +1,24 @@
 ---
-import Github from "./icons/Github.astro"
-const { class: className, ...rest } = Astro.props
-
-const PROJECT = [
-    {
-        image: '/cardsImg/avocadoFeed.jpg',
-        image2: '/cardsImg/logo-palta.png',
-        title: 'Avocado',
-        description: 'Red Social de Recetas realizado para la Tecnicatura en Desarrollo Web y Aplicaciones Digitales.',
-        github: 'https://github.com/Nervios-de-Acero/Avocado-Frontend',
-    },
-    {
-        image: '/cardsImg/avocadoFeed.jpg',
-        image2: '/cardsImg/logo-palta.png',
-        title: 'Avocado',
-        description: 'Red Social de Recetas',
-        github: 'https://github.com/Nervios-de-Acero/Avocado-Frontend',
-    },
-    {
-        image: '/cardsImg/avocadoFeed.jpg',
-        image2: '/cardsImg/logo-palta.png',
-        title: 'Avocado',
-        description: 'Red Social de Recetas',
-        github: 'https://github.com/Nervios-de-Acero/Avocado-Frontend',
-    },
-]
+const {slug, image, image2, title, description, github, classList = [] } = Astro.props;
 ---
 
-
-{
-    PROJECT.map(({ image, image2, title, description, github }) => (
-        <article class="card-container">
-            <div class="card">
-                <div class="wrapper">
-                    <img src={image} class="cover-image" />
-                </div>
-                <img src={image2} class="character" />                           
-            </div>
-            <div class="description-container">
-                <h4 class="title">{title}</h4>
-                <p class="description">{description}</p>
-            </div>
-            <div class="description-container">
-                <a class="icon-git" href={github} target="_blank">
-                    <Github />
-                </a>
-            </div>  
-        </article>
-    ))
-}
-
+<a href={`/projects/${slug}`} class="link-detail-proyect">
+    <article class={["card-container", ...classList].join(' ')}>
+    <div class="card">
+        <div class="wrapper">
+            <img src={image} class="cover-image" alt={`${title} cover`} />
+        </div>
+        <img src={image2} class="character" alt={`${title} character`} />                           
+    </div>
+    <div class="description-container">
+        <h4 class="title">{title}</h4>
+        <p class="description">{description}</p>
+    </div>
+    <div class="description-container">
+       <span class="link-false">Ver más</span>
+    </div>  
+</article>
+</a>
 
 <style> 
     .card-container{
@@ -191,6 +160,18 @@ const PROJECT = [
         transform: scale(0);
     }
     
+    .link-false{
+        color: #61aee5;
+        font-weight: 600;
+        transition: 0.3s ease-in;
+    }
+    .link-detail-proyect{
+        text-decoration: none;
+    }
+    .link-detail-proyect:hover .link-false{
+        transform: translateY(-10px);
+        color: #FF3CAC;
+    }
 
     @media(min-width: 500px){
         .card-container{

@@ -1,16 +1,37 @@
 ---
-import SocialButtons from './SocialButtons.astro'
+import SocialButtons from './SocialButtons.astro';
+
 ---
 
 <section id="hero" class="hero">
-    <div class="background"></div>
-    <div class="container-title">
-        <span class="name">Hola, soy Yanina Unrein 👋</span>
-        <h1 class="title">FrontEnd</h1>
-        <h2 class="subtitle">Developer</h2>
-        <SocialButtons className="social-buttons" />
-    </div>
+  <div class="background"></div>
+  <div class="container-title">
+    <span class="name">Hola, soy Yanina Unrein <span class="hand-icon">👋</span></span>
+    <h1 class="title">FrontEnd</h1>
+    <h2 class="subtitle">Developer</h2>
+    <SocialButtons class="social-buttons" />
+  </div>
 </section>
+
+<script type="module">
+    import { gsap } from 'https://cdn.skypack.dev/gsap';
+  
+    function initAnimation() {
+      gsap.set(['.name', '.title', '.subtitle'], { y: 100, opacity: 0, visibility: 'hidden' });
+  
+      gsap.to(['.name', '.title', '.subtitle'], {
+        opacity: 1,
+        y: 0,
+        visibility: 'visible',
+        ease: 'power3.out',
+        duration: 1.5,
+        stagger: 0.3,
+        delay: 0.2,
+      });
+    }
+  
+    document.addEventListener('DOMContentLoaded', initAnimation);
+</script>
 
 <style>
     .hero {
@@ -76,6 +97,12 @@ import SocialButtons from './SocialButtons.astro'
         display: none;
    }
 
+   .hand-icon {
+        animation: wave  2.5s infinite;
+        transform-origin: 70% 70%;
+        display: inline-block;
+    }
+
    @media(min-width:768px){
     .title{
         font-size: 5rem;
@@ -95,5 +122,31 @@ import SocialButtons from './SocialButtons.astro'
         font-size: 3.5rem;
     }
     
+    @keyframes wave {
+        0% {
+            transform: rotate(0deg);
+        }
+        10% {
+            transform: rotate(14deg);
+        }
+        20% {
+            transform: rotate(-8deg);
+        }
+        30% {
+            transform: rotate(14deg);
+        }
+        40% {
+            transform: rotate(-4deg);
+        }
+        50% {
+            transform: rotate(10deg);
+        }
+        60% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(0deg);
+        }
+    }
   }
 </style>

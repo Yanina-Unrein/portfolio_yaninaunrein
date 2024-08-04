@@ -1,5 +1,8 @@
 ---
 import CardProject from "./CardProject.astro";
+import { PROJECTS } from '../data/projects_detail';
+import CardColaboracion from "./cardColaboracion.astro";
+import { PROJECTSC } from "../data/projects_colaborate";
 ---
 
 <section id="proyectos" class="projects-section">
@@ -9,20 +12,61 @@ import CardProject from "./CardProject.astro";
             <h3 class="sub-title">Trabajos seleccionados</h3>
         </div>   
         <div class="cards-container">
-            <CardProject className="card-project" />
+            {PROJECTS.map(project => (
+                <CardProject classList={['card-project', 'project-element']} {...project} />
+            ))}
+        </div>
+        <div class="title-container">
+            <h3 class="sub-title">Colaboraciones</h3>
+            <div class="cards-container">
+                {PROJECTSC.map(project => (
+                    <CardColaboracion classlist={['card-project', 'project-element']} {...project} />
+                ))}
+            </div>
         </div>
     </div>
 </section>
 
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Animación para los títulos
+      gsap.from(['.title', '.sub-title'], {
+        opacity: 0,
+        y: 50,
+        ease: 'power2',
+        duration: 1.2,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: '#proyectos',
+          start: 'top 70%',
+          end: 'bottom top',
+        },
+      });
+
+      // Animación para las tarjetas de proyectos
+      gsap.from('.project-element','card-project', {
+        opacity: 0,
+        y: 100,
+        ease: 'power3',
+        duration: 1.5,
+        stagger: 0.3,
+        scrollTrigger: {
+          trigger: '#proyectos',
+          start: 'top 75%',
+          end: 'bottom top',
+        },
+      });
+    });
+  </script>
+
 <style>
     .projects-section {
         display: flex;
-        -webkit-box-pack: center;
         justify-content: center;
-        -webkit-box-align: center;
         align-items: center;
         background-color: #13151a;
-        align-items: center;       
     }
 
     .projects-container {
@@ -31,7 +75,6 @@ import CardProject from "./CardProject.astro";
         height: auto;
         display: flex;
         flex-direction: column;
-        -webkit-box-align: center;
         align-items: center;
         row-gap: 40px;
         padding-top: 60px;
@@ -41,12 +84,11 @@ import CardProject from "./CardProject.astro";
     .title-container {
         display: flex;
         flex-direction: column;
-        -webkit-box-align: center;
         align-items: center;
         gap: 30px;
     }
 
-    .title{
+    .title {
         font-size: 2rem;
         padding: 5px 0;
         display: inline-block;
@@ -64,7 +106,7 @@ import CardProject from "./CardProject.astro";
         white-space: nowrap; 
     }
 
-    .sub-title{
+    .sub-title {
         color: #fff;
         font-size: 0.85rem;
         margin: 0;
@@ -81,12 +123,12 @@ import CardProject from "./CardProject.astro";
         gap: 30px 20px;
     }
 
-    body.open .title, body.open .sub-title, body.open .card-project  {
+    body.open .title, body.open .sub-title, body.open .card-project {
         display: none;
-   }
+    }
 
     @media(min-width: 950px){
-        .cards-container{
+        .cards-container {
             grid-template-columns: 1fr 1fr;
         }
     }

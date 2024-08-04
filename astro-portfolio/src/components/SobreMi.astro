@@ -6,7 +6,7 @@
           </figure>
           <p class="description">Soy una apasionada por la programación, los videojuegos, mangas, animes y gatos. Soy proactiva, comprometida, autodidacta y me gusta siempre dar lo mejor de mí en todo, por más simple o compleja que se pueda tornar la situación.</p>
           <figure class="img-container">
-           <img src="../../public/img/sobre_mi.png" alt="ilustración de una joven en su escritorio utilizando la computadora con dos gatos situados sobre el escritorio">
+               <img src="../../public/img/sobre_mi.png" alt="ilustración de una joven en su escritorio utilizando la computadora con dos gatos situados sobre el escritorio">
           </figure>
           <h3 class="subtitle">Técnica en Desarrollo Web y Aplicaciones Digitales</h3>
           <p class="description">Me encuentro estudiando la Tecnicatura en Desarrollo Web en la Universidad de Entre Ríos y en continuo aprendizaje con cursos, bootcamp o de forma autodidacta. En julio del 2024 me recibí de la Tecnicatura en Desarrollo Web y Aplicaciones Digitales en el Instituto Superior Politécnico Córdoba.</p>
@@ -16,6 +16,39 @@
           <a href="https://drive.google.com/file/d/1s4V4XGx-iITWHwULUHnnhvLRi4UObwuo/view?usp=sharing" target="_blank">Descargar CV</a>
      </div>
 </section>
+
+<script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', () => {
+       gsap.registerPlugin(ScrollTrigger);
+ 
+       gsap.from('.personal-img', {
+         opacity: 0,
+         scale: 0.2,
+         ease: 'power2',
+         duration: 1.2,
+         scrollTrigger: {
+           trigger: '#sobremi',
+           start: 'top 80%',
+           end: 'bottom top',
+         },
+       });
+ 
+       gsap.from(['.title', '.description', '.img-container', '.subtitle', '.cv-container'], {
+         opacity: 0,
+         y: 100,
+         ease: 'power2',
+         duration: 1.2,
+         stagger: 0.2,
+         scrollTrigger: {
+           trigger: '#sobremi',
+           start: 'top 80%',
+           end: 'bottom top',
+         },
+       });
+     });
+   </script>
+   
+
 
 <style>
      .sobremi-section{   
@@ -150,12 +183,14 @@
      }
 
      /* Ocultar elementos del contenedor sobremi cuando el navbar está abierto */
-     body.open .title,
-     body.open .description,
-     body.open .img-container,
-     body.open .subtitle {
-     display: none;
+     body.open .sobreMi-container {
+     visibility: hidden;
      }
+
+     body.open .title,body.open .subtitle, body.open .cv-container  {
+        display: none;
+   }
+
 
      @media(min-width:768px){
           .title::before {
@@ -190,7 +225,8 @@
           }
 
           .cv-container a{
-               font-size: 1.4rem;
+               padding: 10px;
+               width: 180px;
           }
      }
 
