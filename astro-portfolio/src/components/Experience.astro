@@ -7,19 +7,21 @@ import ExperienceItems from "./ExperienceItems.astro";
     <div class="title-container">
         <h2 class="title">Experiencia</h2>
     </div>
-    <ol class="timeline">
-        {
-            EXPERIENCE.map((experience) =>
-                <li class="item-experience">
-                  <ExperienceItems {...experience} />  
-                </li>
-        )
-        }   
-    </ol>
-    <div class="section-logo">
-        <figure class="logo-container">
-            <img src="../../public/cardsImg/portfolio/logo-portfolio.png" alt="">
-        </figure>
+    <div class="web-container">
+        <ol class="timeline">
+            {
+                EXPERIENCE.map((experience) =>
+                    <li class="item-experience">
+                      <ExperienceItems {...experience} />  
+                    </li>
+            )
+            }   
+        </ol>
+        <div class="section-logo">
+            <figure class="logo-container">
+                <img src="../../public/cardsImg/portfolio/logo-portfolio.png" alt="">
+            </figure>
+        </div>
     </div>
 </section>
 
@@ -121,7 +123,17 @@ import ExperienceItems from "./ExperienceItems.astro";
 
     @media(min-width:1024px){
         .experience-section{
-            padding: 60px 150px;
+            padding: 60px 90px;
+        }
+
+        .web-container{
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .section-logo{
+            align-items: flex-end;
         }
     }
 </style>

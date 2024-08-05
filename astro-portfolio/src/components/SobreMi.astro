@@ -1,15 +1,19 @@
 <section id="sobremi" class="sobremi-section">
-     <div class="sobreMi-container">
-          <h2 class="title">Sobre Mí</h2>
-          <figure class="personal-img">
-               <img src="../../public/img/opcion2.jpeg" alt="">
-          </figure>
-          <p class="description">Soy una apasionada por la programación, los videojuegos, mangas, animes y gatos. Soy proactiva, comprometida, autodidacta y me gusta siempre dar lo mejor de mí en todo, por más simple o compleja que se pueda tornar la situación.</p>
-          <figure class="img-container">
-               <img src="../../public/img/sobre_mi.png" alt="ilustración de una joven en su escritorio utilizando la computadora con dos gatos situados sobre el escritorio">
-          </figure>
-          <h3 class="subtitle">Técnica en Desarrollo Web y Aplicaciones Digitales</h3>
-          <p class="description">Me encuentro estudiando la Tecnicatura en Desarrollo Web en la Universidad de Entre Ríos y en continuo aprendizaje con cursos, bootcamp o de forma autodidacta. En julio del 2024 me recibí de la Tecnicatura en Desarrollo Web y Aplicaciones Digitales en el Instituto Superior Politécnico Córdoba.</p>
+     <h2 class="title">Sobre Mí</h2>
+     <div class="sobreMi-container">         
+         <div class="title-container">             
+               <figure class="personal-img">
+                    <img src="../../public/img/opcion2.jpeg" alt="">
+               </figure>
+         </div>
+          <div class="text-container">
+               <p class="description">Soy una apasionada por la programación, los videojuegos, mangas, animes y gatos. Soy proactiva, comprometida, autodidacta y me gusta siempre dar lo mejor de mí en todo, por más simple o compleja que se pueda tornar la situación.</p>
+               <figure class="img-container">
+                    <img src="../../public/img/sobre_mi.png" alt="ilustración de una joven en su escritorio utilizando la computadora con dos gatos situados sobre el escritorio">
+               </figure>
+               <h3 class="subtitle">Técnica en Desarrollo Web y Aplicaciones Digitales</h3>
+               <p class="description">Me encuentro estudiando la Tecnicatura en Desarrollo Web en la Universidad de Entre Ríos y en continuo aprendizaje con cursos, bootcamp o de forma autodidacta. En julio del 2024 me recibí de la Tecnicatura en Desarrollo Web y Aplicaciones Digitales en el Instituto Superior Politécnico Córdoba.</p>
+          </div>
      </div> 
      <div class="cv-container">
           <span>Si estás interesado en conocer más sobre mí, puedes descargar mi Curriculum Vitae a continuación:</span>
@@ -53,11 +57,10 @@
 <style>
      .sobremi-section{   
           display: flex;
-          justify-content: center;
           flex-direction: column;
-          align-items: center;
           padding: 50px;  
           background-color: #13151a;
+          gap: 20px;
      }
 
      .sobreMi-container{
@@ -65,7 +68,7 @@
           flex-direction: column;
           justify-content: center;
           color: #fff;
-          gap: 30px;
+          gap: 20px;
      }
 
      .personal-img{
@@ -111,6 +114,8 @@
         padding: 20px 0;
         display: inline-block;
         position: relative;
+        color: #fff;
+        margin: 30px 0;
      }
 
      .title::before {
@@ -124,10 +129,13 @@
      }
 
      .description{
-          font-size: 1.1rem;
+          font-size: 1rem;
           line-height: 1.6;
           padding: 20px 0;
           text-align: center;
+          margin: 0 auto; 
+          word-break: break-word; /* Permitir el corte de palabras largas */
+          hyphens: auto; /* Habilitar la separación de palabras */
      }
     
      .img-container{ 
@@ -148,6 +156,8 @@
      .subtitle{
           color: #F9C1DC;
           text-align: center;
+          font-size: 1.2rem;
+          font-weight: 400;
      }
 
      .cv-container{
@@ -156,12 +166,12 @@
           align-items: center;
           justify-content: center;
           gap: 30px;
-          padding: 30px 0;
+          padding: 20px 0;
      }
      .cv-container span{
           text-align: center;
           color: #fff;
-          font-size: 0.90rem;
+          font-size: 1rem;
      }
      .cv-container a{
           width: 200px;
@@ -193,37 +203,59 @@
 
 
      @media(min-width:768px){
+          .sobremi-section{
+               justify-content: center;
+          }
           .title::before {
                width: 5%;
           }
-          .sobreMi-container{
-               max-width: 500px;       
-          }
+
      }
 
      @media(min-width:1024px){
-          .sobreMi-container{
-               max-width: 950px;       
+          .sobremi-section{        
+               padding: 50px 90px;
           }
 
-          .title::before {
-               width: 18%;
+          .sobreMi-container{
+               flex-direction: row;  
+               justify-content: space-around; 
+               max-width: 100%;
+               padding: 20px;
+          }
+
+          .title-container{
+               display: flex;
+               flex-direction: column;
           }
 
           .personal-img{
                width: 300px;
                height: 300px;
           }
-
           .personal-img::before{
-               top: 150px;
+               top: 148px;
                left: 150px;
           }
 
+          .text-container{
+               display: flex;
+               flex-direction: column;
+               justify-content: center;
+               align-items: center;
+               width: 50%;
+               gap: 20px;
+          }
+          
           .cv-container a{
                padding: 10px;
                width: 180px;
           }
+
+          .img-container{
+               width: 500px;
+          }
+
      }
 
      @keyframes spin {
