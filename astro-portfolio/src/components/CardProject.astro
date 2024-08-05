@@ -173,6 +173,10 @@ const {slug, image, image2, title, description, github, classList = [] } = Astro
         color: #FF3CAC;
     }
 
+    body.open .title, body.open .description  {
+        display: none;
+   }
+
     @media(min-width: 500px){
         .card-container{
             width: 400px;

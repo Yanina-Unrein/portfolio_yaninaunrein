@@ -26,38 +26,6 @@ import ExperienceItems from "./ExperienceItems.astro";
 </section>
 
 
-<script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', () => {
-      gsap.registerPlugin(ScrollTrigger);
-
-      gsap.from(['.title'], {
-        opacity: 0,
-        y: 50,
-        ease: 'power2',
-        duration: 1.2,
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: '#proyectos',
-          start: 'top 70%',
-          end: 'bottom top',
-        },
-      });
-
-      gsap.from('.timeline', {
-        opacity: 0,
-        y: 100,
-        ease: 'power3',
-        duration: 1.5,
-        stagger: 0.3,
-        scrollTrigger: {
-          trigger: '#proyectos',
-          start: 'top 50%',
-          end: 'bottom top',
-        },
-      });
-    });
-  </script>
-
 <style>
     .experience-section{
         padding: 30px 20px;  
@@ -114,6 +82,9 @@ import ExperienceItems from "./ExperienceItems.astro";
      visibility: hidden;
     }
 
+    body.open .title {
+        display: none;
+    }
     
     @media(min-width:768px){
         .experience-section{

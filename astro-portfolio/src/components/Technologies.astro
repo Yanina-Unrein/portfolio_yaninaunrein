@@ -9,7 +9,7 @@ import Carrousel from "./Carrousel.astro";
         <p class="description">Mi área principal de especialización es el desarrollo Frontend pero mi formación es FullStack. </p>
         <p class="description">HTML, CSS, JS, creación de aplicaciones web pequeñas y medianas con Angular o React, complementos personalizados, funciones, animaciones y codificación de diseños interactivos. También tengo experiencia como desarrolladora con CMS como WordPress, Shopify, CPanel, Wix. Visita mi <a class="interlink" href="https://www.linkedin.com/in/yaninaunrein/" target="_blank">LinkedIn</a> para más detalles.</p>
     </div>
-    <Carrousel icons={ICONS} />
+    <Carrousel classlist={['project-element']} icons={ICONS} />
 </section>
 
 <style>
@@ -24,7 +24,7 @@ import Carrousel from "./Carrousel.astro";
 
     .title{
         font-size: 2rem;
-        padding: 20px 0;
+        padding: 20px 0 10px 0;
         display: inline-block;
         position: relative;
         color: #fff;
@@ -58,6 +58,15 @@ import Carrousel from "./Carrousel.astro";
         transform: translateY(-10px);
         color: #FF3CAC;
     }
+
+    body.open .section-tecnologies, body.open .project-element {
+        visibility: hidden;
+    }
+
+    body.open .title, body.open .description {
+        display: none;
+   }
+
 
     @media(min-width:768px){
         .text-technologies{
