@@ -1,0 +1,66 @@
+---
+import {ICONS} from "../data/iconsTecnologies";
+import Technologie from "./icons/Technologie.astro";
+---
+
+<div id="linearGradientCarrucel" class="carousel-container">
+  <div id="carrucel" class="carousel">
+    {ICONS.map(icon => (
+        <div class="icon-wrapper">
+          <Technologie svgPath={icon.svgPath} />
+        </div>
+    ))}
+    {ICONS.map(icon => (
+        <div class="icon-wrapper">
+          <Technologie svgPath={icon.svgPath} />
+        </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .carousel-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    overflow: hidden;
+    padding: 20px 0;
+  }
+
+  .carousel {
+    display: flex;
+    flex-direction: row;
+    gap: 60px; /* Espacio entre iconos */
+    white-space: nowrap; /* Asegúrate de que no haya saltos de línea */
+  }
+
+  .icon-wrapper {
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+
+<script type="module">
+  import { gsap } from 'https://cdn.skypack.dev/gsap';
+
+  function initCarrousel() {
+    const carrucel = document.querySelector('#carrucel');
+    const totalWidth = carrucel.scrollWidth / 2; // Ancho total del carrusel
+    const duration = 15; // Cambia esto según tus necesidades
+
+    // Mueve el carrusel continuamente
+    gsap.to(carrucel, {
+      x: -totalWidth,
+      duration: duration,
+      ease: 'linear',
+      repeat: -1, // Repite la animación infinitamente
+      
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initCarrousel);
+</script>
