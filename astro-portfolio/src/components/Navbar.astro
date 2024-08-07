@@ -10,20 +10,51 @@ import SocialButtons from './SocialButtons.astro'
   const closeMenuOnClick = () => {
       const menuLinks = document.querySelectorAll('.menu a');
       menuLinks.forEach(link => {
-          link.addEventListener('click', () => {
+          link.addEventListener('click', (event) => {
               document.body.classList.remove("open");
+
+              const href = link.getAttribute('href');
+              if (href.startsWith('#')) {
+                event.preventDefault();
+
+                // Verifica si ya estamos en la página principal
+                if (window.location.pathname !== '/') {
+                  window.location.href = `/${href}`;
+                } else {
+                  // Si ya estamos en la página principal, desplázate al elemento con el id correspondiente
+                  const targetElement = document.querySelector(href);
+                  if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }
+              }
           });
       });
   };
 
   document.addEventListener('DOMContentLoaded', closeMenuOnClick);
+
+  const navigateToHome = (event) => {
+    event.preventDefault(); // Previene el comportamiento por defecto del enlace
+
+    // Verifica si ya estamos en la página principal
+    if (window.location.pathname !== '/') {
+      window.location.href = '/';
+    } else {
+      // Si ya estamos en la página principal, desplázate al elemento con el id 'hero'
+      const heroElement = document.getElementById('hero');
+      if (heroElement) {
+        heroElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 </script>
 
 <header>
   <button class="navbar-burger" onclick="toggleMenu()"></button>
       <div class="menu">
         <nav>
-          <a href="#hero" style="animation-delay: 0.1s"><img class="icon" src="../../public/icons/home-icon.png">Inicio</a>
+          <a href="/" style="animation-delay: 0.1s"><img class="icon" src="../../public/icons/home-icon.png">Inicio</a>
           <a href="#sobremi" style="animation-delay: 0.1s"><img class="icon" src="../../public/icons/user-icon.png">Sobre Mi</a>
           <a href="#experiencia" style="animation-delay: 0.1s"><img class="icon" src="../../public/icons/experiencia-icon.png">Experiencia</a>
           <a href="#proyectos" style="animation-delay: 0.2s"><img class="icon" src="../../public/icons/code-icon.png">Proyectos</a>
