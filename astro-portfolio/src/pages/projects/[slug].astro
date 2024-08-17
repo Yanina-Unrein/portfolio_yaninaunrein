@@ -32,7 +32,7 @@ if (!project) {
         <span class="pre-title">Frontend developer</span>
         <span>{project.fecha}</span>
       </div>
-      <h1 class="title">{project.title}</h1>
+      <h1 class="title" id="title">{project.title}</h1>
       <p class="description">{project.description}</p>
       <figure class="img-container">
         <img src={project.imageD} alt={`${project.title} cover`} />
@@ -57,19 +57,6 @@ if (!project) {
     </section>
   )}
 </Layout>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Usa el tipo 'HTMLElement' para asegurar que el elemento tenga la propiedad 'style'
-    const title = document.querySelector('.title') as HTMLElement;
-    
-    if (title) {
-      // Ajusta el ancho del título al ancho del contenido
-      title.style.setProperty('--typing-width', `${title.scrollWidth}px`);
-    }
-  });
-</script>
-
 
 <style>
   .detail-section{
@@ -104,19 +91,30 @@ if (!project) {
   }
 
   .title{
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     text-transform: uppercase;
     background-image: linear-gradient(225deg, #FF3CAC 50%, #784BA0 70%, #2B86C5 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     transition: all .2s;
     padding: 5px 0;
-    overflow: hidden; /* Esconde el texto que no está visible */
-    border-right: 2px solid #ffffff; /* Línea de cursor */
-    white-space: nowrap; /* Mantén el texto en una sola línea */
-    animation: typing 4s steps(30, end) infinite, blink 0.75s step-end infinite; /* Animación de escritura y parpadeo */
+    white-space: nowrap; 
     width: fit-content;
-  }
+    animation: typing 3s steps(40) infinite;
+    border-right: 2px solid #ffffff;
+    overflow: hidden;
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background-color: #000;
+  animation: cursor 1s infinite; 
+}
 
   .description{
     color: #fff;
@@ -188,20 +186,38 @@ if (!project) {
     .title{
       font-size: 2rem;
     }
+
+    .sub-title::before{
+      width: 10%;
+    }
   }
 
   @media(min-width:1024px){
-    
+    .sub-title::before{
+      width: 5%;
+    }
   }
 
 
   @keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
+    from {
+    max-width: 0; /* Inicialmente, el texto tiene un ancho máximo de 0 */
   }
+  to {
+    max-width: 100%; /* El cursor se detiene en la última letra del texto */
+  }
+}
 
-  @keyframes blink {
-    50% { border-color: transparent; }
+@keyframes cursor {
+  0% {
+    opacity: 1; /* La cursor es visible */
   }
+  50% {
+    opacity: 0; /* La cursor es invisible */
+  }
+  100% {
+    opacity: 1; /* La cursor es visible de nuevo */
+  }
+}
 
 </style>

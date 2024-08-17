@@ -33,68 +33,71 @@
       const email = document.getElementById('email') as HTMLInputElement;
       const message = document.getElementById('message') as HTMLTextAreaElement;
       
-      const nameError = document.getElementById('nameError');
-      const emailError = document.getElementById('emailError');
-      const messageError = document.getElementById('messageError');
+      const nameError = document.getElementById('nameError') as HTMLSpanElement;
+      const emailError = document.getElementById('emailError') as HTMLSpanElement;
+      const messageError = document.getElementById('messageError') as HTMLSpanElement;
       const modal = document.getElementById('modal') as HTMLDivElement;
       const closeModal = document.getElementById('closeModal') as HTMLSpanElement;
     
 
       if (form && name && email && message && nameError && emailError && messageError && modal && closeModal) {
-        form.addEventListener('submit', function (event) {
-          event.preventDefault(); // Prevent default form submission
-  
-          let isValid = true;
-  
-            // Validate name
-            if (!name.value.trim()) {
-            nameError.innerText = 'El nombre es obligatorio';
-            isValid = false;
-            } else if (!/^[a-zA-Z\s]+$/.test(name.value)) {
-            nameError.innerText = 'El nombre solo puede contener letras y espacios';
-            isValid = false;
-            } else {
-            nameError.innerText = '';
-            }
-  
-          // Validate email
-          if (!email.value.trim()) {
-            emailError.innerText = 'El correo es obligatorio';
-            isValid = false;
-          } else if (!/\S+@\S+\.\S+/.test(email.value)) {
-            emailError.innerText = 'El correo no es válido';
-            isValid = false;
-          } else {
-            emailError.innerText = '';
-          }
-  
-          // Validate message
-          if (!message.value.trim()) {
-            messageError.innerText = 'El mensaje es obligatorio';
-            isValid = false;
-          } else {
-            messageError.innerText = '';
-          }
+      form.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        let isValid = true;
+
+        // Reset previous error messages
+        nameError.innerText = '';
+        emailError.innerText = '';
+        messageError.innerText = '';
+
+        // Validate name
+        if (!name.value.trim()) {
+          nameError.innerText = 'El nombre es obligatorio';
+          isValid = false;
+        } else if (!/^[a-zA-Z\s]+$/.test(name.value)) {
+          nameError.innerText = 'El nombre solo puede contener letras y espacios';
+          isValid = false;
+        }
+
+        // Validate email
+        if (!email.value.trim()) {
+          emailError.innerText = 'El correo es obligatorio';
+          isValid = false;
+        } else if (!/\S+@\S+\.\S+/.test(email.value)) {
+          emailError.innerText = 'El correo no es válido';
+          isValid = false;
+        }
+
+        // Validate message
+        if (!message.value.trim()) {
+          messageError.innerText = 'El mensaje es obligatorio';
+          isValid = false;
+        }
   
           if (isValid) {
             // Form is valid, you can submit the form
             const formData = new FormData(form);
-            fetch(form.action, {
-              method: 'POST',
-              body: formData,
-            })
-            .then(response => {
-              if (response.ok) {
-                modal.style.display = 'block'; // Show modal
-                form.reset(); // Reset the form fields
-              } else {
-                alert('Ha ocurrido un error al enviar el mensaje');
-              }
-            })
-            .catch(error => {
-              console.error('Error:', error);
+          fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'Accept': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.ok) {
+              modal.style.display = 'block'; // Show modal
+              form.reset(); // Reset the form fields
+            } else {
               alert('Ha ocurrido un error al enviar el mensaje');
-            });
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('Ha ocurrido un error al enviar el mensaje');
+          });
           }
         });
   
@@ -147,6 +150,7 @@
     .error {
       color: red;
       font-size: 0.85rem;
+      padding-top: 5px;
     }
   
     button {

@@ -16,6 +16,7 @@ export const PROJECTS = [
         fecha: 'agosto 2024',
         image: '/cardsImg/portfolio/portfolio.jpg',
         image2: '/cardsImg/portfolio/logo-portfolio.png',
+        imageD: '/cardsImg/portfolio/portfolioFC.jpg',
         title: 'Personal Portfolio',
         description: 'Portfolio personal, aquí encontraras mis proyectos.',
         descriptionExtend:'',
