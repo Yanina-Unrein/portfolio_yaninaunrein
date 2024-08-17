@@ -1,5 +1,10 @@
 export const EXPERIENCE = [
     {
+        date: 'Agosto -2024',
+        title: 'Freelance - Juana Manso Rediseño',
+        description: 'Se realizo un rediseño en el Home del sitio agregando nuevas secciones, se agregaron nuevas páginas de contenido y navegabilidad a ellas desde el navbar, se implementaron elementos como un slider interactivo.',
+    },
+    {
         date: 'Marzo -2024',
         title: 'Freelance - colaboración de maquetación',
         description: 'Hero slider con video de fondo realizado en Wordpress con el constructor Divi, totalmente responsivo.',

@@ -1,0 +1,42 @@
+---
+import ContactForm from "./ContactForm.astro";
+---
+
+<section id="contacto" class="contact-container">
+    <h2 class="title">Contáctame</h2>
+    <ContactForm />
+</section>
+
+<style>
+    .contact-container {
+        display: flex;
+        flex-direction: column;
+        padding: 50px;  
+        background-color: #13151a;
+    }
+
+    .title{
+        font-size: 2rem;
+        padding: 20px 0 10px 0;
+        display: inline-block;
+        position: relative;
+        color: #fff;
+        margin: 30px 0;
+    }
+
+    .title::before {
+        content: '';
+        position: absolute;
+        bottom: 0.80px; 
+        left: 0;
+        width: 15%; 
+        border-bottom: 4px solid #F9C1DC; 
+        white-space: nowrap; 
+    }
+
+    @media(min-width:768px){
+        .contact-container{
+            align-items: center;          
+        }
+    }
+</style>
