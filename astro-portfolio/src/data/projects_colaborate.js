@@ -2,7 +2,7 @@ export const PROJECTSC = [
     {
         image: '/cardsImg/juanaManso/juanaManso.png',
         title: 'Juana Manso rediseño',
-        description: 'Se realizo el rediseño de la página home y otras páginas, agregando nuevas secciones que estilizan el sitio y dan una mejor accesibilidad al usuario. También agregue navegabilidad al navbar y las nuevas páginas.',
+        description: 'Se realizo el rediseño de la página home y otras páginas en Wordpress, agregando nuevas secciones que estilizan el sitio y dan una mejor accesibilidad al usuario. También agregue navegabilidad al navbar y las nuevas páginas.',
         link: 'https://www.juanamanso.org/#',        
     },
     {
