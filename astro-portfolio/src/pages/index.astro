@@ -1,18 +1,18 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import SobreMi from '../components/SobreMi.astro';
-import Projects from '../components/Projects.astro';
-import Experience from '../components/Experience.astro';
-import Technologies from '../components/Technologies.astro';
-import Contact from '../components/Contact.astro';
+import Layout from '@/layouts/Layout.astro';
+import Hero from '@/components/sections/Hero.astro';
+import About from '@/components/sections/About.astro';
+import Projects from '@/components/sections/Projects.astro';
+import Experience from '@/components/sections/Experience.astro';
+import Technologies from '@/components/sections/Technologies.astro';
+import Contact from '@/components/sections/Contact.astro';
 ---
 
 <Layout title="Portfolio Yanina Unrein - Desarrolladora y Programadora Web"
-description="Desarrolladora Web especializada en el Frontend">
+description="Descubre mi portfolio como desarrolladora Frontend junior. Explora mis proyectos y habilidades en diseño web, programación y desarrollo de interfaces interactivas.">
 	<main>
 		<Hero />
-		<SobreMi />
+		<About />
 		<Experience />
 		<Projects />
 		<Technologies />
@@ -20,6 +20,3 @@ description="Desarrolladora Web especializada en el Frontend">
 	</main>
 </Layout>
 
-<style>
-
-</style>

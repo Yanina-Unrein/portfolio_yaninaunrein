@@ -1,5 +1,5 @@
 ---
-import SocialButtons from './SocialButtons.astro'
+import SocialButtons from '../SocialButtons.astro'
 ---
 
 <script type="text/javascript">
@@ -55,7 +55,7 @@ import SocialButtons from './SocialButtons.astro'
       <div class="menu">
         <nav>
           <a href="/" style="animation-delay: 0.1s"><img class="icon" src="../../public/icons/home-icon.png">Inicio</a>
-          <a href="#sobremi" style="animation-delay: 0.1s"><img class="icon" src="../../public/icons/user-icon.png">Sobre Mi</a>
+          <a href="#about" style="animation-delay: 0.1s"><img class="icon" src="../../public/icons/user-icon.png">Sobre Mi</a>
           <a href="#experiencia" style="animation-delay: 0.1s"><img class="icon" src="../../public/icons/experiencia-icon.png">Experiencia</a>
           <a href="#proyectos" style="animation-delay: 0.2s"><img class="icon" src="../../public/icons/code-icon.png">Proyectos</a>
           <a href="#technologies" style="animation-delay: 0.3s"><img class="icon" src="../../public/icons/studios-icon.png">Tecnologías</a>
@@ -110,6 +110,8 @@ import SocialButtons from './SocialButtons.astro'
     background-repeat: no-repeat;
     background-position: center;
     margin: 20px;
+    background-color: rgba(0, 0, 0, 0.768);
+    border-radius: 50px;
   }
   
   body.open .navbar-burger {
@@ -127,7 +129,6 @@ import SocialButtons from './SocialButtons.astro'
     background: rgba(0, 0, 0, 0.6);
     opacity: 0;
     visibility: hidden;
-    border-bottom: 20px solid white;
     transition: 0.5s;
   }
   
@@ -159,7 +160,7 @@ import SocialButtons from './SocialButtons.astro'
     color: #f9f9f9;
     font-size: 1.2rem;
     font-family: "Raleway", sans-serif;
-    padding: 20px 0;
+    padding: 15px 0;
     width: 300px;
     align-items: center;
     text-decoration: none;
@@ -189,13 +190,13 @@ import SocialButtons from './SocialButtons.astro'
   }
   
   .icon{
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     padding-right: 10px;
   }
 
   .social-buttons{
-    padding: 20px;
+    padding: 5px;
   }
 
   
@@ -250,7 +251,7 @@ import SocialButtons from './SocialButtons.astro'
       width: auto;
       color: #ffff;
       padding: 10px 20px;
-      font-size: 0.90rem;
+      font-size: 0.98rem;
     }
 
     .menu a::after {
@@ -258,7 +259,7 @@ import SocialButtons from './SocialButtons.astro'
     }
 
     .icon{
-      width: 35px;
+      width: 38px;
       height: 35px;
     }
 

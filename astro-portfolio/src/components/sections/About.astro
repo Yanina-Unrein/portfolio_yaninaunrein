@@ -1,61 +1,35 @@
-<section id="sobremi" class="sobremi-section">
-     <h2 class="title">Sobre Mí</h2>
-     <div class="sobreMi-container">         
-         <div class="title-container">             
-               <figure class="personal-img">
-                    <img src="../../public/img/opcion2.jpeg" alt="">
-               </figure>
-         </div>
-          <div class="text-container">
-               <p class="description">Soy una apasionada por la programación, los videojuegos, mangas, animes y gatos. Soy proactiva, comprometida, autodidacta y me gusta siempre dar lo mejor de mí en todo, por más simple o compleja que se pueda tornar la situación.</p>
-               <figure class="img-container">
-                    <img src="../../public/img/sobre_mi.png" alt="ilustración de una joven en su escritorio utilizando la computadora con dos gatos situados sobre el escritorio">
-               </figure>
-               <h3 class="subtitle">Técnica en Desarrollo Web y Aplicaciones Digitales</h3>
-               <p class="description">Me encuentro estudiando la Tecnicatura en Desarrollo Web en la Universidad de Entre Ríos y en continuo aprendizaje con cursos, bootcamp o de forma autodidacta. En julio del 2024 me recibí de la Tecnicatura en Desarrollo Web y Aplicaciones Digitales en el Instituto Superior Politécnico Córdoba.</p>
-          </div>
-     </div> 
-     <div class="cv-container">
-          <span>Si estás interesado en conocer más sobre mí, puedes descargar mi Curriculum Vitae a continuación:</span>
-          <a href="https://drive.google.com/file/d/1s4V4XGx-iITWHwULUHnnhvLRi4UObwuo/view?usp=sharing" target="_blank">Descargar CV</a>
-     </div>
-</section>
+---
+import Section from "@/components/Section.astro"
+---
 
-<script type="text/javascript">
-     document.addEventListener('DOMContentLoaded', () => {
-       gsap.registerPlugin(ScrollTrigger);
- 
-       gsap.from('.personal-img', {
-         opacity: 0,
-         scale: 0.2,
-         ease: 'power2',
-         duration: 1.2,
-         scrollTrigger: {
-           trigger: '#sobremi',
-           start: 'top 80%',
-           end: 'bottom top',
-         },
-       });
- 
-       gsap.from(['.title', '.description', '.img-container', '.subtitle', '.cv-container'], {
-         opacity: 0,
-         y: 100,
-         ease: 'power2',
-         duration: 1.2,
-         stagger: 0.2,
-         scrollTrigger: {
-           trigger: '#sobremi',
-           start: 'top 80%',
-           end: 'bottom top',
-         },
-       });
-     });
-   </script>
-   
+<Section>
+     <section id="about" class="about-section">
+          <h2>Sobre Mí</h2>
+          <div class="about-container">         
+          <div class="title-container">             
+                    <figure class="personal-img">
+                         <img src="../../public/img/opcion2.jpeg" alt="">
+                    </figure>
+          </div>
+               <div class="text-container">
+                    <p>Soy una apasionada por la programación, los videojuegos, mangas, animes y gatos. Soy proactiva, comprometida, autodidacta y me gusta siempre dar lo mejor de mí en todo, por más simple o compleja que se pueda tornar la situación.</p>
+                    <figure class="img-container">
+                         <img src="../../public/img/sobre_mi.png" alt="una joven sentada en un escritorio trabajando en su computadora con 2 gatos subidos en el escritorio">
+                    </figure>
+                    <h3>Técnica en Desarrollo Web y Aplicaciones Digitales</h3>
+                    <p>Me encuentro estudiando la Tecnicatura en Desarrollo Web en la Universidad de Entre Ríos y en continuo aprendizaje con cursos, bootcamp o de forma autodidacta. En julio del 2024 me recibí de la Tecnicatura en Desarrollo Web y Aplicaciones Digitales en el Instituto Superior Politécnico Córdoba.</p>
+               </div>
+          </div> 
+          <div class="cv-container">
+               <span>Si estás interesado en conocer más sobre mí, puedes descargar mi Curriculum Vitae a continuación:</span>
+               <a href="https://drive.google.com/file/d/1s4V4XGx-iITWHwULUHnnhvLRi4UObwuo/view?usp=sharing" target="_blank">Descargar CV</a>
+          </div>
+     </section>
+</Section>
 
 
 <style>
-     .sobremi-section{   
+     .about-section{   
           display: flex;
           flex-direction: column;
           padding: 50px;  
@@ -63,7 +37,7 @@
           gap: 20px;
      }
 
-     .sobreMi-container{
+     .about-container{
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -109,38 +83,33 @@
           z-index: 1;  
      }
 
-     .title{
-        font-size: 2rem;
+     h2{
+        font-size: 2.5rem;
         padding: 20px 0 10px 0;
         display: inline-block;
         position: relative;
         color: #fff;
-        margin: 30px 0;
+        margin: 30px 0;     
      }
 
-     .title::before {
+     h2::before {
         content: '';
         position: absolute;
         bottom: 0.80px; 
         left: 0;
-        width: 15%; 
+        width: 20%; 
         border-bottom: 4px solid #F9C1DC; 
         white-space: nowrap; 
      }
 
-     .description{
+     p{
           font-size: 1rem;
           line-height: 1.6;
           padding: 20px 0;
-          text-align: center;
-          margin: 0 auto; 
-          word-break: break-word; /* Permitir el corte de palabras largas */
-          hyphens: auto; /* Habilitar la separación de palabras */
+          text-align: center;           
      }
     
      .img-container{ 
-        margin: 0;
-        padding: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -153,10 +122,11 @@
           display: block;
      }
 
-     .subtitle{
+     h3{
+          padding-top: 15px;
           color: #F9C1DC;
           text-align: center;
-          font-size: 1.2rem;
+          font-size: 1.3rem;
           font-weight: 400;
      }
 
@@ -166,7 +136,6 @@
           align-items: center;
           justify-content: center;
           gap: 30px;
-          padding: 20px 0;
      }
      .cv-container span{
           text-align: center;
@@ -176,60 +145,53 @@
      .cv-container a{
           width: 200px;
           text-align: center;
-          color: #fff;
+          color: #13151a;
           font-size: 1.2rem;
           font-weight: 600;
           text-decoration: none;
           background-color: #F9C1DC;
           padding: 15px;
           border-radius: 20px;
-          box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
           cursor: pointer;
+          box-shadow: rgba(138, 137, 137, 0.405) 0px 5px 15px 0px;
           transition: background-color 0.3s ease, transform 0.3s ease, background-image 0.3s ease;
      }
      .cv-container a:hover {
           background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
           transform: scale(1.1); 
+          color: #ffffff;
      }
 
-     /* Ocultar elementos del contenedor sobremi cuando el navbar está abierto */
-     body.open .sobreMi-container {
+     /* Ocultar elementos del contenedor about cuando el navbar está abierto */
+     body.open .about-container {
      visibility: hidden;
      }
 
-     body.open .sobremi-section  {
-        display: none;
-   }
+     body.open .about-section {
+          display: none;
+     }    
 
 
      @media(min-width:768px){
-          .sobremi-section{
+          .about-section{
                justify-content: center;
           }
 
-          .title::before {
+          h2::before {
                width: 5%;           
           }
 
      }
 
      @media(min-width:1024px){
-          .sobremi-section{        
+          .about-section{        
                padding: 50px 90px;
-          }
-
-          .sobreMi-container{
-               flex-direction: row;  
-               justify-content: space-around; 
-               max-width: 100%;
-               padding: 20px;
-          }
+          }    
 
           .title-container{
                display: flex;
                flex-direction: column;
           }
-
 
           .personal-img{
                width: 300px;
@@ -245,7 +207,6 @@
                flex-direction: column;
                justify-content: center;
                align-items: center;
-               width: 50%;
                gap: 20px;
           }
           
@@ -255,7 +216,7 @@
           }
 
           .img-container{
-               width: 500px;
+               width: 400px;
           }
 
      }

@@ -1,23 +1,23 @@
 ---
-import CardProject from "./CardProject.astro";
-import { PROJECTS } from '../data/projects_detail';
-import CardColaboracion from "./cardColaboracion.astro";
-import { PROJECTSC } from "../data/projects_colaborate";
+import CardProject from "@/components/CardProject.astro";
+import { PROJECTS } from '@/data/projects_detail';
+import CardColaboracion from "@/components/cardColaboracion.astro";
+import { PROJECTSC } from "@/data/projects_colaborate";
 ---
 
 <section id="proyectos" class="projects-section">
     <div class="projects-container">
         <div class="title-container">
-            <h2 class="title">Proyectos</h2>
-            <h3 class="sub-title">Trabajos seleccionados</h3>
+            <h2>Proyectos</h2>
+            <h3>Trabajos seleccionados</h3>
         </div>   
         <div class="cards-container">
             {PROJECTS.map(project => (
                 <CardProject classList={['card-project', 'project-element']} {...project} />
             ))}
         </div>
-        <div class="title-container">
-            <h3 class="sub-title">Colaboraciones</h3>
+        <div class="colaboration-container">
+            <h3>Colaboraciones</h3>
             <div class="cards-container colaborate">
                 {PROJECTSC.map(project => (
                     <CardColaboracion classlist={['card-project', 'project-element']} {...project} />
@@ -27,32 +27,14 @@ import { PROJECTSC } from "../data/projects_colaborate";
     </div>
 </section>
 
-<script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', () => {
-      gsap.registerPlugin(ScrollTrigger);
-
-      // Animación para las tarjetas de proyectos
-      gsap.from('.title', '.sub-title','.project-element','card-project', {
-        opacity: 0,
-        y: 100,
-        ease: 'power3',
-        duration: 1.5,
-        stagger: 0.3,
-        scrollTrigger: {
-          trigger: '#proyectos',
-          start: 'top 70%',
-          end: 'bottom top',
-        },
-      });
-    });
-  </script>
-
 <style>
     .projects-section {
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: #13151a;
+        max-width: 1100px;
+        margin: 0 auto 50px;
     }
 
     .projects-container {
@@ -64,7 +46,6 @@ import { PROJECTSC } from "../data/projects_colaborate";
         align-items: center;
         row-gap: 40px;
         padding-top: 60px;
-        padding-bottom: 60px;
     }
 
     .title-container {
@@ -74,15 +55,15 @@ import { PROJECTSC } from "../data/projects_colaborate";
         gap: 30px;
     }
 
-    .title {
-        font-size: 2rem;
+    h2 {
+        font-size: 2.5rem;
         padding: 5px 0;
         display: inline-block;
         position: relative;
         color: #fff;
     }
 
-    .title::before {
+    h2::before {
         content: '';
         position: absolute;
         bottom: 0.80px; 
@@ -92,11 +73,9 @@ import { PROJECTSC } from "../data/projects_colaborate";
         white-space: nowrap; 
     }
 
-    .sub-title {
+    h3 {
         color: #fff;
-        font-size: 0.85rem;
-        margin: 0;
-        padding: 0;
+        font-size: 1rem;
     }
 
     .cards-container {
@@ -109,17 +88,32 @@ import { PROJECTSC } from "../data/projects_colaborate";
         gap: 30px 20px;
     }
 
-    body.open .projects-section, body.open .cards-container {
-        visibility: hidden;
+    .colaboration-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 50px 5px 20px 5px;
     }
 
-    body.open .title, body.open .sub-title  {
+    .colaboration-container h3{
+        padding: 0 0 40px 0;
+    }
+
+    body.open .projects-section, body.open .cards-container {
+        display: none;
+    }
+
+    body.open h2, body.open h3  {
         display: none;
    }
 
     @media(min-width: 950px){
         .cards-container {
             grid-template-columns: 1fr 1fr;
+        }
+
+        h3{
+            font-size: 1.3rem;
         }
     }
 </style>
