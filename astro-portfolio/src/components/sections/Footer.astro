@@ -11,7 +11,7 @@
                 <a class="logo-name" href="/">Yanina Unrein</a>
                 <span class="subtitle-logo">FrontEnd Developer</span>
             </div>
-            <figure class="img-container">
+            <figure>
                 <img src="../../public/cardsImg/portfolio/logo-portfolio.png" alt="">
             </figure>
         </div>
@@ -45,7 +45,7 @@
 
     .wave{
         position: absolute;
-        top: -80px;
+        top: -79px;
         left: 0;
         width: 100%;
         height: 80px;
@@ -82,7 +82,7 @@
     }
 
     .logo-name{
-        font-size: 1.5rem;
+        font-size: 1.9rem;
         font-weight: 800;
         background-color: #FF3CAC;
         text-decoration: none;
@@ -91,6 +91,10 @@
         -webkit-text-fill-color: transparent;
         transition: all .2s;
    }
+
+   .subtitle-logo{
+        font-weight: 600;
+    }
 
    .logo-container{
         display: flex;
@@ -105,11 +109,11 @@
         gap: 5px;
     }
 
-   .img-container{
+   figure{
         width: 100px;
         height: 100px;
    }
-   .img-container img{
+   figure img{
         width: 100%;
         height: auto;
    }
@@ -145,15 +149,19 @@
     }
 
    .copyright{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-   }
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
 
    .copyright span {
-         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    body.open footer {
+        display: none;
     }
 
    @media(min-width: 768px) {

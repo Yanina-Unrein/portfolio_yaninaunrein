@@ -7,8 +7,8 @@ interface Props {
 const { title, description } = Astro.props;
 
 
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
+import Navbar from '@/components/sections/Navbar.astro';
+import Footer from '@/components/sections/Footer.astro';
 ---
 
 <!doctype html>
@@ -32,14 +32,31 @@ import Footer from '../components/Footer.astro';
 		<Footer />
 	</body>	
 </html>
+
 <style is:global>
-	*{
-		font-family: "Raleway", sans-serif;
+	html {	
+		font-family: "Raleway", sans-serif;	
+		background: #13151a;
+	}
+
+	body, figure{
 		padding: 0;
 		margin: 0;
 	}
-	html {		
-		background: #13151a;
+
+	a{
+		text-decoration: none;
 	}
-	
+
+	*, *::before, *::after{
+		box-sizing: border-box;
+	}
+
+	h1, h2, h3, h4, h5, h6{
+		margin: 0;
+	}
+
+	p{
+		text-wrap: pretty;
+	}
 </style>

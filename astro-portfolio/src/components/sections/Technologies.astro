@@ -1,0 +1,86 @@
+---
+import {ICONS} from "@/data/iconsTecnologies";
+import Carrousel from "@/components/Carrousel.astro";
+import Section from "@/components/Section.astro"
+---
+
+<Section>
+    <section id="technologies" class="section-tecnologies">
+        <div>
+            <h2>Tecnologías</h2>
+            <p>Mi área principal de especialización es el desarrollo Frontend pero mi formación es FullStack. </p>
+            <p>HTML, CSS, JS, creación de aplicaciones web pequeñas y medianas con Angular o React, complementos personalizados, funciones, animaciones y codificación de diseños interactivos. También tengo experiencia como desarrolladora con CMS como WordPress, Shopify, CPanel, Wix.</p>
+            <p>Visita mi <a href="https://www.linkedin.com/in/yaninaunrein/" target="_blank">LinkedIn</a> para más detalles.</p>
+        </div>
+        <Carrousel classlist={['project-element']} icons={ICONS} />
+    </section>
+</Section>
+
+<style>
+    .section-tecnologies {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;  
+        background-color: #13151a;
+        padding: 0 20px;
+    }
+
+    h2{
+        font-size: 2rem;
+        padding: 20px 0 10px 0;
+        display: inline-block;
+        position: relative;
+        color: #fff;
+        margin: 10px 0;
+    }
+
+    h2::before {
+        content: '';
+        position: absolute;
+        bottom: 0.80px; 
+        left: 0;
+        width: 15%; 
+        border-bottom: 4px solid #F9C1DC; 
+        white-space: nowrap; 
+    }
+
+    p{
+        font-size: 1.1rem;
+        line-height: 1.6;
+        text-align: center;
+        color: #fff;
+    }
+    a{
+        color: #61aee5;
+        transition: 0.3s ease-in;
+    }
+
+    a:hover{
+        cursor: pointer;
+        transform: translateY(-10px);
+        color: #FF3CAC;
+        text-decoration: underline;
+    }
+
+    body.open .section-tecnologies, body.open .project-element {
+        display: none;
+    }
+
+    body.open h2, body.open p {
+        display: none;
+   }
+
+
+    @media(min-width:768px){
+        div{
+            max-width: 500px;       
+        }
+    }
+
+     @media(min-width:1024px){
+        div{
+            max-width: 950px;       
+        }
+    }
+</style>

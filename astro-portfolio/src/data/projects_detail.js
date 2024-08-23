@@ -19,7 +19,7 @@ export const PROJECTS = [
         imageD: '/cardsImg/portfolio/portfolioFC.jpg',
         title: 'Personal Portfolio',
         description: 'Portfolio personal, aquí encontraras mis proyectos.',
-        descriptionExtend:'',
+        descriptionExtend:'Mi portfolio como Developer está diseñado para mostrar mis habilidades y proyectos a través de una interfaz atractiva y funcional. El sitio permite a los visitantes explorar mis trabajos, incluyendo ejemplos de desarrollo web, animaciones y diseño responsivo. Los usuarios pueden navegar por diferentes secciones que destacan mis colaboraciones en proyectos reales, así como mi experiencia en la creación de interfaces intuitivas y dinámicas. Mi enfoque principal fue garantizar que el portafolio no solo reflejara mi capacidad técnica, sino también mi creatividad y atención al detalle, proporcionando una experiencia de usuario fluida y agradable.',
         rol:'A lo largo del desarrollo de mi portfolio, encabezé la implementación de diseño y funcionalidad utilizando Astro y JavaScript, incorporando bibliotecas como GSAP para una interfaz de usuario atractiva y animaciones dinámicas. Me centré en el diseño receptivo, la optimización del rendimiento y la presentación efectiva del contenido para mostrar mis habilidades y proyectos de manera clara y concisa. Además, me aseguré de que la página fuera totalmente adaptable a varios dispositivos, garantizando así una experiencia óptima para todos los usuarios.',
         tecnologias: ['Astro','JavaScript', 'HTML5', 'CSS3', 'GSAP']
     },

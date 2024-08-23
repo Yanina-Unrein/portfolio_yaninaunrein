@@ -1,34 +1,37 @@
 ---
-import { EXPERIENCE } from "../data/experience";
-import ExperienceItems from "./ExperienceItems.astro";
+import { EXPERIENCE } from "@/data/experience";
+import ExperienceItems from "@/components/ExperienceItems.astro";
+import Section from "@/components/Section.astro"
 ---
 
-<section id="experiencia" class="experience-section">
-    <div class="title-container">
-        <h2 class="title">Experiencia</h2>
-    </div>
-    <div class="web-container">
-        <ol class="timeline">
-            {
-                EXPERIENCE.map((experience) =>
-                    <li class="item-experience">
-                      <ExperienceItems {...experience} />  
-                    </li>
-            )
-            }   
-        </ol>
-        <div class="section-logo">
-            <figure class="logo-container">
-                <img src="../../public/cardsImg/portfolio/logo-portfolio.png" alt="">
-            </figure>
+<Section>
+    <section id="experiencia" class="experience-section">
+        <div class="title-container">
+            <h2>Experiencia</h2>
         </div>
-    </div>
-</section>
+        <div class="web-container">
+            <ol class="timeline">
+                {
+                    EXPERIENCE.map((experience) =>
+                        <li>
+                        <ExperienceItems {...experience} />  
+                        </li>
+                )
+                }   
+            </ol>
+            <div class="section-logo">
+                <figure>
+                    <img src="../../public/cardsImg/portfolio/logo-portfolio.png" alt="">
+                </figure>
+            </div>
+        </div>
+    </section>
+</Section>
 
 
 <style>
     .experience-section{
-        padding: 30px 20px;  
+        padding: 0 30px;  
         background-color: #13151a;
     }
     .timeline {
@@ -39,50 +42,46 @@ import ExperienceItems from "./ExperienceItems.astro";
     }
 
     .title-container{
-        padding: 30px 0;
+        padding: 30px 0 60px 0;
     }
-    .title{
-        font-size: 2rem;
+    h2{
+        font-size: 2.5rem;
         display: inline-block;
         position: relative;
         color: #fff;
         padding: 10px 0;
     }
 
-    .title::before {
+    h2::before {
         content: '';
         position: absolute;
         bottom: 0.80px; 
         left: 0;
-        width: 25%; 
+        width: 20%; 
         border-bottom: 4px solid #F9C1DC; 
         white-space: nowrap; 
-    }
-
-    .item-experience{
-        position: relative;
-        margin-bottom: 2rem; /* Ajusta el espaciado según sea necesario */
     }
 
     .section-logo{
         display: flex;
         justify-content: end;
     }
-    .logo-container{
+    figure{
         width: 150px;
         height: 150px;
     }
-    .logo-container img{
+    figure img{
         width: 100%;
         height: auto;
         filter: drop-shadow(0 0 10px rgba(84, 84, 84, 0.8));
     }
 
     body.open .experience-section {
-     visibility: hidden;
+        display: none;
     }
 
-    body.open .title {
+
+    body.open h2 {
         display: none;
     }
     
