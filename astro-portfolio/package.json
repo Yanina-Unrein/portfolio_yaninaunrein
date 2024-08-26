@@ -13,6 +13,7 @@
     "@astrojs/check": "^0.9.2",
     "astro": "^4.13.3",
     "gsap": "^3.12.5",
+    "tailwindcss-animated": "^1.1.2",
     "typescript": "^5.5.2"
   }
 }
