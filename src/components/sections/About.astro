@@ -14,7 +14,7 @@ import Section from "@/components/Section.astro"
                <div class="text-container">
                     <h3>Hola, soy Yanina Unrein</h3>
                     <p>Soy una apasionada por la programación, los videojuegos, mangas, animes y gatos. Soy proactiva, comprometida, autodidacta y me gusta siempre dar lo mejor de mí en todo, por más simple o compleja que se pueda tornar la situación.</p>
-                    <p>Me encuentro estudiando la <span class="tecnica">Tecnicatura en Desarrollo Web</span> en la Universidad de Entre Ríos y en continuo aprendizaje con cursos, bootcamp o de forma autodidacta. En julio del 2024 me recibí como <span class="tecnica">Técnica en Desarrollo Web y Aplicaciones Digitales</span> en el Instituto Superior Politécnico Córdoba.</p>
+                    <p>En julio del 2024 me recibí como <span class="tecnica">Técnica en Desarrollo Web y Aplicaciones Digitales</span> en el Instituto Superior Politécnico Córdoba. Actualmente me encuentro estudiando la <span class="tecnica">Tecnicatura en Desarrollo Web</span> en la Universidad de Entre Ríos en mi segundo año y en continuo aprendizaje con cursos, bootcamp o de forma autodidacta.</p>
                </div>     
           </div> 
           <div class="cv-container">
@@ -206,7 +206,10 @@ import Section from "@/components/Section.astro"
                display: flex;
                flex-direction: column;
                justify-content: center;
-               align-items: center;
+          }
+
+          .text-container h3 , p {
+               text-align: left;
           }
           
           .cv-container a{
