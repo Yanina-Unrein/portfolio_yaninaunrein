@@ -2,9 +2,10 @@
 interface Props {
 	title: string;
 	description: string;
+	hideNavbarFooter?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, hideNavbarFooter } = Astro.props;
 
 
 import Navbar from '@/components/sections/Navbar.astro';
@@ -27,10 +28,10 @@ import Footer from '@/components/sections/Footer.astro';
 		<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 	</head>
 	<body>
-		<Navbar />
+		{!hideNavbarFooter && <Navbar />}
 		<slot />
-		<Footer />
-	</body>	
+		{!hideNavbarFooter && <Footer />} 
+	  </body>
 </html>
 
 <style is:global>

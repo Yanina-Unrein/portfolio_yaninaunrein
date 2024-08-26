@@ -3,25 +3,22 @@ import Section from "@/components/Section.astro"
 ---
 
 <Section>
-     <section id="about" class="about-section animate-shake animate-once">
+     <section id="about" class="about-section">
           <h2>Sobre Mí</h2>
-          <div class="about-container">         
-          <div class="title-container">             
+          <div class="about-container">    
+               <div class="img-container">             
                     <figure class="personal-img">
                          <img src="../../public/img/opcion2.jpeg" alt="">
                     </figure>
-          </div>
-               <div class="text-container">
-                    <p>Soy una apasionada por la programación, los videojuegos, mangas, animes y gatos. Soy proactiva, comprometida, autodidacta y me gusta siempre dar lo mejor de mí en todo, por más simple o compleja que se pueda tornar la situación.</p>
-                    <figure class="img-container">
-                         <img src="../../public/img/sobre_mi.png" alt="una joven sentada en un escritorio trabajando en su computadora con 2 gatos subidos en el escritorio">
-                    </figure>
-                    <h3>Técnica en Desarrollo Web y Aplicaciones Digitales</h3>
-                    <p>Me encuentro estudiando la Tecnicatura en Desarrollo Web en la Universidad de Entre Ríos y en continuo aprendizaje con cursos, bootcamp o de forma autodidacta. En julio del 2024 me recibí de la Tecnicatura en Desarrollo Web y Aplicaciones Digitales en el Instituto Superior Politécnico Córdoba.</p>
                </div>
+               <div class="text-container">
+                    <h3>Hola, soy Yanina Unrein</h3>
+                    <p>Soy una apasionada por la programación, los videojuegos, mangas, animes y gatos. Soy proactiva, comprometida, autodidacta y me gusta siempre dar lo mejor de mí en todo, por más simple o compleja que se pueda tornar la situación.</p>
+                    <p>Me encuentro estudiando la <span class="tecnica">Tecnicatura en Desarrollo Web</span> en la Universidad de Entre Ríos y en continuo aprendizaje con cursos, bootcamp o de forma autodidacta. En julio del 2024 me recibí como <span class="tecnica">Técnica en Desarrollo Web y Aplicaciones Digitales</span> en el Instituto Superior Politécnico Córdoba.</p>
+               </div>     
           </div> 
           <div class="cv-container">
-               <span>Si estás interesado en conocer más sobre mí, puedes descargar mi Curriculum Vitae a continuación:</span>
+               <p>Si estás interesado en conocer más sobre mí, puedes descargar mi Curriculum Vitae a continuación:</p>
                <a href="https://drive.google.com/file/d/1s4V4XGx-iITWHwULUHnnhvLRi4UObwuo/view?usp=sharing" target="_blank">Descargar CV</a>
           </div>
      </section>
@@ -32,17 +29,23 @@ import Section from "@/components/Section.astro"
      .about-section{   
           display: flex;
           flex-direction: column;
-          padding: 50px;  
+          justify-content: center;
+          padding: 50px 30px;  
           background-color: #13151a;
-          gap: 20px;
      }
 
      .about-container{
           display: flex;
           flex-direction: column;
-          justify-content: center;
           color: #fff;
-          gap: 20px;
+          gap: 25px;
+     }
+
+     .img-container{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding-bottom: 25px;
      }
 
      .personal-img{
@@ -98,35 +101,24 @@ import Section from "@/components/Section.astro"
         bottom: 0.80px; 
         left: 0;
         width: 20%; 
-        border-bottom: 4px solid #F9C1DC; 
+        border-bottom: 4px solid #fb4ea1; 
         white-space: nowrap; 
+     }
+
+     h3{
+          font-size: 1.3rem;
+          text-align: center;
+          color: #784BA0;
      }
 
      p{
           font-size: 1rem;
-          line-height: 1.6;
-          padding: 20px 0;
-          text-align: center;           
+          line-height: 1.6;        
+          text-align: center;
      }
     
-     .img-container{ 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-     }
-
-     .img-container img{
-          max-width: 100%;
-          height: auto;
-          display: block;
-     }
-
-     h3{
-          padding-top: 15px;
-          color: #F9C1DC;
-          text-align: center;
-          font-size: 1.3rem;
+     .tecnica{
+          color: #f97eba;
           font-weight: 400;
      }
 
@@ -134,20 +126,20 @@ import Section from "@/components/Section.astro"
           display: flex;
           flex-direction: column;
           align-items: center;
-          justify-content: center;
-          gap: 30px;
+          padding: 20px 0 0 0;
      }
-     .cv-container span{
+
+     .cv-container p{
+          color: #ffffff;
           text-align: center;
-          color: #fff;
-          font-size: 1rem;
      }
+
+ 
      .cv-container a{
-          width: 200px;
+          width: 150px;
           text-align: center;
           color: #13151a;
-          font-size: 1.2rem;
-          font-weight: 600;
+          font-weight: 800;
           text-decoration: none;
           background-color: #F9C1DC;
           padding: 15px;
@@ -175,10 +167,19 @@ import Section from "@/components/Section.astro"
      @media(min-width:768px){
           .about-section{
                justify-content: center;
+               padding: 50px 80px;
           }
 
           h2::before {
                width: 5%;           
+          }
+
+          .about-container{
+               flex-direction: row;
+          }
+
+          .text-container{
+               width: 50%;
           }
 
      }
@@ -188,18 +189,17 @@ import Section from "@/components/Section.astro"
                padding: 50px 90px;
           }    
 
-          .title-container{
-               display: flex;
-               flex-direction: column;
+          .about-container{
+               justify-content: space-around;
           }
 
           .personal-img{
-               width: 300px;
-               height: 300px;
+               width: 250px;
+               height: 250px;
           }
           .personal-img::before{
-               top: 148px;
-               left: 150px;
+               top: 127px;
+               left: 125px;
           }
 
           .text-container{
@@ -207,16 +207,11 @@ import Section from "@/components/Section.astro"
                flex-direction: column;
                justify-content: center;
                align-items: center;
-               gap: 20px;
           }
           
           .cv-container a{
-               padding: 10px;
+               padding: 20px;
                width: 180px;
-          }
-
-          .img-container{
-               width: 400px;
           }
 
      }
