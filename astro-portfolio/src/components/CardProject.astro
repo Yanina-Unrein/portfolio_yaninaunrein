@@ -1,0 +1,190 @@
+---
+const {slug, image, image2, title, description, github, classList = [] } = Astro.props;
+---
+
+<a href={`/proyecto/${slug}`} class="link-detail-proyect">
+    <article class={["card-container", ...classList].join(' ')}>
+        <div class="card">
+            <div class="wrapper">
+                <img src={image} class="cover-image" alt={`${title} cover`} />
+            </div>
+            <img src={image2} class="character" alt={`${title} character`} />                           
+        </div>
+        <div class="description-container">
+            <h4>{title}</h4>
+            <p>{description}</p>
+        </div>
+        <div class="description-container">
+        <span>Ver más</span>
+        </div>  
+    </article>
+</a>
+
+<style> 
+    .card-container{
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+    }
+    
+    .card {
+        width: 300px;
+        height: 300px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        perspective: 8000px;       
+    }
+
+    .cover-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .wrapper {
+        transition: all 0.5s;
+        position: absolute;
+        width: 100%;
+        z-index: -1;
+    }
+
+    .card:hover .wrapper {
+        transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+        box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+        -webkit-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+    }
+
+    .wrapper::before,
+    .wrapper::after {
+        content: "";
+        opacity: 0;
+        width: 100%;
+        height: 80px;
+        transition: all 0.5s;
+        position: absolute;
+        left: 0;
+    }
+    .wrapper::before {
+        top: 0;
+        height: 100%;
+        background-image: linear-gradient(
+            to top,
+            transparent 46%,
+            rgba(12, 13, 19, 0.5) 68%,
+            rgba(12, 13, 19) 97%
+        );
+    }
+    .wrapper::after {
+        bottom: 0;
+        opacity: 1;
+        background-image: linear-gradient(
+            to bottom,
+            transparent 46%,
+            rgba(12, 13, 19, 0.5) 68%,
+            rgba(12, 13, 19) 97%
+        );
+    }
+
+    .card:hover .wrapper::before,
+    .wrapper::after {
+        opacity: 1;
+    }
+
+    .card:hover .wrapper::after {
+        height: 120px;
+    }
+
+    .character {
+        width: 50%;
+        height: auto;
+        opacity: 0;
+        transition: all 0.5s;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .card:hover .character {
+        opacity: 1;
+        transform: translate3d(0%, -30%, 100px);
+    }
+
+    .description-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+        color: #fff;
+        padding:  10px 5px 0 5px;
+
+    }
+
+    h4{
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: all .2s;
+    }
+
+    p{
+        font-size: 0.90rem;
+        text-align: center;
+    }
+
+    .icon-git{
+        display: inline-flex;
+        text-decoration: none;
+        width: 40px;
+        height: 40px;
+        color: #000;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .icon-git::before{
+        content: "";
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        transition: 0.3s ease-in;
+    }
+
+    .icon-git:hover::before{
+        transform: scale(0);
+    }
+    
+    span{
+        color: #61aee5;
+        font-weight: 600;
+        transition: 0.3s ease-in;
+    }
+    .link-detail-proyect{
+        text-decoration: none;
+    }
+    .link-detail-proyect:hover span{
+        transform: translateY(-10px);
+        color: #FF3CAC;
+    }
+
+    body.open .link-detail-proyect, body.open h4, body.open p, body.open span  {
+        display: none;
+   }
+
+    @media(min-width: 500px){
+        .card-container{
+            width: 400px;
+        }
+
+        .card {
+            width: 400px;
+            height: 350px;
+        }
+    }
+</style>

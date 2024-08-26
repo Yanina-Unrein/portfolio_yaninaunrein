@@ -1,0 +1,228 @@
+---
+import Section from "@/components/Section.astro"
+---
+
+<Section>
+     <section id="about" class="about-section">
+          <h2>Sobre Mí</h2>
+          <div class="about-container">    
+               <div class="img-container">             
+                    <figure class="personal-img">
+                         <img src="../../public/img/opcion2.jpeg" alt="">
+                    </figure>
+               </div>
+               <div class="text-container">
+                    <h3>Hola, soy Yanina Unrein</h3>
+                    <p>Soy una apasionada por la programación, los videojuegos, mangas, animes y gatos. Soy proactiva, comprometida, autodidacta y me gusta siempre dar lo mejor de mí en todo, por más simple o compleja que se pueda tornar la situación.</p>
+                    <p>Me encuentro estudiando la <span class="tecnica">Tecnicatura en Desarrollo Web</span> en la Universidad de Entre Ríos y en continuo aprendizaje con cursos, bootcamp o de forma autodidacta. En julio del 2024 me recibí como <span class="tecnica">Técnica en Desarrollo Web y Aplicaciones Digitales</span> en el Instituto Superior Politécnico Córdoba.</p>
+               </div>     
+          </div> 
+          <div class="cv-container">
+               <p>Si estás interesado en conocer más sobre mí, puedes descargar mi Curriculum Vitae a continuación:</p>
+               <a href="https://drive.google.com/file/d/1s4V4XGx-iITWHwULUHnnhvLRi4UObwuo/view?usp=sharing" target="_blank">Descargar CV</a>
+          </div>
+     </section>
+</Section>
+
+
+<style>
+     .about-section{   
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 50px 30px;  
+          background-color: #13151a;
+     }
+
+     .about-container{
+          display: flex;
+          flex-direction: column;
+          color: #fff;
+          gap: 25px;
+     }
+
+     .img-container{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding-bottom: 25px;
+     }
+
+     .personal-img{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          margin: auto;
+          width: 200px;
+          height: 200px;  
+          position: relative;
+          z-index: 1;  
+     }
+
+     .personal-img::before {
+          content: '';
+          position: absolute;
+          top: 101px;
+          left: 99px;
+          width: 110%;
+          height: 110%;
+          border-radius: 50%;
+          border: 3px solid transparent;
+          border-top: 3px solid #FF3CAC; /* Color del borde superior para el gradiente */
+          border-right: 3px solid #784BA0; /* Color del borde derecho para el gradiente */
+          border-bottom: 3px solid #2B86C5; /* Color del borde inferior para el gradiente */
+          box-sizing: border-box;
+          transform: translate(-50%, -50%);
+          animation: spin 2s linear infinite;
+          z-index: 0;  
+     }
+ 
+     .personal-img img{
+          width: 100%;
+          height: auto;
+          border-radius: 100%;
+          position: relative;
+          z-index: 1;  
+     }
+
+     h2{
+        font-size: 2.5rem;
+        padding: 20px 0 10px 0;
+        display: inline-block;
+        position: relative;
+        color: #fff;
+        margin: 30px 0;     
+     }
+
+     h2::before {
+        content: '';
+        position: absolute;
+        bottom: 0.80px; 
+        left: 0;
+        width: 20%; 
+        border-bottom: 4px solid #fb4ea1; 
+        white-space: nowrap; 
+     }
+
+     h3{
+          font-size: 1.3rem;
+          text-align: center;
+          color: #784BA0;
+     }
+
+     p{
+          font-size: 1rem;
+          line-height: 1.6;        
+          text-align: center;
+     }
+    
+     .tecnica{
+          color: #f97eba;
+          font-weight: 400;
+     }
+
+     .cv-container{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 20px 0 0 0;
+     }
+
+     .cv-container p{
+          color: #ffffff;
+          text-align: center;
+     }
+
+ 
+     .cv-container a{
+          width: 150px;
+          text-align: center;
+          color: #13151a;
+          font-weight: 800;
+          text-decoration: none;
+          background-color: #F9C1DC;
+          padding: 15px;
+          border-radius: 20px;
+          cursor: pointer;
+          box-shadow: rgba(138, 137, 137, 0.405) 0px 5px 15px 0px;
+          transition: background-color 0.3s ease, transform 0.3s ease, background-image 0.3s ease;
+     }
+     .cv-container a:hover {
+          background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+          transform: scale(1.1); 
+          color: #ffffff;
+     }
+
+     /* Ocultar elementos del contenedor about cuando el navbar está abierto */
+     body.open .about-container {
+     visibility: hidden;
+     }
+
+     body.open .about-section {
+          display: none;
+     }    
+
+
+     @media(min-width:768px){
+          .about-section{
+               justify-content: center;
+               padding: 50px 80px;
+          }
+
+          h2::before {
+               width: 5%;           
+          }
+
+          .about-container{
+               flex-direction: row;
+          }
+
+          .text-container{
+               width: 50%;
+          }
+
+     }
+
+     @media(min-width:1024px){
+          .about-section{        
+               padding: 50px 90px;
+          }    
+
+          .about-container{
+               justify-content: space-around;
+          }
+
+          .personal-img{
+               width: 250px;
+               height: 250px;
+          }
+          .personal-img::before{
+               top: 127px;
+               left: 125px;
+          }
+
+          .text-container{
+               display: flex;
+               flex-direction: column;
+               justify-content: center;
+               align-items: center;
+          }
+          
+          .cv-container a{
+               padding: 20px;
+               width: 180px;
+          }
+
+     }
+
+     @keyframes spin {
+          0% {
+          transform: translate(-50%, -50%) rotate(0deg);
+          }
+          100% {
+          transform: translate(-50%, -50%) rotate(360deg);
+          }
+     }
+
+</style>

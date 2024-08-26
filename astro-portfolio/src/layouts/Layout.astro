@@ -1,34 +1,63 @@
 ---
 interface Props {
 	title: string;
+	description: string;
+	hideNavbarFooter?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, description, hideNavbarFooter } = Astro.props;
+
+
+import Navbar from '@/components/sections/Navbar.astro';
+import Footer from '@/components/sections/Footer.astro';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
+		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js" defer></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/ScrollTrigger.min.js" defer></script>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 	</head>
 	<body>
+		{!hideNavbarFooter && <Navbar />}
 		<slot />
-	</body>
+		{!hideNavbarFooter && <Footer />} 
+	  </body>
 </html>
+
 <style is:global>
-	*{
-		font-family: "Raleway", sans-serif;
-	}
-	html {		
+	html {	
+		font-family: "Raleway", sans-serif;	
 		background: #13151a;
-		background-size: 224px;
+	}
+
+	body, figure{
+		padding: 0;
+		margin: 0;
+	}
+
+	a{
+		text-decoration: none;
+	}
+
+	*, *::before, *::after{
+		box-sizing: border-box;
+	}
+
+	h1, h2, h3, h4, h5, h6{
+		margin: 0;
+	}
+
+	p{
+		text-wrap: pretty;
 	}
 </style>

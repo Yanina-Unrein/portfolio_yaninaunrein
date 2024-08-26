@@ -1,13 +1,22 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '@/layouts/Layout.astro';
+import Hero from '@/components/sections/Hero.astro';
+import About from '@/components/sections/About.astro';
+import Projects from '@/components/sections/Projects.astro';
+import Experience from '@/components/sections/Experience.astro';
+import Technologies from '@/components/sections/Technologies.astro';
+import Contact from '@/components/sections/Contact.astro';
 ---
 
-<Layout title="Yanina Unrein">
+<Layout title="Portfolio Yanina Unrein - Desarrolladora y Programadora Web"
+description="Descubre mi portfolio como desarrolladora Frontend junior. Explora mis proyectos y habilidades en diseño web, programación y desarrollo de interfaces interactivas.">
 	<main>
-		
+		<Hero />
+		<About />
+		<Experience />
+		<Projects />
+		<Technologies />
+		<Contact />
 	</main>
 </Layout>
 
-<style>
-	
-</style>

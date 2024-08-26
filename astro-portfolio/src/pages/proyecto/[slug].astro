@@ -1,0 +1,226 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { PROJECTS } from '@/data/projects_detail';
+import Section from '@/components/Section.astro';
+
+export async function getStaticPaths() {
+  // Genera un array de rutas posibles a partir de los slugs en PROJECTS
+  const paths = PROJECTS.map((project) => ({
+    params: { slug: project.slug },
+  }));
+
+  return paths; // Devuelve el array directamente
+}
+
+const { slug } = Astro.params;
+const project = PROJECTS.find(proj => proj.slug === slug);
+
+if (!project) {
+  throw new Error(`No se encontró el proyecto con el slug: ${slug}`);
+}
+---
+
+<Layout title={project.title} description={project.description}>
+  {!project ? (
+    <div>
+      <h1>Proyecto no encontrado</h1>
+      <p>No se encontró ningún proyecto con el slug: {slug}</p>
+    </div>
+  ) : (
+    <Section>
+      <section class="detail-section">
+        <div class="detail-container">
+          <div class="header-container">
+            <span class="pre-title">Frontend developer</span>
+            <span>{project.fecha}</span>
+          </div>
+          <h1 class="title" id="title">{project.title}</h1>
+          <p class="description">{project.description}</p>
+          <figure class="img-container">
+            <img src={project.imageD} alt={`${project.title} cover`} />
+          </figure>
+          <div class="info-container">
+            <h2 class="sub-title">Descripción</h2>
+            <p class="description">{project.descriptionExtend}</p>
+          </div>
+          <div class="info-container">
+            <h2 class="sub-title">Responsabilidades</h2>
+            <p class="description">{project.rol}</p>
+          </div>
+          <div class="info-container">
+            <h2 class="sub-title">Tecnologías</h2>
+            <div class="technologies-container">
+              {project.tecnologias.map(tecnologia => (
+                <span class="technologie">{tecnologia}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+    </section>
+  </Section>
+  )}
+</Layout>
+
+<style>
+  .detail-section{
+    width: 100%;
+    height: auto;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding-top: 120px;
+    padding-bottom: 25px;
+    z-index: 1000;
+  }
+
+  .detail-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-inline: 15px;
+    padding-bottom: 50px;
+  }
+
+  .header-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    color: #fff;
+    padding: 10px 0 2px 0;
+  }
+
+  .title{
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    background-image: linear-gradient(225deg, #FF3CAC 50%, #784BA0 70%, #2B86C5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all .2s;
+    padding: 5px 0;
+    white-space: nowrap; 
+    width: fit-content;
+    animation: typing 3s steps(40) infinite;
+    border-right: 2px solid #ffffff;
+    overflow: hidden;
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background-color: #000;
+  animation: cursor 1s infinite; 
+}
+
+  .description{
+    color: #fff;
+    padding: 0 0 10px 0;
+    font-weight: 200;
+  }
+
+  .img-container{
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .img-container img{
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .info-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px 10px;
+  }
+
+  .sub-title{
+    display: inline-block;
+    position: relative;
+    color: #ffffff;
+    padding: 8px 0;
+  }
+
+  .sub-title::before {
+    content: '';
+    position: absolute;
+    bottom: 0.80px; 
+    left: 0;
+    width: 13%; 
+    border-bottom: 4px solid #fb4ea1; 
+    white-space: nowrap; 
+  }
+  
+  .technologies-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 10px;
+  }
+
+  .technologie{
+    padding: 10px;
+    color: #ffffff;
+    border-color: rgb(23, 23, 23);
+    background: rgb(5, 5, 5);
+    border-radius: 10px;
+  }
+
+  @media(min-width:768px){
+    .detail-section{
+      padding-top: 170px;
+      padding-bottom: 100px;
+    }
+
+    .detail-container{
+      width: 75%;
+    }
+
+    .title{
+      font-size: 2rem;
+    }
+
+    .sub-title::before{
+      width: 10%;
+    }
+  }
+
+  @media(min-width:1024px){
+    .sub-title::before{
+      width: 5%;
+    }
+  }
+
+
+  @keyframes typing {
+    from {
+    max-width: 0; 
+  }
+  to {
+    max-width: 100%; 
+  }
+}
+
+@keyframes cursor {
+  0% {
+    opacity: 1; 
+  }
+  50% {
+    opacity: 0; 
+  }
+  100% {
+    opacity: 1; 
+  }
+}
+
+</style>

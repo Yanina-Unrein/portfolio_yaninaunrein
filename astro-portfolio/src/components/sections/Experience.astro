@@ -1,0 +1,109 @@
+---
+import { EXPERIENCE } from "@/data/experience";
+import ExperienceItems from "@/components/ExperienceItems.astro";
+import Section from "@/components/Section.astro"
+---
+
+<Section>
+    <section id="experiencia" class="experience-section">
+        <div class="title-container">
+            <h2>Experiencia</h2>
+        </div>
+        <div class="web-container">
+            <ol class="timeline">
+                {
+                    EXPERIENCE.map((experience) =>
+                        <li>
+                        <ExperienceItems {...experience} />  
+                        </li>
+                )
+                }   
+            </ol>
+            <div class="section-logo">
+                <figure>
+                    <img src="../../public/cardsImg/portfolio/logo-portfolio.png" alt="">
+                </figure>
+            </div>
+        </div>
+    </section>
+</Section>
+
+
+<style>
+    .experience-section{
+        padding: 0 30px;  
+        background-color: #13151a;
+    }
+    .timeline {
+        position: relative;
+        border-left: 2px solid #ffffff; 
+        margin: 0;
+        list-style: none;
+    }
+
+    .title-container{
+        padding: 30px 0 60px 0;
+    }
+    h2{
+        font-size: 2.5rem;
+        display: inline-block;
+        position: relative;
+        color: #fff;
+        padding: 10px 0;
+    }
+
+    h2::before {
+        content: '';
+        position: absolute;
+        bottom: 0.80px; 
+        left: 0;
+        width: 20%; 
+        border-bottom: 4px solid #fb4ea1; 
+        white-space: nowrap; 
+    }
+
+    .section-logo{
+        display: flex;
+        justify-content: end;
+    }
+    figure{
+        width: 150px;
+        height: 150px;
+    }
+    figure img{
+        width: 100%;
+        height: auto;
+        filter: drop-shadow(0 0 10px rgba(84, 84, 84, 0.8));
+    }
+
+    body.open .experience-section {
+        display: none;
+    }
+
+
+    body.open h2 {
+        display: none;
+    }
+    
+    @media(min-width:768px){
+        .experience-section{
+            padding: 0 80px;
+        }
+    }
+
+    @media(min-width:1024px){
+        .experience-section{
+            padding: 40px 90px;
+        }
+
+        .web-container{
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .section-logo{
+            align-items: flex-end;
+        }
+    }
+</style>
