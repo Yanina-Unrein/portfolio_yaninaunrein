@@ -3,6 +3,8 @@ import CardProject from "@/components/CardProject.astro";
 import { PROJECTS } from '@/data/projects_detail';
 import CardColaboracion from "@/components/cardColaboracion.astro";
 import { PROJECTSC } from "@/data/projects_colaborate";
+
+const isSingleProject = PROJECTS.length === 1;
 ---
 
 <section id="proyectos" class="projects-section">
@@ -11,7 +13,7 @@ import { PROJECTSC } from "@/data/projects_colaborate";
             <h2>Proyectos</h2>
             <h3>Trabajos seleccionados</h3>
         </div>   
-        <div class="cards-container">
+        <div class={`cards-container ${isSingleProject ? 'single' : ''}`}>
             {PROJECTS.map(project => (
                 <CardProject classList={['card-project', 'project-element']} {...project} />
             ))}
@@ -26,6 +28,8 @@ import { PROJECTSC } from "@/data/projects_colaborate";
         </div>
     </div>
 </section>
+
+
 
 <style>
     .projects-section {
@@ -109,10 +113,22 @@ import { PROJECTSC } from "@/data/projects_colaborate";
     @media(min-width: 950px){
         .cards-container {
             grid-template-columns: 1fr 1fr;
+            justify-content: center;
+        }
+
+        .cards-container.single {
+            grid-template-columns: 1fr;
+            justify-items: center;
         }
 
         h3{
             font-size: 1.3rem;
         }
+
+        .colaborate{
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            justify-content: center;
+        }
+
     }
 </style>
