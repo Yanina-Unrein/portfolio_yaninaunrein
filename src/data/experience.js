@@ -1,13 +1,5 @@
 export const EXPERIENCE = [
     {
-        title: 'DAIRA IT Group - Freelance Frontend Developer Junior',
-        position: "Frontend Developer Junior",
-        url: "",
-        startDate: 'Septiembre 2024',
-        endDate: "Actualidad",
-        description: 'Contratación Freelance para trabajar como Frontend Developer Junior. Participo en proyectos en curso o proyectos desde cero utilizando tecnologías como Svelte y Tailwind.',
-    },
-    {
         title: 'Freelance - Colaboración en Sitio Juana Manso',
         position: "Diseñadora y Frontend Developer",
         url: "https://www.juanamanso.org/",
