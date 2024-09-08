@@ -1,6 +1,6 @@
 export const ICONS = [
     {
-        name: 'HTML5',
+        name: 'HTML',
         svgPath: `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 452 520" width="48" height="48">
             <path fill="#e34f26" d="M41 460L0 0h451l-41 460-185 52" />
