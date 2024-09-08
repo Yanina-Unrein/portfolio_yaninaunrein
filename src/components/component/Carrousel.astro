@@ -8,11 +8,13 @@ import Technologie from "../icons/Technologie.astro";
     {ICONS.map(icon => (
         <div class="icon-wrapper">
           <Technologie svgPath={icon.svgPath} />
+          <p class="icon-name">{icon.name}</p>
         </div>
     ))}
     {ICONS.map(icon => (
         <div class="icon-wrapper">
           <Technologie svgPath={icon.svgPath} />
+          <p class="icon-name">{icon.name}</p>
         </div>
     ))}
   </div>
@@ -41,6 +43,14 @@ import Technologie from "../icons/Technologie.astro";
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+  }
+
+  .icon-name {
+    margin-top: 8px; 
+    font-size: 12px;
+    text-align: center;
+    color: #ffffff; 
   }
 </style>
 
