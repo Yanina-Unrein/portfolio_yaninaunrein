@@ -1,5 +1,12 @@
 ---
+import { ICONS } from '@/data/iconsTecnologies'
 import SocialButtons from '../buttons/SocialButtons.astro'
+import User from '@/components/icons/User.astro'
+import Home from '@/components/icons/Home.astro'
+import Tools from '@/components/icons/Tools.astro'
+import Code from '@/components/icons/Code.astro'
+import Study from '@/components/icons/Study.astro'
+import Send from '@/components/icons/Send.astro'
 ---
 
 <script type="text/javascript">
@@ -54,12 +61,12 @@ import SocialButtons from '../buttons/SocialButtons.astro'
   <button class="navbar-burger" onclick="toggleMenu()"></button>
       <div class="menu">
         <nav>
-          <a href="/" style="animation-delay: 0.1s"><img class="icon" src="/icons/home-icon.png">Inicio</a>
-          <a href="#about" style="animation-delay: 0.1s"><img class="icon" src="/icons/user-icon.png">Sobre Mi</a>
-          <a href="#experiencia" style="animation-delay: 0.1s"><img class="icon" src="/icons/experiencia-icon.png">Experiencia</a>
-          <a href="#proyectos" style="animation-delay: 0.2s"><img class="icon" src="/icons/code-icon.png">Proyectos</a>
-          <a href="#technologies" style="animation-delay: 0.3s"><img class="icon" src="/icons/studios-icon.png">Tecnologías</a>
-          <a href="#contacto" style="animation-delay: 0.5s"><img class="icon" src="/icons/contacto-icon.png">Contacto</a>
+          <a href="/" style="animation-delay: 0.1s"><Home class="icon" />Inicio</a>
+          <a href="#about" style="animation-delay: 0.1s"><User class="icon" />Sobre Mi</a>
+          <a href="#experiencia" style="animation-delay: 0.1s"><Tools class="icon" />Experiencia</a>
+          <a href="#proyectos" style="animation-delay: 0.2s"><Code class="icon" />Proyectos</a>
+          <a href="#technologies" style="animation-delay: 0.3s"><Study class="icon" />Tecnologías</a>
+          <a href="#contacto" style="animation-delay: 0.5s"><Send class="icon" />Contacto</a>
           <div class="social-buttons">
             <SocialButtons />
         </div>
