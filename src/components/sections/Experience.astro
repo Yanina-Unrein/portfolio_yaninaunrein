@@ -36,9 +36,36 @@ import Section from "@/components/Section.astro"
     }
     .timeline {
         position: relative;
-        border-left: 2px solid #ffffff; 
+        border-left: 2.5px solid #ffffff; 
         margin: 0;
         list-style: none;
+    }
+
+    /* Efecto de luz deslizante */
+    .timeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -4px; /* Ajusta esto para centrar mejor la luz */
+        width: 5px;
+        height: 8px;
+        background-color: #fb4ea1;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #fb4ea1, 0 0 20px #fb4ea1, 0 0 30px #ff8ed6;
+        animation: slide-light 7s linear infinite;
+    }
+
+    /* Animación para mover la luz arriba y abajo */
+    @keyframes slide-light {
+        0% {
+            top: 0;
+        }
+        50% {
+            top: 100%; /* Mueve la luz hasta el final de la línea */
+        }
+        100% {
+            top: 0; /* Regresa al inicio */
+        }
     }
 
     .title-container{

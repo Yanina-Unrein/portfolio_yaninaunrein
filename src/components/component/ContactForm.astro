@@ -157,8 +157,21 @@ import { validateName, validateEmail, validateMessage, validateFormFields } from
 
   input, textarea {
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #414141;
     border-radius: 4px;
+    background-color: transparent;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: #FF3CAC;
+    border-top: transparent;
+  }
+
+  textarea:focus {
+    outline: none;
+    border-color: #FF3CAC;
+    border-top: transparent;
   }
 
   textarea{
@@ -174,7 +187,7 @@ import { validateName, validateEmail, validateMessage, validateFormFields } from
 
   button {
     padding: 10px;
-    background-color: #F9C1DC;
+    background-color: #784BA0;
     color: #ffffff;
     border: none;
     font-size: 1.1rem;
