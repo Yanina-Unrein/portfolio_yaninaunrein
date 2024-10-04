@@ -1,64 +1,55 @@
 ---
-import { ICONS } from '@/data/iconsTecnologies'
-import SocialButtons from '../buttons/SocialButtons.astro'
+import SocialButtons from '@/components/buttons/SocialButtons.astro'
 import User from '@/components/icons/User.astro'
 import Home from '@/components/icons/Home.astro'
 import Tools from '@/components/icons/Tools.astro'
 import Code from '@/components/icons/Code.astro'
 import Study from '@/components/icons/Study.astro'
 import Send from '@/components/icons/Send.astro'
+import Language from '../buttons/Language.astro'
 ---
 
 <script type="text/javascript">
-  const toggleMenu = () => {
-      document.body.classList.toggle("open");
-  };
+ document.addEventListener('DOMContentLoaded', () => {
+    const toggleMenu = () => {
+      document.body.classList.toggle('open');
+      document.querySelector('.navbar-burger').setAttribute('aria-expanded', document.body.classList.contains('open'));
+    };
 
-  const closeMenuOnClick = () => {
+    const closeMenuOnClick = () => {
       const menuLinks = document.querySelectorAll('.menu a');
       menuLinks.forEach(link => {
-          link.addEventListener('click', (event) => {
-              document.body.classList.remove("open");
-
-              const href = link.getAttribute('href');
-              if (href.startsWith('#')) {
-                event.preventDefault();
-
-                // Verifica si ya estamos en la página principal
-                if (window.location.pathname !== '/') {
-                  window.location.href = `/${href}`;
-                } else {
-                  // Si ya estamos en la página principal, desplázate al elemento con el id correspondiente
-                  const targetElement = document.querySelector(href);
-                  if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }
-              }
-          });
+        link.addEventListener('click', (event) => {
+          document.body.classList.remove('open');
+          const href = link.getAttribute('href');
+          if (href.startsWith('#')) {
+            event.preventDefault();
+            const targetElement = document.querySelector(href);
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
+        });
       });
-  };
+    };
 
-  document.addEventListener('DOMContentLoaded', closeMenuOnClick);
-
-  const navigateToHome = (event) => {
-    event.preventDefault(); // Previene el comportamiento por defecto del enlace
-
-    // Verifica si ya estamos en la página principal
-    if (window.location.pathname !== '/') {
-      window.location.href = '/';
-    } else {
-      // Si ya estamos en la página principal, desplázate al elemento con el id 'hero'
+    const navigateToHome = (event) => {
+      event.preventDefault();
       const heroElement = document.getElementById('hero');
-      if (heroElement) {
+      if (window.location.pathname === '/' && heroElement) {
         heroElement.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.location.href = '/';
       }
-    }
-  };
+    };
+
+    document.querySelector('.navbar-burger').addEventListener('click', toggleMenu);
+    closeMenuOnClick();
+  });
 </script>
 
 <header>
-  <button class="navbar-burger" onclick="toggleMenu()"></button>
+  <button class="navbar-burger" onclick="toggleMenu()" aria-expanded="false" aria-controls="menu"></button>
       <div class="menu">
         <nav>
           <a href="/" style="animation-delay: 0.1s"><Home class="icon" />Inicio</a>
@@ -70,11 +61,23 @@ import Send from '@/components/icons/Send.astro'
           <div class="social-buttons">
             <SocialButtons />
         </div>
-        </nav>     
-      </div>
+        </nav>
+      </div> 
+      <Language class="language-toggle" />
 </header>
 
   <style>
+    header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center; 
+      width: 100%;
+      position: absolute;
+    }
+
+    .language-toggle {
+      margin-left: auto;
+    }
   button {
     border: 0;
     padding: 0;
@@ -204,6 +207,7 @@ import Send from '@/components/icons/Send.astro'
 
   .social-buttons{
     padding: 5px;
+    position: fixed;
   }
 
   
@@ -224,7 +228,7 @@ import Send from '@/components/icons/Send.astro'
     }
   }
 
-  @media(min-width: 1024px) {
+  @media(min-width: 1180px) {
   .navbar-burger {
     display: none;
   }
