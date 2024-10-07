@@ -1,10 +1,14 @@
 ---
 import ContactForm from "@/components/component/ContactForm.astro";
 import Section from "@/components/Section.astro"
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 <Section>
 <section id="contacto" class="contact-container">
-    <h2>Contáctame</h2>
+    <h2 data-i18n="contact.title">{t('contact.title')}</h2>
     <ContactForm />
 </section>
 </Section>

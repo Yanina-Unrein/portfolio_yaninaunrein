@@ -2,15 +2,23 @@
 import {ICONS} from "@/data/iconsTecnologies";
 import Carrousel from "@/components/component/Carrousel.astro";
 import Section from "@/components/Section.astro"
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <Section>
     <section id="technologies" class="section-tecnologies">
         <div>
-            <h2>Tecnologías</h2>
-            <p>Mi área principal de especialización es el desarrollo Frontend pero mi formación es FullStack.</p>
-            <p>HTML, CSS, JS, creación de aplicaciones web pequeñas y medianas con Angular o React, complementos personalizados, funciones, animaciones y codificación de diseños interactivos. También tengo experiencia como desarrolladora con CMS como WordPress, Shopify, CPanel, Wix.</p>
-            <p>Visita mi <a href="https://www.linkedin.com/in/yaninaunrein/" target="_blank">LinkedIn</a> para más detalles.</p>
+            <h2 data-i18n="technologies.title">{t('technologies.title')}</h2>
+            <p data-i18n="technologies.description_1">{t('technologies.description_1')}</p>
+            <p data-i18n="technologies.description_2">{t('technologies.description_2')}</p>
+            <p data-i18n="technologies.linkTextPrefix">
+                {t('technologies.linkTextPrefix')}
+                <a href="https://www.linkedin.com/in/yaninaunrein/" target="_blank">LinkedIn</a>
+                <span data-i18n="technologies.linkTextSuffix">{t('technologies.linkTextSuffix')}</span>
+            </p>
         </div>
         <Carrousel classlist={['project-element']} icons={ICONS} />
     </section>

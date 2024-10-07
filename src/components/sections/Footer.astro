@@ -1,3 +1,10 @@
+---
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
 <footer>
     <div class="waves">
         <div class="wave" id="wave1"></div>
@@ -17,9 +24,9 @@
         </div>
         <div class="nav-container">
             <div class="links">
-                <a class="btn" href="/">Inicio</a>
-                <a class="btn" href="#proyectos">Proyectos</a>
-                <a class="btn" href="#contacto">Contacto</a>
+                <a class="btn" href="/" data-i18n="footer.home">{t('footer.home')}</a>
+                <a class="btn" href="#proyectos" data-i18n="footer.projects">{t('footer.projects')}</a>
+                <a class="btn" href="#contacto" data-i18n="footer.contact">{t('footer.contact')}</a>
             </div>
             <div class="links">
                 <a class="btn" href="https://www.linkedin.com/in/yaninaunrein/" target="_blank">LinkedIn</a>
@@ -28,7 +35,7 @@
         </div>
     </section>
     <div class="copyright">
-        <span>Página hecha con el ❤️</span>
+        <span data-i18n="footer.copyright_1">{t('footer.copyright_1')}</span>
         <span>Yanina Unrein 2024</span>
     </div>
 </footer>

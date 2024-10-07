@@ -10,10 +10,13 @@ const { title, description, hideNavbarFooter } = Astro.props;
 
 import Navbar from '@/components/sections/Navbar.astro';
 import Footer from '@/components/sections/Footer.astro';
+import { getCurrentLang } from '../i18n/utils';
+
+const currentLang = getCurrentLang();
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={currentLang} data-lang={currentLang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />

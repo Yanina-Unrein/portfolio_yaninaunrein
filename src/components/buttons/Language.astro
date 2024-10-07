@@ -1,10 +1,13 @@
 ---
-// Define el estado inicial para determinar si el idioma es inglés o español
-let isEnglish = false; // Estado inicial: español (Es)
+import { getCurrentLang, updateLanguage } from '@/i18n/utils';
+
+// Establecer el idioma predeterminado como 'es' (español)
+const currentLang = getCurrentLang() || 'es';
+const isEnglish = currentLang === 'en';
 ---
 
 <div class={`language-switcher ${Astro.props.class}`}>
-    <input type="checkbox" id="checkbox" />
+    <input type="checkbox" id="checkbox" checked={isEnglish} />
     <label for="checkbox" class="switch">
       <span id="language-text">{isEnglish ? 'En' : 'Es'}</span>
       <svg
@@ -21,17 +24,37 @@ let isEnglish = false; // Estado inicial: español (Es)
   </div>
   
   <script>
-   document.addEventListener('DOMContentLoaded', () => {
+    import { updateLanguage, getCurrentLang } from '@/i18n/utils';
+   
+  document.addEventListener('DOMContentLoaded', () => {
     const checkbox = document.getElementById('checkbox') as HTMLInputElement;
     const languageText = document.getElementById('language-text') as HTMLSpanElement;
 
-    // Evento al hacer clic en el switch
-    checkbox.addEventListener('change', () => {
-      const isEnglish = checkbox.checked;
-      languageText.textContent = isEnglish ? 'En' : 'Es'; // Cambia el texto del switch
-    });
-  });
+    let currentLang = getCurrentLang() || 'es';
 
+    // Inicializar el idioma y el estado del switch
+    const initializeLanguage = () => {
+      const savedLang = localStorage.getItem('lang') || 'es';
+      currentLang = savedLang;
+      checkbox.checked = currentLang === 'en';
+      languageText.textContent = currentLang === 'en' ? 'En' : 'Es';
+      updateLanguage(currentLang);
+    };
+
+    // Función para alternar el idioma
+    const toggleLanguage = () => {
+      currentLang = checkbox.checked ? 'en' : 'es';
+      languageText.textContent = currentLang === 'en' ? 'En' : 'Es';
+      updateLanguage(currentLang);
+      localStorage.setItem('lang', currentLang); // Guardar el idioma en localStorage
+    };
+
+    // Inicializar el idioma al cargar la página
+    initializeLanguage();
+
+    // Evento para manejar el cambio de idioma al hacer clic en el switch
+    checkbox.addEventListener('change', toggleLanguage);
+  });
   </script>
 
   <style>

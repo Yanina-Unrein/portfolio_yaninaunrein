@@ -3,6 +3,10 @@ import CardProject from "@/components/cards/CardProject.astro";
 import { PROJECTS } from '@/data/projects_detail';
 import CardColaboracion from "@/components/cards/cardColaboracion.astro";
 import { PROJECTSC } from "@/data/projects_colaborate";
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const isSingleProject = PROJECTS.length === 1;
 ---
@@ -10,8 +14,8 @@ const isSingleProject = PROJECTS.length === 1;
 <section id="proyectos" class="projects-section">
     <div class="projects-container">
         <div class="title-container">
-            <h2>Proyectos</h2>
-            <h3>Trabajos seleccionados</h3>
+            <h2 data-i18n="projects.title">{t('projects.title')}</h2>
+            <h3 data-i18n="projects.subtitle_1">{t('projects.subtitle_1')}</h3>
         </div>   
         <div class={`cards-container ${isSingleProject ? 'single' : ''}`}>
             {PROJECTS.map(project => (
@@ -19,7 +23,7 @@ const isSingleProject = PROJECTS.length === 1;
             ))}
         </div>
         <div class="colaboration-container">
-            <h3>Colaboraciones</h3>
+            <h3 data-i18n="projects.subtitle_2">{t('projects.subtitle_2')}</h3>
             <div class="cards-container colaborate">
                 {PROJECTSC.map(project => (
                     <CardColaboracion classlist={['card-project', 'project-element']} {...project} />

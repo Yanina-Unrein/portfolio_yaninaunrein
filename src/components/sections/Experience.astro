@@ -2,12 +2,16 @@
 import { EXPERIENCE } from "@/data/experience";
 import ExperienceItems from "@/components/component/ExperienceItems.astro";
 import Section from "@/components/Section.astro"
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <Section>
     <section id="experiencia" class="experience-section">
         <div class="title-container">
-            <h2>Experiencia</h2>
+            <h2 data-i18n="experience.title">{t('experience.title')}</h2>
         </div>
         <div class="web-container">
             <ol class="timeline">

@@ -6,8 +6,32 @@ import Tools from '@/components/icons/Tools.astro'
 import Code from '@/components/icons/Code.astro'
 import Study from '@/components/icons/Study.astro'
 import Send from '@/components/icons/Send.astro'
-import Language from '../buttons/Language.astro'
+import Language from '@/components/buttons/Language.astro'
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 ---
+
+<header>
+  <button class="navbar-burger" onclick="toggleMenu()" aria-expanded="false" aria-controls="menu"></button>
+      <div class="menu">
+        <nav>
+          <a href="/" data-i18n="navbar.home" style="animation-delay: 0.1s"><Home class="icon" />{t('navbar.home')}</a>
+          <a href="#about" data-i18n="navbar.about" style="animation-delay: 0.1s"><User class="icon" />{t('navbar.about')}</a>
+          <a href="#experiencia" data-i18n="navbar.experience" style="animation-delay: 0.1s"><Tools class="icon" />{t('navbar.experience')}</a>
+          <a href="#proyectos" data-i18n="navbar.projects" style="animation-delay: 0.2s"><Code class="icon" />{t('navbar.projects')}</a>
+          <a href="#technologies" data-i18n="navbar.technologies" style="animation-delay: 0.3s"><Study class="icon" />{t('navbar.technologies')}</a>
+          <a href="#contacto" data-i18n="navbar.contact" style="animation-delay: 0.5s"><Send class="icon" />{t('navbar.contact')}</a>
+          <div class="social-buttons">
+            <SocialButtons />
+        </div>
+        </nav>
+      </div> 
+      <Language class="language-toggle" lang={lang} />
+</header>
+
 
 <script type="text/javascript">
  document.addEventListener('DOMContentLoaded', () => {
@@ -47,24 +71,6 @@ import Language from '../buttons/Language.astro'
     closeMenuOnClick();
   });
 </script>
-
-<header>
-  <button class="navbar-burger" onclick="toggleMenu()" aria-expanded="false" aria-controls="menu"></button>
-      <div class="menu">
-        <nav>
-          <a href="/" style="animation-delay: 0.1s"><Home class="icon" />Inicio</a>
-          <a href="#about" style="animation-delay: 0.1s"><User class="icon" />Sobre Mi</a>
-          <a href="#experiencia" style="animation-delay: 0.1s"><Tools class="icon" />Experiencia</a>
-          <a href="#proyectos" style="animation-delay: 0.2s"><Code class="icon" />Proyectos</a>
-          <a href="#technologies" style="animation-delay: 0.3s"><Study class="icon" />Tecnologías</a>
-          <a href="#contacto" style="animation-delay: 0.5s"><Send class="icon" />Contacto</a>
-          <div class="social-buttons">
-            <SocialButtons />
-        </div>
-        </nav>
-      </div> 
-      <Language class="language-toggle" />
-</header>
 
   <style>
     header{

@@ -22,9 +22,9 @@ export const translations = {
         subTitle: "Hola, soy Yanina Unrein",
         description_1: "Soy una apasionada por la programación, los videojuegos, mangas, animes y gatos. Soy proactiva, comprometida, autodidacta y me gusta siempre dar lo mejor de mí en todo, por más simple o compleja que se pueda tornar la situación.",
         description_2: "En julio del 2024 me recibí como",
-        description_3: "Técnica en Desarrollo Web y Aplicaciones Digitales",
+        description_3: " Técnica en Desarrollo Web y Aplicaciones Digitales ",
         description_4: "en el Instituto Superior Politécnico Córdoba. Actualmente me encuentro estudiando la",
-        description_5: "Tecnicatura en Desarrollo Web",
+        description_5: " Tecnicatura en Desarrollo Web ",
         description_6: "en la Universidad de Entre Ríos en mi segundo año y en continuo aprendizaje con cursos, bootcamp o de forma autodidacta.",
         cv_text: "Si estás interesado en conocer más sobre mí, puedes descargar mi Curriculum Vitae a continuación:",
         btn_dowload: "Descargar CV",
@@ -38,7 +38,8 @@ export const translations = {
         title: "Tecnologías",
         description_1: "Mi área principal de especialización es el desarrollo Frontend pero mi formación es FullStack.",
         description_2: "HTML, CSS, JS, creación de aplicaciones web pequeñas y medianas con Angular o React, complementos personalizados, funciones, animaciones y codificación de diseños interactivos. También tengo experiencia como desarrolladora con CMS como WordPress, Shopify, CPanel, Wix.",
-        description_3: "Visita mi para más detalles.",
+        linkTextPrefix: "Visita mi ",
+        linkTextSuffix: " para más detalles.",
       },
       experience: {
         title: "Experiencia",
@@ -75,12 +76,12 @@ export const translations = {
         },
         aboutMe: {
           title: "About Me",
-          subTitle: "Hello, I'm Yanina Unrein",
+          subTitle: "Hi, I'm Yanina Unrein",
           description_1: "I am passionate about programming, video games, manga, anime, and cats. I am proactive, committed, self-taught, and I always strive to do my best in everything, no matter how simple or complex the situation may be.",
           description_2: "In July 2024, I graduated as",
-          description_3: "Technician in Web Development and Digital Applications",
+          description_3: " Technician in Web Development and Digital Applications ",
           description_4: "from the Instituto Superior Politécnico Córdoba. I am currently studying",
-          description_5: "Web Development Technology",
+          description_5: " Web Development Technology ",
           description_6: "at the Universidad de Entre Ríos in my second year, and I am continuously learning through courses, bootcamps, or self-taught methods.",
           cv_text: "If you are interested in knowing more about me, you can download my Curriculum Vitae below:",
           btn_dowload: "Download CV",
@@ -94,7 +95,8 @@ export const translations = {
           title: "Technologies",
           description_1: "My main area of expertise is Frontend development, but my training is FullStack.",
           description_2: "HTML, CSS, JS, creating small and medium web applications with Angular or React, custom plugins, functions, animations, and coding interactive designs. I also have experience as a developer with CMS such as WordPress, Shopify, CPanel, Wix.",
-          description_3: "Visit my for more details.",
+          linkTextPrefix: "Visit my  ",
+          linkTextSuffix: " for more details.",
         },
         experience: {
           title: "Experience",
@@ -112,3 +114,4 @@ export const translations = {
         },
       },
     };
+

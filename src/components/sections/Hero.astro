@@ -1,11 +1,17 @@
 ---
-import SocialButtons from "@/components/buttons/SocialButtons.astro"
+import SocialButtons from "@/components/buttons/SocialButtons.astro";
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section id="hero" class="hero">
   <div class="background">
     <div class="container-title">
-        <span class="name">Hola, soy Yanina Unrein <span class="hand-icon">👋</span></span>
+        <span class="name" data-i18n="hero.text">{t('hero.text')} 
+            <span class="hand-icon">👋</span>
+        </span>
         <h1>FrontEnd</h1>
         <h2>Developer</h2>
         <SocialButtons class="social-buttons" />
