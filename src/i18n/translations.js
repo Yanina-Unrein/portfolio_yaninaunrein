@@ -53,7 +53,13 @@ export const translations = {
         mail: "Correo Electrónico",       
         message: "Mensaje",
         btn_submit: "Enviar",
-        message_submit: "Mensaje enviado, me pondré en contacto contigo apenas lo lea. Muchas Gracias!"
+        message_submit: "Mensaje enviado, me pondré en contacto contigo apenas lo lea. Muchas Gracias!",
+        error: {
+          name_required: 'El nombre es obligatorio.',
+          email_required: 'El correo electrónico es obligatorio.',
+          email_invalid: 'El correo electrónico no es válido.',
+          message_required: 'El mensaje es obligatorio.'
+        }
       },
     },
     en: {
@@ -111,6 +117,12 @@ export const translations = {
           message: "Message",
           btn_submit: "Send",
           message_submit: "Message sent, I will contact you as soon as I read it. Thank you very much!",
+          error: {
+            name_required: 'Name is required.',
+            email_required: 'Email is required.',
+            email_invalid: 'Email is invalid.',
+            message_required: 'Message is required.'
+          }
         },
       },
     };

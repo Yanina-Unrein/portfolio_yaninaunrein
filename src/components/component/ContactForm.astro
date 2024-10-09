@@ -1,24 +1,28 @@
 ---
 import { validateName, validateEmail, validateMessage, validateFormFields } from '@/utils/validateForm.js';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <form id="contactForm" class="contact-form" action="https://formspree.io/f/xkgwrdpk" method="POST">
   <div class="form-group">
-    <label for="name">Nombre y Apellido</label>
-    <input type="text" id="name" name="name" placeholder="Nombre y apellido" required />
+    <label for="name" data-i18n="contactForm.name">{t('contactForm.name')}</label>
+    <input type="text" id="name" name="name" ddata-i18n="contactForm.name" placeholder={t('contactForm.name')} required />
     <span class="error" id="nameError"></span>
   </div>
   <div class="form-group">
-    <label for="email">Correo Electrónico</label>
+    <label for="email" data-i18n="contactForm.mail">{t('contactForm.mail')}</label>
     <input type="email" id="email" name="email" placeholder="example@example.com" required />
     <span class="error" id="emailError"></span>
   </div>
   <div class="form-group">
-    <label for="message">Mensaje</label>
-    <textarea id="message" name="message" placeholder="Escribe tu mensaje" required></textarea>
+    <label for="message" data-i18n="contactForm.message">{t('contactForm.message')}</label>
+    <textarea id="message" name="message" placeholder={t('contactForm.message')} required></textarea>
     <span class="error" id="messageError"></span>
   </div>
-  <button type="submit">Enviar</button>
+  <button type="submit" data-i18n="contactForm.btn_submit">{t('contactForm.btn_submit')}</button>
 </form>
 
 <!-- Modal -->
@@ -26,7 +30,7 @@ import { validateName, validateEmail, validateMessage, validateFormFields } from
   <div class="modal-content">
     <span id="closeModal" class="close">&times;</span>
     <img src="/img/mail.png" alt="gato anaranjado tecleando rápido en una computadora" class="modal-image" />
-    <p>Mensaje enviado, me pondré en contacto contigo apenas lo lea. Muchas Gracias!</p>
+    <p data-i18n="contactForm.message_submit">{t('contactForm.message_submit')}</p>
   </div>
 </div>
 

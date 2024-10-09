@@ -1,6 +1,7 @@
 import { translations } from '@/i18n/translations';
 import { EXPERIENCE } from '@/data/experience';
-
+import { PROJECTS } from '@/data/projects_details';
+import { PROJECTSC } from '@/data/projects_colaborate';
 
 
 const defaultLang = 'es';
@@ -46,6 +47,8 @@ export function updateLanguage(lang) {
 
     // Update experience items
     updateExperienceItems(lang);
+    updateCardProject(lang);
+    updateCardProjectColaboration(lang);
   }
 }
 
@@ -66,6 +69,34 @@ function updateExperienceItems(lang) {
       if (link) {
         link.href = experience.url;
       }
+    }
+  });
+}
+
+function updateCardProject(lang) {
+  const cardProject = document.querySelectorAll('.link-detail-proyect');
+  const translations = PROJECTS[lang] || PROJECTS[defaultLang];
+
+  cardProject.forEach((item, index) => {
+    const project = translations[index];
+    if (project) {
+      item.querySelector('h4').textContent = project.title;
+      item.querySelector('p').textContent = project.description;
+      item.querySelector('span').textContent = project.link; // Corrige "spam" a "span"
+    }
+  });
+}
+
+function updateCardProjectColaboration(lang) {
+  const cardProject = document.querySelectorAll('.card-colaboration');
+  const translations = PROJECTSC[lang] || PROJECTSC[defaultLang];
+
+  cardProject.forEach((item, index) => {
+    const project = translations[index];
+    if (project) {
+      item.querySelector('h4').textContent = project.title;
+      item.querySelector('p').textContent = project.description;
+      item.querySelector('a').textContent = project.view_more;
     }
   });
 }

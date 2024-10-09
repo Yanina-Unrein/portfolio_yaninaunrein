@@ -1,8 +1,13 @@
 ---
-const { image, title, description, link, classList = [] } = Astro.props;
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Obtener el idioma de la URL
+const t = useTranslations(lang); // Obtener la función de traducción
+
+const { image, title, description, link, view_more, classList = [] } = Astro.props;
 ---
 
-<article>
+<article class="card-colaboration">
     <div class="card">
         <figure>
             <img src={image} alt={`${title} cover`} />
@@ -12,7 +17,7 @@ const { image, title, description, link, classList = [] } = Astro.props;
             <p>{description}</p>
         </div>
         <div class="description-container">
-           <a href={link} target="_blank">Ver más</a>
+           <a href={link} target="_blank">{view_more}</a>
         </div>  
     </div>  
 </article>

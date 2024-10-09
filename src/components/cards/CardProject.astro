@@ -1,5 +1,6 @@
 ---
-const {slug, image, image2, title, description, github, classList = [] } = Astro.props;
+
+const {slug, image, image2, title, description, link, classList = [] } = Astro.props;
 ---
 
 <a href={`/proyecto/${slug}`} class="link-detail-proyect">
@@ -15,7 +16,7 @@ const {slug, image, image2, title, description, github, classList = [] } = Astro
             <p>{description}</p>
         </div>
         <div class="description-container">
-        <span>Ver más</span>
+        <span>{link}</span>
         </div>  
     </article>
 </a>
