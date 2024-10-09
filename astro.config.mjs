@@ -5,4 +5,8 @@ import vercel from "@astrojs/vercel/serverless";
 export default defineConfig({
   output: "server",
   adapter: vercel(),
+  i18n: {
+    defaultLocale: "es",
+    locales: ["es", "en"],
+  }
 });

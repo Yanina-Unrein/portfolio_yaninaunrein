@@ -6,6 +6,7 @@ import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const experiences = EXPERIENCE[lang as keyof typeof EXPERIENCE];
 ---
 
 <Section>
@@ -16,16 +17,16 @@ const t = useTranslations(lang);
         <div class="web-container">
             <ol class="timeline">
                 {
-                    EXPERIENCE.map((experience) =>
+                    experiences.map((experience) => (
                         <li>
-                        <ExperienceItems {...experience} />  
+                            <ExperienceItems {...experience} />
                         </li>
-                )
+                    ))
                 }   
             </ol>
             <div class="section-logo">
                 <figure>
-                    <img src="../../public/cardsImg/portfolio/logo-portfolio.png" alt="">
+                    <img src="../../public/cardsImg/portfolio/logo-portfolio.png" alt="gato con anteojos sentado frente a una computadora">
                 </figure>
             </div>
         </div>

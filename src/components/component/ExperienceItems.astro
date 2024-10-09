@@ -1,12 +1,11 @@
 ---
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
-import { EXPERIENCE } from '@/data/experience2';
+import { EXPERIENCE } from '@/data/experience';
 
 const lang = getLangFromUrl(Astro.url); // Obtener el idioma de la URL
 const t = useTranslations(lang); // Obtener la función de traducción
 
-// Obtener las experiencias según el idioma actual
-const experiencias = EXPERIENCE[lang];
+
 const {title, position, url, startDate, endDate,  description } = Astro.props;
 
 ---
