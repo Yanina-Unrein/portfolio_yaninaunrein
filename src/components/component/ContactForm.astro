@@ -9,7 +9,7 @@ const t = useTranslations(lang);
 <form id="contactForm" class="contact-form" action="https://formspree.io/f/xkgwrdpk" method="POST">
   <div class="form-group">
     <label for="name" data-i18n="contactForm.name">{t('contactForm.name')}</label>
-    <input type="text" id="name" name="name" ddata-i18n="contactForm.name" placeholder={t('contactForm.name')} required />
+    <input type="text" id="name" name="name" data-i18n="contactForm.namePlaceholder" placeholder={t('contactForm.namePlaceholder')} required />
     <span class="error" id="nameError"></span>
   </div>
   <div class="form-group">
@@ -19,7 +19,7 @@ const t = useTranslations(lang);
   </div>
   <div class="form-group">
     <label for="message" data-i18n="contactForm.message">{t('contactForm.message')}</label>
-    <textarea id="message" name="message" placeholder={t('contactForm.message')} required></textarea>
+    <textarea id="message" name="message" placeholder={t('contactForm.messagePlaceholder')} required></textarea>
     <span class="error" id="messageError"></span>
   </div>
   <button type="submit" data-i18n="contactForm.btn_submit">{t('contactForm.btn_submit')}</button>
@@ -29,13 +29,14 @@ const t = useTranslations(lang);
 <div id="modal" class="modal">
   <div class="modal-content">
     <span id="closeModal" class="close">&times;</span>
-    <img src="/img/mail.png" alt="gato anaranjado tecleando rápido en una computadora" class="modal-image" />
+    <img src="/img/mail.png" data-i18n="contactForm.alt_img" alt={t('contactForm.message')} class="modal-image" />
     <p data-i18n="contactForm.message_submit">{t('contactForm.message_submit')}</p>
   </div>
 </div>
 
 <script>
   import { validateName, validateEmail, validateMessage, validateFormFields } from '@/utils/validateForm.js';
+  import { updateLanguage, getCurrentLang } from '@/i18n/utils';
 
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contactForm') as HTMLFormElement;
@@ -103,27 +104,23 @@ const t = useTranslations(lang);
       }
     });
 
-    // Validación en tiempo real para el campo de correo electrónico
-    email.addEventListener('input', () => {
-      const errorMessage = validateEmail(email.value);
-      emailError.innerText = errorMessage;
-      if (errorMessage) {
-        email.style.borderColor = 'red';
-      } else {
-        email.style.borderColor = 'green';
-      }
-    });
+    name.addEventListener('input', () => {
+        const errorMessage = validateName(name.value);
+        nameError.innerText = errorMessage;
+        name.style.borderColor = errorMessage ? 'red' : 'green';
+      });
 
-    // Validación en tiempo real para el campo de mensaje
-    message.addEventListener('input', () => {
-      const errorMessage = validateMessage(message.value);
-      messageError.innerText = errorMessage;
-      if (errorMessage) {
-        message.style.borderColor = 'red';
-      } else {
-        message.style.borderColor = 'green';
-      }
-    });
+      email.addEventListener('input', () => {
+        const errorMessage = validateEmail(email.value);
+        emailError.innerText = errorMessage;
+        email.style.borderColor = errorMessage ? 'red' : 'green';
+      });
+
+      message.addEventListener('input', () => {
+        const errorMessage = validateMessage(message.value);
+        messageError.innerText = errorMessage;
+        message.style.borderColor = errorMessage ? 'red' : 'green';
+      });
 
     // Cerrar el modal
     closeModal.addEventListener('click', () => {
@@ -137,6 +134,11 @@ const t = useTranslations(lang);
       }
     });
 
+     // Actualizar las traducciones cuando cambie el idioma
+     document.addEventListener('languageChanged', () => {
+        updateLanguage(getCurrentLang());
+      });
+    
   }});
 
 </script>

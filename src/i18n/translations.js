@@ -50,12 +50,16 @@ export const translations = {
       },
       contactForm: {
         name: "Nombre y Apellido", 
+        namePlaceholder: "Yanina Unrein",
         mail: "Correo Electrónico",       
         message: "Mensaje",
+        messagePlaceholder: "Deja aquí tu mensaje",
         btn_submit: "Enviar",
+        alt_img: "gato anaranjado tecleando rápido en una computadora",
         message_submit: "Mensaje enviado, me pondré en contacto contigo apenas lo lea. Muchas Gracias!",
-        error: {
+        errors: {
           name_required: 'El nombre es obligatorio.',
+          name_invalid: 'El nombre solo puede contener letras y espacios',
           email_required: 'El correo electrónico es obligatorio.',
           email_invalid: 'El correo electrónico no es válido.',
           message_required: 'El mensaje es obligatorio.'
@@ -113,12 +117,16 @@ export const translations = {
         },
         contactForm: {
           name: "Full Name",
+          namePlaceholder: "Yanina Unrein",
           mail: "Email Address",
           message: "Message",
+          messagePlaceholder: "Leave your message here",
           btn_submit: "Send",
           message_submit: "Message sent, I will contact you as soon as I read it. Thank you very much!",
-          error: {
+          alt_img: "orange cat typing fast on a computer",
+          errors: {
             name_required: 'Name is required.',
+            name_invalid: 'The name can only contain letters and spaces',
             email_required: 'Email is required.',
             email_invalid: 'Email is invalid.',
             message_required: 'Message is required.'

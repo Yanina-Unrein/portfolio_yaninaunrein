@@ -28,7 +28,6 @@ export function updateLanguage(lang) {
     localStorage.setItem('lang', lang);
     
     const elements = document.querySelectorAll('[data-i18n]');
-    console.log('Elementos con data-i18n:', elements);
     
     elements.forEach(el => {
       const key = el.getAttribute('data-i18n');
@@ -41,14 +40,16 @@ export function updateLanguage(lang) {
       } else {
         el.insertBefore(document.createTextNode(translation), el.firstChild);
       }
-
-      console.log(`Actualizando ${key} con la traducción:`, translation);
     });
 
     // Update experience items
     updateExperienceItems(lang);
     updateCardProject(lang);
     updateCardProjectColaboration(lang);
+
+    // Disparar el evento de cambio de idioma
+    const event = new Event('languageChanged');
+    document.dispatchEvent(event);
   }
 }
 
@@ -108,4 +109,10 @@ export function getCurrentLang() {
     return lang;
   }
   return defaultLang;
+}
+
+// Función para cambiar el idioma
+export function changeLanguage(newLang) {
+  updateLanguage(newLang);
+  // Aquí puedes agregar cualquier otra lógica necesaria para el cambio de idioma
 }
