@@ -1,6 +1,6 @@
 ---
 
-const {slug, image, image2, title, description, link, classList = [] } = Astro.props;
+const {slug, image, image2, title, description, tecnologias, link, classList = [] } = Astro.props;
 ---
 
 <a href={`/proyecto/${slug}`} class="link-detail-proyect">
@@ -14,6 +14,13 @@ const {slug, image, image2, title, description, link, classList = [] } = Astro.p
         <div class="description-container">
             <h4>{title}</h4>
             <p>{description}</p>
+            <div>
+                <ul>
+                    {tecnologias.map((tecnologia: unknown) => (
+                        <li class="technologie">{tecnologia}</li>
+                      ))}
+                </ul>
+            </div>
         </div>
         <div class="description-container">
         <span>{link}</span>
@@ -136,6 +143,41 @@ const {slug, image, image2, title, description, link, classList = [] } = Astro.p
     p{
         font-size: 0.90rem;
         text-align: center;
+    }
+
+    ul{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        padding: 0;
+        margin-top: 0;
+        gap: 25px;
+        list-style: none;
+    }
+
+    ul li{
+        background: #333;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        cursor: pointer;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-family: Consolas, Courier New, monospace;
+        border: solid #404c5d 1px;
+        font-size: 16px;
+        color: rgb(161, 161, 161);
+        -webkit-transition: 500ms;
+        transition: 500ms;
+        border-radius: 5px;
+        background: linear-gradient(145deg, #2e2d2d, #212121);
+        -webkit-box-shadow: -1px -5px 15px #41465b, 5px 5px 15px #41465b,
+            inset 5px 5px 10px #212121, inset -5px -5px 10px #212121;
+        box-shadow: -1px -5px 15px #41465b, 5px 5px 15px #41465b,
+            inset 5px 5px 10px #212121, inset -5px -5px 10px #212121;
     }
 
     .icon-git{
