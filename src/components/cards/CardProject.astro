@@ -1,9 +1,10 @@
 ---
 
 const {slug, image, image2, title, description, tecnologias, link, classList = [] } = Astro.props;
+const lang = Astro.url.pathname.split('/')[1] || 'es';
 ---
 
-<a href={`/proyecto/${slug}`} class="link-detail-proyect">
+<a href={`/${lang}/${slug}`} class="link-detail-proyect">
     <article class={["card-container", ...classList].join(' ')}>
         <div class="card">
             <div class="wrapper">

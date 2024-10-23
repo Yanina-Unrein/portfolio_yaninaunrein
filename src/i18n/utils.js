@@ -8,20 +8,17 @@ const defaultLang = 'es';
 
 export function getLangFromUrl(url) {
   const [, lang] = url.pathname.split('/');
-  console.log('Idioma obtenido de la URL:', lang); // Verifica el idioma obtenido de la URL
   if (lang in translations) return lang;
   return defaultLang;
 }
 
 export function useTranslations(lang) {
-  console.log('Usando traducciones para el idioma:', lang); // Verifica el idioma actual para las traducciones
   return function t(key) {
     return key.split('.').reduce((obj, k) => obj && obj[k], translations[lang]) || key;
   };
 }
 
 export function updateLanguage(lang) {
-  console.log('Actualizando idioma a:', lang);
   if (typeof document !== 'undefined') {
     document.documentElement.lang = lang;
     document.documentElement.setAttribute('data-lang', lang);
@@ -46,10 +43,14 @@ export function updateLanguage(lang) {
     updateExperienceItems(lang);
     updateCardProject(lang);
     updateCardProjectColaboration(lang);
+    // Actualizar detalles del proyecto
+    const slug = getCurrentProjectSlug(); // Suponiendo que tienes una forma de obtener el slug
+    updateProjectDetails(lang, slug); // Llamar a la nueva función
 
-    // Disparar el evento de cambio de idioma
-    const event = new Event('languageChanged');
-    document.dispatchEvent(event);
+     // Actualizar la URL manteniendo la ruta actual
+     const currentPath = window.location.pathname.split('/').slice(2).join('/');
+     const newPath = `/${lang}/${currentPath}`;
+     window.history.replaceState({}, '', newPath);
   }
 }
 
@@ -83,7 +84,7 @@ function updateCardProject(lang) {
     if (project) {
       item.querySelector('h4').textContent = project.title;
       item.querySelector('p').textContent = project.description;
-      item.querySelector('span').textContent = project.link; // Corrige "spam" a "span"
+      item.querySelector('span').textContent = project.link; 
     }
   });
 }
@@ -102,6 +103,23 @@ function updateCardProjectColaboration(lang) {
   });
 }
 
+function getCurrentProjectSlug() {
+  // Obtener el slug del proyecto actual de la URL o de otro lugar
+  const pathParts = window.location.pathname.split('/');
+  return pathParts[pathParts.length - 1]; // Último segmento de la URL como slug
+}
+
+function updateProjectDetails(lang, slug) {
+  const project = PROJECTS[lang]?.find((p) => p.slug === slug);
+
+  if (project) {
+    document.querySelector('.title').textContent = project.title;
+    document.querySelector('.description').textContent = project.description;
+    document.querySelector('.description-extend').textContent = project.descriptionExtend;
+    document.querySelector('.responsability').textContent = project.descriptionExtend;
+  }
+}
+
 export function getCurrentLang() {
   if (typeof localStorage !== 'undefined') {
     const lang = localStorage.getItem('lang') || defaultLang;
@@ -114,5 +132,4 @@ export function getCurrentLang() {
 // Función para cambiar el idioma
 export function changeLanguage(newLang) {
   updateLanguage(newLang);
-  // Aquí puedes agregar cualquier otra lógica necesaria para el cambio de idioma
 }

@@ -65,6 +65,11 @@ export const translations = {
           message_required: 'El mensaje es obligatorio.'
         }
       },
+      projectDetail: {
+        description: 'Descripción',
+        responsabilities: 'Responsabilidades',
+        technologies: 'Tecnologías',
+      }
     },
     en: {
         navbar: {
@@ -132,6 +137,11 @@ export const translations = {
             message_required: 'Message is required.'
           }
         },
+        projectDetail: {
+          description: 'Description',
+          responsabilities: 'Responsibilities',
+          technologies: 'Technologies',
+        }
       },
     };
 
