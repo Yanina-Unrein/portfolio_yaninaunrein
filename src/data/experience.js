@@ -20,8 +20,8 @@ export const EXPERIENCE = {
       },
       {
         id: 'job3',
-        title: 'Publissoft - Interna de Programación',
-        position: "Interna de Programación",
+        title: 'Publissoft - Web Developer',
+        position: "Web Developer",
         url: "",
         startDate: 'Enero 2024',
         endDate: "Actualidad",
@@ -58,8 +58,8 @@ export const EXPERIENCE = {
       },
       {
         id: 'job3',
-        title: 'Publissoft - Programming Intern',
-        position: "Programming Intern",
+        title: 'Publissoft - Web Developer',
+        position: "Web Developer",
         url: "",
         startDate: 'January 2024',
         endDate: "Present",
