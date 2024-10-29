@@ -46,12 +46,18 @@ const t = useTranslations(lang);
         link.addEventListener('click', (event) => {
           document.body.classList.remove('open');
           const href = link.getAttribute('href');
-          if (href.startsWith('#')) {
+          // Si el enlace tiene un hash, desplazar suavemente
+           if (href.startsWith('#')) {
             event.preventDefault();
             const targetElement = document.querySelector(href);
             if (targetElement) {
               targetElement.scrollIntoView({ behavior: 'smooth' });
+              document.body.classList.remove('open'); // Cierra el menú al hacer clic
             }
+          } else {
+            // Redirigir a otras páginas
+            document.body.classList.remove('open');
+            window.location.href = href; // Si el enlace es una ruta externa, redirigir
           }
         });
       });

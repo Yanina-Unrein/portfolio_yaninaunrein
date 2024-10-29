@@ -39,18 +39,32 @@ export function updateLanguage(lang) {
       }
     });
 
-    // Update experience items
+    
     updateExperienceItems(lang);
     updateCardProject(lang);
     updateCardProjectColaboration(lang);
-    // Actualizar detalles del proyecto
-    const slug = getCurrentProjectSlug(); // Suponiendo que tienes una forma de obtener el slug
-    updateProjectDetails(lang, slug); // Llamar a la nueva función
+    const slug = getCurrentProjectSlug();
+    updateProjectDetails(lang, slug); 
 
-     // Actualizar la URL manteniendo la ruta actual
-     const currentPath = window.location.pathname.split('/').slice(2).join('/');
-     const newPath = `/${lang}/${currentPath}`;
-     window.history.replaceState({}, '', newPath);
+      // Obtener la ruta actual sin modificar
+      const pathParts = window.location.pathname.split('/');
+
+      // Verificar si el primer segmento es un idioma válido (como 'en')
+      const isLangInPath = pathParts[1] in translations;
+
+      // Si el idioma está en la ruta, quitarlo y reconstruir el "currentPath"
+      let currentPath = isLangInPath ? pathParts.slice(2).join('/') : pathParts.slice(1).join('/');
+
+      // Construir la nueva ruta
+      let newPath = `/${currentPath}`; // Para español, no agregar el código de idioma
+
+      // Si el idioma es distinto de español, agregar el código de idioma
+      if (lang !== 'es') {
+        newPath = `/${lang}/${currentPath}`;
+      }
+
+      // Actualizar el estado de la URL
+      window.history.replaceState({}, '', newPath);
   }
 }
 
@@ -104,9 +118,8 @@ function updateCardProjectColaboration(lang) {
 }
 
 function getCurrentProjectSlug() {
-  // Obtener el slug del proyecto actual de la URL o de otro lugar
   const pathParts = window.location.pathname.split('/');
-  return pathParts[pathParts.length - 1]; // Último segmento de la URL como slug
+  return pathParts[pathParts.length - 1]; 
 }
 
 function updateProjectDetails(lang, slug) {
@@ -116,7 +129,7 @@ function updateProjectDetails(lang, slug) {
     document.querySelector('.title').textContent = project.title;
     document.querySelector('.description').textContent = project.description;
     document.querySelector('.description-extend').textContent = project.descriptionExtend;
-    document.querySelector('.responsability').textContent = project.descriptionExtend;
+    document.querySelector('.responsability').textContent = project.rol;
   }
 }
 
