@@ -26,7 +26,7 @@ const t = useTranslations(lang);
           <a href="#contacto" data-i18n="navbar.contact" style="animation-delay: 0.5s"><Send class="icon" />{t('navbar.contact')}</a>
           <div class="social-buttons">
             <SocialButtons />
-        </div>
+          </div>
         </nav>
       </div> 
       <Language class="language-toggle" lang={lang} />
@@ -45,23 +45,26 @@ const t = useTranslations(lang);
       menuLinks.forEach(link => {
         link.addEventListener('click', (event) => {
           document.body.classList.remove('open');
+
           const href = link.getAttribute('href');
           // Si el enlace tiene un hash, desplazar suavemente
            if (href.startsWith('#')) {
             event.preventDefault();
+
             const targetElement = document.querySelector(href);
             if (targetElement) {
               targetElement.scrollIntoView({ behavior: 'smooth' });
-              document.body.classList.remove('open'); // Cierra el menú al hacer clic
+              document.body.classList.remove('open'); 
             }
           } else {
-            // Redirigir a otras páginas
             document.body.classList.remove('open');
-            window.location.href = href; // Si el enlace es una ruta externa, redirigir
+            window.location.href = href; 
           }
         });
       });
     };
+
+    document.addEventListener('DOMContentLoaded', closeMenuOnClick);
 
     const navigateToHome = (event) => {
       event.preventDefault();
@@ -90,6 +93,7 @@ const t = useTranslations(lang);
     .language-toggle {
       margin-left: auto;
     }
+    
   button {
     border: 0;
     padding: 0;
@@ -126,8 +130,8 @@ const t = useTranslations(lang);
     left: 0;
     display: grid;
     place-items: center;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     background-image: url("/icons/menu.svg");
     background-repeat: no-repeat;
     background-position: center;
@@ -219,7 +223,6 @@ const t = useTranslations(lang);
 
   .social-buttons{
     padding: 5px;
-    position: fixed;
   }
 
   

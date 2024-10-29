@@ -1,6 +1,7 @@
 ---
 import Section from "@/components/Section.astro"
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import Download from "@/components/buttons/Download.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -23,8 +24,8 @@ const t = useTranslations(lang);
                </div>     
           </div> 
           <div class="cv-container">
-               <p data-i18n="aboutMe.cv_text">{t('aboutMe.cv_text')}</p>
-               <a href="https://drive.google.com/file/d/1s4V4XGx-iITWHwULUHnnhvLRi4UObwuo/view?usp=sharing" target="_blank" data-i18n="aboutMe.btn_dowload">{t('aboutMe.btn_dowload')}</a>
+               <p data-i18n="aboutMe.cv_text">{t('aboutMe.cv_text')}</p>               
+               <Download />
           </div>
      </section>
 </Section>
@@ -131,35 +132,13 @@ const t = useTranslations(lang);
           display: flex;
           flex-direction: column;
           align-items: center;
+          gap: 15px;
           padding: 20px 0 0 0;
      }
 
      .cv-container p{
           color: #ffffff;
           text-align: center;
-     }
-
- 
-     .cv-container a{
-          position: relative;
-          width: 150px;
-          text-align: center;
-          color: #ffffff;
-          text-decoration: none;
-          background-color: #784BA0;
-          padding: 15px;
-          border-radius: 20px;
-          cursor: pointer;
-          background-blend-mode: overlay;
-          background-size: cover;
-          aspect-ratio: 1/0.25;
-          box-shadow: rgba(138, 137, 137, 0.405) 0px 5px 15px 0px;
-          transition: all 0.3s ease-in-out;
-     }
-     .cv-container a:hover {
-          background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
-          transform: scale(1.1); 
-          box-shadow: 0 0 1em 0.45em rgba(0, 0, 0, 0.1);
      }
 
      /* Ocultar elementos del contenedor about cuando el navbar está abierto */

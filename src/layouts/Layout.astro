@@ -8,8 +8,8 @@ interface Props {
 const { title, description, hideNavbarFooter } = Astro.props;
 
 
-import Navbar from '@/components/sections/Navbar.astro';
-import Footer from '@/components/sections/Footer.astro';
+import Navbar from '@/components/component/Navbar.astro';
+import Footer from '@/components/component/Footer.astro';
 import { getCurrentLang } from '../i18n/utils';
 
 const currentLang = getCurrentLang();
