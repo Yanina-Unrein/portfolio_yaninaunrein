@@ -59,7 +59,7 @@ const lang = Astro.url.pathname.split('/')[1] || 'es';
         z-index: -1;
     }
 
-    .card:hover .wrapper {
+    .link-detail-proyect:hover .wrapper {
         transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
         box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
         -webkit-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
@@ -97,12 +97,12 @@ const lang = Astro.url.pathname.split('/')[1] || 'es';
         );
     }
 
-    .card:hover .wrapper::before,
+    .link-detail-proyect:hover .wrapper::before,
     .wrapper::after {
         opacity: 1;
     }
 
-    .card:hover .wrapper::after {
+    .link-detail-proyect:hover .wrapper::after {
         height: 120px;
     }
 
@@ -115,7 +115,7 @@ const lang = Astro.url.pathname.split('/')[1] || 'es';
         z-index: -1;
     }
 
-    .card:hover .character {
+    .link-detail-proyect:hover .character {
         opacity: 1;
         transform: translate3d(0%, -30%, 100px);
     }
@@ -247,7 +247,8 @@ const lang = Astro.url.pathname.split('/')[1] || 'es';
         animation: shine 2.5s infinite linear;
         animation-fill-mode: forwards;
         -webkit-text-size-adjust: none;
-        font-size: 1rem;
+        font-size: 1.2rem;
+        font-weight: 600;
         text-decoration: none;
         white-space: nowrap;
     }

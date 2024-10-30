@@ -4,7 +4,7 @@ import { PROJECTS } from '@/data/projects_details';
 import CardColaboracion from "@/components/cards/cardColaboracion.astro";
 import { PROJECTSC } from "@/data/projects_colaborate";
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
-import CardProjects2 from "../cards/cardProjects2.astro";
+
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -35,7 +35,6 @@ const isSingleProject = projects.length === 1;
             </div>
         </div>
         <div>
-            <CardProjects2 />
         </div>
     </div>
 </section>
