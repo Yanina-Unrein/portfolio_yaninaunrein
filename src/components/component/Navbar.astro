@@ -39,19 +39,18 @@ const t = useTranslations(lang);
       document.body.classList.toggle('open');
       document.querySelector('.navbar-burger').setAttribute('aria-expanded', document.body.classList.contains('open'));
     };
-
-    const closeMenuOnClick = () => {
+    
+   const closeMenuOnClick = () => {
       const menuLinks = document.querySelectorAll('.menu a');
       menuLinks.forEach(link => {
         link.addEventListener('click', (event) => {
           document.body.classList.remove('open');
-
-          const href = link.getAttribute('href');
-          // Si el enlace tiene un hash, desplazar suavemente
-           if (href.startsWith('#')) {
+          const href = link.getAttribute('href');       
+           
+          if (href.startsWith('#')) {
             event.preventDefault();
-
             const targetElement = document.querySelector(href);
+            
             if (targetElement) {
               targetElement.scrollIntoView({ behavior: 'smooth' });
               document.body.classList.remove('open'); 
@@ -62,22 +61,83 @@ const t = useTranslations(lang);
           }
         });
       });
-    };
+    }; 
+    const handleNavLinkClick = (event, href) => {
+    event.preventDefault(); // Evita el comportamiento por defecto
 
-    document.addEventListener('DOMContentLoaded', closeMenuOnClick);
+    const isHomePage = window.location.pathname === '/';
+    
+    if (isHomePage) {
+      const targetElement = document.querySelector(href);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Si no estás en la página principal, redirige y almacena el id del enlace
+      sessionStorage.setItem('targetSection', href);
+      window.location.href = '/'; // Redirige al home
+    }
+  };
 
-    const navigateToHome = (event) => {
+  // Asigna los eventos a los enlaces de navegación
+  const navLinks = document.querySelectorAll('.menu a');
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href.startsWith('#')) {
+      link.addEventListener('click', (event) => {
+        handleNavLinkClick(event, href);
+        closeMenuOnClick(); // Cierra el menú después de hacer clic
+      });
+    }
+  });
+
+  // Comprueba si hay una sección objetivo almacenada en sessionStorage
+  const targetSection = sessionStorage.getItem('targetSection');
+  if (targetSection && window.location.pathname === '/') {
+    sessionStorage.removeItem('targetSection'); // Limpia el valor almacenado
+    const targetElement = document.querySelector(targetSection);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' }); // Desplaza a la sección objetivo
+    }
+  }
+
+  // Maneja el cambio de idioma
+  const languageLinks = document.querySelectorAll('.language-toggle a');
+  languageLinks.forEach(link => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault(); // Evita la redirección por defecto
+    const newLang = link.getAttribute('data-lang'); // Obtén el nuevo idioma
+
+    // Almacena la sección actual en sessionStorage
+    const currentPath = window.location.pathname;
+    sessionStorage.setItem('targetSection', currentPath);
+
+    // Cambia el idioma usando la función que ya tienes
+    changeLanguage(newLang);
+    
+    // Redirige a la sección correcta en el nuevo idioma
+    const targetSection = sessionStorage.getItem('targetSection');
+    if (targetSection) {
+      window.location.href = `/${newLang}${targetSection}`; // Añade la sección si existe
+    } else {
+      window.location.href = `/${newLang}`; // Solo cambia el idioma si no hay sección
+    }
+  });
+});
+   
+    /* const navigateToHome = (event) => {
       event.preventDefault();
       const heroElement = document.getElementById('hero');
+      
       if (window.location.pathname === '/' && heroElement) {
         heroElement.scrollIntoView({ behavior: 'smooth' });
       } else {
         window.location.href = '/';
       }
-    };
+    };  */
 
     document.querySelector('.navbar-burger').addEventListener('click', toggleMenu);
-    closeMenuOnClick();
+    closeMenuOnClick(); 
   });
 </script>
 

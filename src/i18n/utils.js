@@ -46,25 +46,15 @@ export function updateLanguage(lang) {
     const slug = getCurrentProjectSlug();
     updateProjectDetails(lang, slug); 
 
-      // Obtener la ruta actual sin modificar
-      const pathParts = window.location.pathname.split('/');
+    const currentPath = window.location.pathname.split('/');
+    const isLangInPath = currentPath[1] in translations;
 
-      // Verificar si el primer segmento es un idioma válido (como 'en')
-      const isLangInPath = pathParts[1] in translations;
-
-      // Si el idioma está en la ruta, quitarlo y reconstruir el "currentPath"
-      let currentPath = isLangInPath ? pathParts.slice(2).join('/') : pathParts.slice(1).join('/');
-
-      // Construir la nueva ruta
-      let newPath = `/${currentPath}`; // Para español, no agregar el código de idioma
-
-      // Si el idioma es distinto de español, agregar el código de idioma
-      if (lang !== 'es') {
-        newPath = `/${lang}/${currentPath}`;
-      }
-
-      // Actualizar el estado de la URL
+    if (!isLangInPath) {
+      window.history.replaceState({}, '', `/${lang}`);
+    } else {
+      const newPath = `/${lang}${currentPath.slice(2).join('/')}`;
       window.history.replaceState({}, '', newPath);
+    }
   }
 }
 
