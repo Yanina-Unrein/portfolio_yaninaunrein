@@ -63,68 +63,54 @@ const t = useTranslations(lang);
       });
     }; 
     const handleNavLinkClick = (event, href) => {
-    event.preventDefault(); // Evita el comportamiento por defecto
+    event.preventDefault();
 
-    const isHomePage = window.location.pathname === '/';
-    
+    const isHomePage = window.location.pathname === '/' || window.location.pathname === '/en';
+
     if (isHomePage) {
       const targetElement = document.querySelector(href);
       if (targetElement) {
         targetElement.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
-      // Si no estás en la página principal, redirige y almacena el id del enlace
+      // Almacenamos la sección en `sessionStorage` y redirigimos al home en español
       sessionStorage.setItem('targetSection', href);
-      window.location.href = '/'; // Redirige al home
+      window.location.href = '/';
     }
   };
 
-  // Asigna los eventos a los enlaces de navegación
   const navLinks = document.querySelectorAll('.menu a');
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
     if (href.startsWith('#')) {
       link.addEventListener('click', (event) => {
         handleNavLinkClick(event, href);
-        closeMenuOnClick(); // Cierra el menú después de hacer clic
       });
     }
   });
 
-  // Comprueba si hay una sección objetivo almacenada en sessionStorage
   const targetSection = sessionStorage.getItem('targetSection');
-  if (targetSection && window.location.pathname === '/') {
-    sessionStorage.removeItem('targetSection'); // Limpia el valor almacenado
+  if (targetSection && (window.location.pathname === '/' || window.location.pathname === '/en')) {
+    sessionStorage.removeItem('targetSection');
     const targetElement = document.querySelector(targetSection);
     if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth' }); // Desplaza a la sección objetivo
+      targetElement.scrollIntoView({ behavior: 'smooth' });
     }
   }
 
-  // Maneja el cambio de idioma
   const languageLinks = document.querySelectorAll('.language-toggle a');
   languageLinks.forEach(link => {
-  link.addEventListener('click', (event) => {
-    event.preventDefault(); // Evita la redirección por defecto
-    const newLang = link.getAttribute('data-lang'); // Obtén el nuevo idioma
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const newLang = link.getAttribute('data-lang');
+      const currentPath = window.location.pathname;
+      const currentSection = window.location.hash || '';
 
-    // Almacena la sección actual en sessionStorage
-    const currentPath = window.location.pathname;
-    sessionStorage.setItem('targetSection', currentPath);
-
-    // Cambia el idioma usando la función que ya tienes
-    changeLanguage(newLang);
-    
-    // Redirige a la sección correcta en el nuevo idioma
-    const targetSection = sessionStorage.getItem('targetSection');
-    if (targetSection) {
-      window.location.href = `/${newLang}${targetSection}`; // Añade la sección si existe
-    } else {
-      window.location.href = `/${newLang}`; // Solo cambia el idioma si no hay sección
-    }
+      window.location.href = `/${newLang}${currentSection}`;
+    });
   });
-});
-   
+
+
     /* const navigateToHome = (event) => {
       event.preventDefault();
       const heroElement = document.getElementById('hero');
