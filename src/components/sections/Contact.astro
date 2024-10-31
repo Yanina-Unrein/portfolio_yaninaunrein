@@ -7,17 +7,16 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 <Section>
-<section id="contacto" class="contact-container">
-    <h2 data-i18n="contact.title">{t('contact.title')}</h2>
-    <ContactForm />
-</section>
+    <div id="contacto" class="contact-container">
+        <h2 data-i18n="contact.title">{t('contact.title')}</h2>
+        <ContactForm />
+    </div>
 </Section>
 
 <style>
     .contact-container {
         display: flex;
-        flex-direction: column;
-        padding: 0 20px 70px 20px;  
+        flex-direction: column;  
         background-color: #13151a;
         margin-bottom: 100px;
     }

@@ -10,7 +10,7 @@ const experiences = EXPERIENCE[lang as keyof typeof EXPERIENCE];
 ---
 
 <Section>
-    <section id="experiencia" class="experience-section">
+    <div id="experiencia" class="experience-section">
         <div class="title-container">
             <h2 data-i18n="experience.title">{t('experience.title')}</h2>
         </div>
@@ -30,13 +30,12 @@ const experiences = EXPERIENCE[lang as keyof typeof EXPERIENCE];
                 </figure>
             </div>
         </div>
-    </section>
+    </div>
 </Section>
 
 
 <style>
     .experience-section{
-        padding: 0 30px;  
         background-color: #13151a;
     }
     .timeline {
@@ -96,17 +95,7 @@ const experiences = EXPERIENCE[lang as keyof typeof EXPERIENCE];
         display: none;
     }
     
-    @media(min-width:768px){
-        .experience-section{
-            padding: 0 80px;
-        }
-    }
-
     @media(min-width:1024px){
-        .experience-section{
-            padding: 40px 90px;
-        }
-
         .web-container{
             display: flex;
             justify-content: center;

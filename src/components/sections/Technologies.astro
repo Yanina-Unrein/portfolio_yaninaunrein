@@ -9,8 +9,8 @@ const t = useTranslations(lang);
 ---
 
 <Section>
-    <section id="technologies" class="section-tecnologies">
-        <div>
+    <div id="technologies" class="section-tecnologies">
+        <div class="technologies-container">
             <h2 data-i18n="technologies.title">{t('technologies.title')}</h2>
             <p data-i18n="technologies.description_1">{t('technologies.description_1')}</p>
             <p data-i18n="technologies.description_2">{t('technologies.description_2')}</p>
@@ -21,7 +21,7 @@ const t = useTranslations(lang);
             </p>
         </div>
         <Carrousel classlist={['project-element']} icons={ICONS} />
-    </section>
+    </div>
 </Section>
 
 <style>
@@ -31,7 +31,6 @@ const t = useTranslations(lang);
         flex-direction: column;
         align-items: center;  
         background-color: #13151a;
-        padding: 0 20px;
         text-align: center;
     }
 
@@ -82,13 +81,13 @@ const t = useTranslations(lang);
 
 
     @media(min-width:768px){
-        div{
+        .technologies-container{
             max-width: 500px;       
         }
     }
 
      @media(min-width:1024px){
-        div{
+        .technologies-container{
             max-width: 950px;       
         }
     }
