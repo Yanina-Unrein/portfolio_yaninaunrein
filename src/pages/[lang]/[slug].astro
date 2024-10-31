@@ -1,32 +1,34 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import { PROJECTS } from '@/data/projects_detail';
+import { PROJECTS } from '@/data/projects_details';
 import Section from '@/components/Section.astro';
+import { useTranslations } from '@/i18n/utils';
 
-export async function getStaticPaths() {
-  // Genera un array de rutas posibles a partir de los slugs en PROJECTS
-  const paths = PROJECTS.map((project) => ({
-    params: { slug: project.slug },
-  }));
+const { lang, slug } = Astro.params;
+const projects = PROJECTS[lang as keyof typeof PROJECTS] || [];
+const project = projects.find((p) => p.slug === slug);
 
-  return paths; // Devuelve el array directamente
-}
+const t = useTranslations(lang);
 
-const { slug } = Astro.params;
-const project = PROJECTS.find(proj => proj.slug === slug);
+/* export async function getStaticPaths() {
+  return Object.entries(PROJECTS).flatMap(([lang, projects]) =>
+    projects.map((project) => ({
+      params: { 
+        lang,
+        slug: project.slug 
+      },
+      props: { project }
+    }))
+  );
+} */
+
 
 if (!project) {
-  throw new Error(`No se encontró el proyecto con el slug: ${slug}`);
+  return Astro.redirect(`/${lang}/404`);
 }
 ---
 
 <Layout title={project.title} description={project.description}>
-  {!project ? (
-    <div>
-      <h1>Proyecto no encontrado</h1>
-      <p>No se encontró ningún proyecto con el slug: {slug}</p>
-    </div>
-  ) : (
     <Section>
       <section class="detail-section">
         <div class="detail-container">
@@ -40,15 +42,15 @@ if (!project) {
             <img src={project.imageD} alt={`${project.title} cover`} />
           </figure>
           <div class="info-container">
-            <h2 class="sub-title">Descripción</h2>
-            <p class="description">{project.descriptionExtend}</p>
+            <h2 class="sub-title" data-i18n="projectDetail.description">{t('projectDetail.description')}</h2>
+            <p class="description description-extend">{project.descriptionExtend}</p>
           </div>
           <div class="info-container">
-            <h2 class="sub-title">Responsabilidades</h2>
-            <p class="description">{project.rol}</p>
+            <h2 class="sub-title" data-i18n="projectDetail.responsabilities">{t('projectDetail.responsabilities')}</h2>
+            <p class="description responsability">{project.rol}</p>
           </div>
           <div class="info-container">
-            <h2 class="sub-title">Tecnologías</h2>
+            <h2 class="sub-title" data-i18n="projectDetail.technologies">{t('projectDetail.technologies')}</h2>
             <div class="technologies-container">
               {project.tecnologias.map(tecnologia => (
                 <span class="technologie">{tecnologia}</span>
@@ -58,7 +60,6 @@ if (!project) {
         </div>
     </section>
   </Section>
-  )}
 </Layout>
 
 <style>
@@ -222,5 +223,4 @@ if (!project) {
     opacity: 1; 
   }
 }
-
 </style>

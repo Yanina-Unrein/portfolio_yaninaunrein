@@ -1,11 +1,17 @@
 ---
-import SocialButtons from "@/components/buttons/SocialButtons.astro"
+import SocialButtons from "@/components/buttons/SocialButtons.astro";
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section id="hero" class="hero">
   <div class="background">
     <div class="container-title">
-        <span class="name">Hola, soy Yanina Unrein <span class="hand-icon">👋</span></span>
+        <span class="name" data-i18n="hero.text">{t('hero.text')} 
+            <span class="hand-icon">👋</span>
+        </span>
         <h1>FrontEnd</h1>
         <h2>Developer</h2>
         <SocialButtons class="social-buttons" />
@@ -37,7 +43,7 @@ import SocialButtons from "@/components/buttons/SocialButtons.astro"
     .hero {
         position: relative;
         width: 100%;
-        height: 800px; 
+        height: 900px; 
     }
 
     .background {
@@ -50,8 +56,8 @@ import SocialButtons from "@/components/buttons/SocialButtons.astro"
         position: relative;
         background-attachment: fixed;
         width: 100%; 
-        height: 800px; 
-        background-image: url("/img/header-background.jpg");
+        height: 900px; 
+        background-image: url("/img/hero-opacity.webp");
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -123,8 +129,8 @@ import SocialButtons from "@/components/buttons/SocialButtons.astro"
     h2{
         font-size: 3.5rem;
     }
-    
-    @keyframes wave {
+  }
+  @keyframes wave {
         0% {
             transform: rotate(0deg);
         }
@@ -150,5 +156,4 @@ import SocialButtons from "@/components/buttons/SocialButtons.astro"
             transform: rotate(0deg);
         }
     }
-  }
 </style>

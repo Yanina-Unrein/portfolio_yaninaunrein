@@ -1,25 +1,31 @@
 ---
 import Section from "@/components/Section.astro"
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import Download from "@/components/buttons/Download.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <Section>
      <section id="about" class="about-section">
-          <h2>Sobre Mí</h2>
+          <h2 data-i18n="aboutMe.title">{t('aboutMe.title')}</h2>
           <div class="about-container">    
                <div class="img-container">             
                     <figure class="personal-img">
-                         <img src="/img/opcion2.jpeg" alt="">
+                         <img src="/img/aboutMe.webp" alt="Yanina Unrein">
                     </figure>
                </div>
                <div class="text-container">
-                    <h3>Hola, soy Yanina Unrein</h3>
-                    <p>Soy una apasionada por la programación, los videojuegos, mangas, animes y gatos. Soy proactiva, comprometida, autodidacta y me gusta siempre dar lo mejor de mí en todo, por más simple o compleja que se pueda tornar la situación.</p>
-                    <p>En julio del 2024 me recibí como <span class="tecnica">Técnica en Desarrollo Web y Aplicaciones Digitales</span> en el Instituto Superior Politécnico Córdoba. Actualmente me encuentro estudiando la <span class="tecnica">Tecnicatura en Desarrollo Web</span> en la Universidad de Entre Ríos en mi segundo año y en continuo aprendizaje con cursos, bootcamp o de forma autodidacta.</p>
+                    <h3 data-i18n="aboutMe.subTitle">{t('aboutMe.subTitle')}</h3>
+                    <p data-i18n="aboutMe.description_1">{t('aboutMe.description_1')}</p>
+                    <p data-i18n="aboutMe.description_2">{t('aboutMe.description_2')} <span class="tecnica" data-i18n="aboutMe.description_3">{t('aboutMe.description_3')}</span> <span data-i18n="aboutMe.description_4">{t('aboutMe.description_4')}</span> <span class="tecnica" data-i18n="aboutMe.description_5">{t('aboutMe.description_5')}</span><span data-i18n="aboutMe.description_6">{t('aboutMe.description_6')}</span> 
+                    </p>
                </div>     
           </div> 
           <div class="cv-container">
-               <p>Si estás interesado en conocer más sobre mí, puedes descargar mi Curriculum Vitae a continuación:</p>
-               <a href="https://drive.google.com/file/d/1s4V4XGx-iITWHwULUHnnhvLRi4UObwuo/view?usp=sharing" target="_blank">Descargar CV</a>
+               <p data-i18n="aboutMe.cv_text">{t('aboutMe.cv_text')}</p>               
+               <Download />
           </div>
      </section>
 </Section>
@@ -30,7 +36,6 @@ import Section from "@/components/Section.astro"
           display: flex;
           flex-direction: column;
           justify-content: center;
-          padding: 50px 30px;  
           background-color: #13151a;
      }
 
@@ -126,32 +131,13 @@ import Section from "@/components/Section.astro"
           display: flex;
           flex-direction: column;
           align-items: center;
+          gap: 15px;
           padding: 20px 0 0 0;
      }
 
      .cv-container p{
           color: #ffffff;
           text-align: center;
-     }
-
- 
-     .cv-container a{
-          width: 150px;
-          text-align: center;
-          color: #13151a;
-          font-weight: 800;
-          text-decoration: none;
-          background-color: #F9C1DC;
-          padding: 15px;
-          border-radius: 20px;
-          cursor: pointer;
-          box-shadow: rgba(138, 137, 137, 0.405) 0px 5px 15px 0px;
-          transition: background-color 0.3s ease, transform 0.3s ease, background-image 0.3s ease;
-     }
-     .cv-container a:hover {
-          background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
-          transform: scale(1.1); 
-          color: #ffffff;
      }
 
      /* Ocultar elementos del contenedor about cuando el navbar está abierto */
@@ -167,7 +153,6 @@ import Section from "@/components/Section.astro"
      @media(min-width:768px){
           .about-section{
                justify-content: center;
-               padding: 50px 80px;
           }
 
           h2::before {
@@ -185,10 +170,6 @@ import Section from "@/components/Section.astro"
      }
 
      @media(min-width:1024px){
-          .about-section{        
-               padding: 50px 90px;
-          }    
-
           .about-container{
                justify-content: space-around;
           }
