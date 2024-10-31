@@ -62,20 +62,35 @@ const t = useTranslations(lang);
         });
       });
     }; 
-    const handleNavLinkClick = (event, href) => {
+    const isHomePage = window.location.pathname === '/' || window.location.pathname === '/en';
+  const isEnglishVersion = window.location.pathname.startsWith('/en');
+
+  const scrollToSection = (sectionId, fromDetailView = false) => {
+    const targetElement = document.querySelector(sectionId);
+    if (targetElement) {
+      if (isHomePage && !fromDetailView) {
+        // On main page, scroll directly to the target section
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        // From detail view, first scroll to home then to the target section
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        setTimeout(() => {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  };
+
+  const handleNavLinkClick = (event, href) => {
     event.preventDefault();
 
-    const isHomePage = window.location.pathname === '/' || window.location.pathname === '/en';
-
     if (isHomePage) {
-      const targetElement = document.querySelector(href);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth' });
-      }
+      scrollToSection(href);
     } else {
-      // Almacenamos la sección en `sessionStorage` y redirigimos al home en español
+      // Store the target section in sessionStorage and redirect to home
       sessionStorage.setItem('targetSection', href);
-      window.location.href = '/';
+      sessionStorage.setItem('fromDetailView', 'true');
+      window.location.href = isEnglishVersion ? '/en' : '/';
     }
   };
 
@@ -89,13 +104,15 @@ const t = useTranslations(lang);
     }
   });
 
+  // Handle stored target section after page load
   const targetSection = sessionStorage.getItem('targetSection');
-  if (targetSection && (window.location.pathname === '/' || window.location.pathname === '/en')) {
+  const fromDetailView = sessionStorage.getItem('fromDetailView') === 'true';
+  if (targetSection && isHomePage) {
     sessionStorage.removeItem('targetSection');
-    const targetElement = document.querySelector(targetSection);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth' });
-    }
+    sessionStorage.removeItem('fromDetailView');
+    setTimeout(() => {
+      scrollToSection(targetSection, fromDetailView);
+    }, 100);
   }
 
   const languageLinks = document.querySelectorAll('.language-toggle a');
@@ -103,13 +120,11 @@ const t = useTranslations(lang);
     link.addEventListener('click', (event) => {
       event.preventDefault();
       const newLang = link.getAttribute('data-lang');
-      const currentPath = window.location.pathname;
       const currentSection = window.location.hash || '';
-
-      window.location.href = `/${newLang}${currentSection}`;
+      const newPath = newLang === 'en' ? '/en' : '/';
+      window.location.href = `${newPath}${currentSection}`;
     });
   });
-
 
     /* const navigateToHome = (event) => {
       event.preventDefault();
