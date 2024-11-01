@@ -1,37 +1,42 @@
 ---
 import { validateName, validateEmail, validateMessage, validateFormFields } from '@/utils/validateForm.js';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <form id="contactForm" class="contact-form" action="https://formspree.io/f/xkgwrdpk" method="POST">
   <div class="form-group">
-    <label for="name">Nombre y Apellido</label>
-    <input type="text" id="name" name="name" placeholder="Nombre y apellido" required />
+    <label for="name" data-i18n="contactForm.name">{t('contactForm.name')}</label>
+    <input type="text" id="name" name="name" data-i18n="contactForm.namePlaceholder" placeholder={t('contactForm.namePlaceholder')} required />
     <span class="error" id="nameError"></span>
   </div>
   <div class="form-group">
-    <label for="email">Correo Electrónico</label>
+    <label for="email" data-i18n="contactForm.mail">{t('contactForm.mail')}</label>
     <input type="email" id="email" name="email" placeholder="example@example.com" required />
     <span class="error" id="emailError"></span>
   </div>
   <div class="form-group">
-    <label for="message">Mensaje</label>
-    <textarea id="message" name="message" placeholder="Escribe tu mensaje" required></textarea>
+    <label for="message" data-i18n="contactForm.message">{t('contactForm.message')}</label>
+    <textarea id="message" name="message" placeholder={t('contactForm.messagePlaceholder')} required></textarea>
     <span class="error" id="messageError"></span>
   </div>
-  <button type="submit">Enviar</button>
+  <button type="submit" data-i18n="contactForm.btn_submit">{t('contactForm.btn_submit')}</button>
 </form>
 
 <!-- Modal -->
 <div id="modal" class="modal">
   <div class="modal-content">
     <span id="closeModal" class="close">&times;</span>
-    <img src="/img/mail.png" alt="gato anaranjado tecleando rápido en una computadora" class="modal-image" />
-    <p>Mensaje enviado, me pondré en contacto contigo apenas lo lea. Muchas Gracias!</p>
+    <img src="/img/mail.png" data-i18n="contactForm.alt_img" alt={t('contactForm.message')} class="modal-image" />
+    <p data-i18n="contactForm.message_submit">{t('contactForm.message_submit')}</p>
   </div>
 </div>
 
 <script>
   import { validateName, validateEmail, validateMessage, validateFormFields } from '@/utils/validateForm.js';
+  import { updateLanguage, getCurrentLang } from '@/i18n/utils';
 
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contactForm') as HTMLFormElement;
@@ -99,27 +104,23 @@ import { validateName, validateEmail, validateMessage, validateFormFields } from
       }
     });
 
-    // Validación en tiempo real para el campo de correo electrónico
-    email.addEventListener('input', () => {
-      const errorMessage = validateEmail(email.value);
-      emailError.innerText = errorMessage;
-      if (errorMessage) {
-        email.style.borderColor = 'red';
-      } else {
-        email.style.borderColor = 'green';
-      }
-    });
+    name.addEventListener('input', () => {
+        const errorMessage = validateName(name.value);
+        nameError.innerText = errorMessage;
+        name.style.borderColor = errorMessage ? 'red' : 'green';
+      });
 
-    // Validación en tiempo real para el campo de mensaje
-    message.addEventListener('input', () => {
-      const errorMessage = validateMessage(message.value);
-      messageError.innerText = errorMessage;
-      if (errorMessage) {
-        message.style.borderColor = 'red';
-      } else {
-        message.style.borderColor = 'green';
-      }
-    });
+      email.addEventListener('input', () => {
+        const errorMessage = validateEmail(email.value);
+        emailError.innerText = errorMessage;
+        email.style.borderColor = errorMessage ? 'red' : 'green';
+      });
+
+      message.addEventListener('input', () => {
+        const errorMessage = validateMessage(message.value);
+        messageError.innerText = errorMessage;
+        message.style.borderColor = errorMessage ? 'red' : 'green';
+      });
 
     // Cerrar el modal
     closeModal.addEventListener('click', () => {
@@ -133,6 +134,11 @@ import { validateName, validateEmail, validateMessage, validateFormFields } from
       }
     });
 
+     // Actualizar las traducciones cuando cambie el idioma
+     document.addEventListener('languageChanged', () => {
+        updateLanguage(getCurrentLang());
+      });
+    
   }});
 
 </script>
@@ -157,8 +163,22 @@ import { validateName, validateEmail, validateMessage, validateFormFields } from
 
   input, textarea {
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #414141;
     border-radius: 4px;
+    background-color: transparent;
+    color: #ffffff;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: #FF3CAC;
+    border-top: transparent;
+  }
+
+  textarea:focus {
+    outline: none;
+    border-color: #FF3CAC;
+    border-top: transparent;
   }
 
   textarea{
@@ -174,7 +194,7 @@ import { validateName, validateEmail, validateMessage, validateFormFields } from
 
   button {
     padding: 10px;
-    background-color: #F9C1DC;
+    background-color: #784BA0;
     color: #ffffff;
     border: none;
     font-size: 1.1rem;
