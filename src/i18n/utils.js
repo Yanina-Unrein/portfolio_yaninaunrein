@@ -39,12 +39,16 @@ export function updateLanguage(lang) {
       }
     });
 
-    
     updateExperienceItems(lang);
     updateCardProject(lang);
     updateCardProjectColaboration(lang);
     const slug = getCurrentProjectSlug();
     updateProjectDetails(lang, slug); 
+
+    // Condición para evitar la actualización de URL en la página 404
+    const is404Page = window.location.pathname.includes('404');
+    if (is404Page) return; // No actualizar la URL en la página 404
+
 
     // Obtener la ruta actual sin modificar
     const pathParts = window.location.pathname.split('/');

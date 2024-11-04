@@ -12,7 +12,7 @@ const experiences = EXPERIENCE[lang as keyof typeof EXPERIENCE];
 <Section>
     <div id="experiencia" class="experience-section">
         <div class="title-container">
-            <h2 data-i18n="experience.title">{t('experience.title')}</h2>
+            <h2 data-i18n="experience.title">{t('experience.title')}</h2>           
         </div>
         <div class="web-container">
             <ol class="timeline">
@@ -26,7 +26,7 @@ const experiences = EXPERIENCE[lang as keyof typeof EXPERIENCE];
             </ol>
             <div class="section-logo">
                 <figure>
-                    <img src="/img/logo-portfolio.png" alt="gato con anteojos sentado frente a una computadora">
+                    <img src="/img/logo-portfolio.png" data-i18n="experience.alt_img" alt={t('experience.message')}>
                 </figure>
             </div>
         </div>
@@ -47,18 +47,15 @@ const experiences = EXPERIENCE[lang as keyof typeof EXPERIENCE];
         margin: 0;
         list-style: none;
     }
-
-    
-
     .title-container{
-        padding: 30px 0 60px 0;
+        padding: 30px 0 20px 0;
     }
     h2{
         font-size: 2.5rem;
         display: inline-block;
         position: relative;
         color: #fff;
-        padding: 10px 0;
+        padding: 10px;
     }
 
     h2::before {
@@ -70,7 +67,6 @@ const experiences = EXPERIENCE[lang as keyof typeof EXPERIENCE];
         border-bottom: 4px solid #fb4ea1; 
         white-space: nowrap; 
     }
-
     .section-logo{
         display: flex;
         justify-content: end;
@@ -89,7 +85,6 @@ const experiences = EXPERIENCE[lang as keyof typeof EXPERIENCE];
     body.open .experience-section {
         display: none;
     }
-
 
     body.open h2 {
         display: none;
