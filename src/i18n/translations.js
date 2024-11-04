@@ -13,6 +13,7 @@ export const translations = {
         projects: "Proyectos",
         contact: "Contacto",
         copyright_1: "Página hecha con el ❤️",
+        alt_img: "Gato con gafas sentado sobre un portátil, mostrando una expresión curiosa y divertida.",
       },
       hero: {
         text: "Hola, soy Yanina Unrein",
@@ -44,6 +45,7 @@ export const translations = {
       experience: {
         title: "Experiencia",
         description: "Aquí están algunos de mis roles anteriores y lo que he aprendido...",
+        alt_img: "Gato con gafas sentado sobre un portátil, mostrando una expresión curiosa y divertida.",
       },
       contact: {
         title: "Contáctame",        
@@ -69,6 +71,16 @@ export const translations = {
         description: 'Descripción',
         responsabilities: 'Responsabilidades',
         technologies: 'Tecnologías',
+      },
+      errorPage:{
+        title: '404 - Página no encontrada',
+        subTitle: '⬐ Aquí es donde está todo el mundo ⬎',
+        img_you: '/img/404/tu-w.png',
+        you_message: '(Un poco leeeejos)',
+        paragraph1: '¿Sabes cómo orientarte para encontrar tu camino de vuelta?',
+        paragraph2: 'Te guiaremos para que no te pierdas',
+        btn_back: 'REGRESAR',
+
       }
     },
     en: {
@@ -85,6 +97,7 @@ export const translations = {
           projects: "Projects",
           contact: "Contact",
           copyright_1: "Page made with ❤️",
+          alt_img: "A cat donning glasses, comfortably seated on a laptop, showcasing a unique blend of intellect and playfulness.",
         },
         hero: {
           text: "Hello, I'm Yanina Unrein",
@@ -116,6 +129,7 @@ export const translations = {
         experience: {
           title: "Experience",
           description: "Here are some of my previous roles and what I have learned...",
+          alt_img: "A cat donning glasses, comfortably seated on a laptop, showcasing a unique blend of intellect and playfulness.",
         },
         contact: {
           title: "Contact Me",
@@ -141,6 +155,15 @@ export const translations = {
           description: 'Description',
           responsabilities: 'Responsibilities',
           technologies: 'Technologies',
+        },
+        errorPage:{
+          title: '404 - Page Not Found',
+          subTitle: '⬐ This is where everyone is ⬎',
+          img_you: '/img/404/you-w.png',
+          you_message: '(A little faaar away)',
+          paragraph1: 'Do you know how to find your way back?',
+          paragraph2: 'We’ll guide you so you don’t get lost',
+          btn_back: 'GO BACK',
         }
       },
     };

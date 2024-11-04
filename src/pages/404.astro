@@ -1,21 +1,27 @@
 ---
 import Layout from "@/layouts/Layout.astro"
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+
 ---
 
 <Layout title="Página no encontrada - 404" description="" hideNavbarFooter={true}>
     <section>
        <div>
-            <h1>404 - Página no encontrada</h1>
-            <h2>⬐ Aquí es donde está todo el mundo ⬎</h2>
+            <h1 data-i18n="errorPage.title">{t('errorPage.title')}</h1>
+            <h2 data-i18n="errorPage.subTitle">{t('errorPage.subTitle')}</h2>
             <figure>
-                <img src="../../public/img/404/title.png" alt="">
+                <img src={t('errorPage.img_you')} alt="">
             </figure>
-            <span>(Un poco leeeejos)</span>
+            <span data-i18n="errorPage.you_message">{t('errorPage.you_message')}</span>
        </div>
        <div class="back-container">
-        <p>¿Sabes cómo orientarte para encontrar tu camino de vuelta?</p>
-        <p>Te guiaremos para que no te pierdas</p>
-        <a href="/">REGRESAR</a>
+        <p data-i18n="errorPage.paragraph1">{t('errorPage.paragraph1')}</p>
+        <p data-i18n="errorPage.paragraph2">{t('errorPage.paragraph2')}</p>
+        <a href="/" data-i18n="errorPage.btn_back">{t('errorPage.btn_back')}</a>
        </div>
     </section>
 </Layout>
@@ -51,10 +57,10 @@ import Layout from "@/layouts/Layout.astro"
 
     figure{
         position: absolute;
-        top: -9px;
-        left: -30px;
-        width: 190px;
-        height: 120px;
+        top: 12px;
+        left: 5px;
+        width: 125px;
+        height: 90px;
         padding-left: 25px;
     }
 
@@ -65,7 +71,7 @@ import Layout from "@/layouts/Layout.astro"
 
     span{
         position: absolute;
-        top: 78px;
+        top: 100px;
         color: #ffffff;
         padding-left: 10px;
         font-size: 0.90rem;
