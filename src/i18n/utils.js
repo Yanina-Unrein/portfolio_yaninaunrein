@@ -45,10 +45,9 @@ export function updateLanguage(lang) {
     const slug = getCurrentProjectSlug();
     updateProjectDetails(lang, slug); 
 
-    // Condición para evitar la actualización de URL en la página 404
+    // Evitar cambiar la URL en la página 404
     const is404Page = window.location.pathname.includes('404');
-    if (is404Page) return; // No actualizar la URL en la página 404
-
+    if (is404Page) return;
 
     // Obtener la ruta actual sin modificar
     const pathParts = window.location.pathname.split('/');
@@ -135,9 +134,7 @@ function updateProjectDetails(lang, slug) {
 
 export function getCurrentLang() {
   if (typeof localStorage !== 'undefined') {
-    const lang = localStorage.getItem('lang') || defaultLang;
-    console.log('Idioma actual obtenido de localStorage:', lang); // Verifica el idioma actual de localStorage
-    return lang;
+    return localStorage.getItem('lang') || defaultLang;
   }
   return defaultLang;
 }
