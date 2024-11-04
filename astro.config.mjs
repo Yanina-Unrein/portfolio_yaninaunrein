@@ -8,8 +8,17 @@ export default defineConfig({
   i18n: {
     defaultLocale: "es",
     locales: ["es", "en"],
+    routing: {
+      prefixDefaultLocale: false
+    }
   },
   devToolbar: {
     enabled: false
+  },
+  pages: {
+    '404': [
+      { path: '/404', locale: 'es' },
+      { path: '/en/404', locale: 'en' }
+    ]
   }
 });

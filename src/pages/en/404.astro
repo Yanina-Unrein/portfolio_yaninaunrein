@@ -1,13 +1,10 @@
 ---
 import Layout from "@/layouts/Layout.astro"
-import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { useTranslations } from '@/i18n/utils';
 
-const lang = getLangFromUrl(Astro.url);
+const lang = 'en'; // English 404 page
 const t = useTranslations(lang);
 
-console.log("Página 404 cargada");
-
-// Forzar la ruta a /404 sin importar el idioma
 Astro.response.status = 404;
 ---
 
