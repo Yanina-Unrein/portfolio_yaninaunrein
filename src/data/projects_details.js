@@ -12,6 +12,8 @@ export const PROJECTS = {
         rol: 'Desarrollé una interfaz de usuario dinámica y altamente interactiva utilizando Angular, creando componentes personalizados para mejorar tanto el atractivo visual como la funcionalidad. Además, me aseguré de que la página fuera totalmente adaptable a varios dispositivos, garantizando así una experiencia óptima para todos los usuarios.',
         tecnologias: ['Angular', 'TypeScript', 'HTML5', 'CSS3', 'Node.js', 'Express', 'MySQL'],
         link: 'Ver más',
+        github: 'https://github.com/Nervios-de-Acero/Avocado-Frontend/tree/main',
+        url: ''
       },
     ],
     en: [
@@ -27,6 +29,8 @@ export const PROJECTS = {
         rol: 'I developed a dynamic and highly interactive user interface using Angular, creating custom components to enhance both visual appeal and functionality. I also ensured that the page was fully responsive across various devices, thus guaranteeing an optimal experience for all users.',
         tecnologias: ['Angular', 'TypeScript', 'HTML5', 'CSS3', 'Node.js', 'Express', 'MySQL'],
         link: 'View more',
+        github: 'https://github.com/Nervios-de-Acero/Avocado-Frontend/tree/main',
+        url: ''
       },
     ]
   };

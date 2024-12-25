@@ -4,13 +4,15 @@ import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const cvPath = lang === 'en' ? '/CV_YaninaUnrein_EN.pdf' : '/CV_YaninaUnrein_ES.pdf';
+const downloadFileName = `YaninaUnrein_CV_${lang.toUpperCase()}.pdf`;
 ---
 
-<a href="/cv.pdf" download="CV_YaninaUnrein">
+<a href={cvPath} download={downloadFileName}>
     <DownloadI />
     <span data-i18n="aboutMe.btn_dowload">{t('aboutMe.btn_dowload')}</span>
 </a>
-
 <style>
 a {
   display: flex;

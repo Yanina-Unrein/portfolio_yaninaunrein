@@ -1,5 +1,5 @@
 <div align="center"> 
-  <h1>🚀 Portafolio Web</h1>
+  <h1>🚀 Portfolio Web</h1>
 </div>
 
 ![Astro](https://img.shields.io/badge/astro-%232C2052.svg?style=for-the-badge&logo=astro&logoColor=white)

@@ -2,6 +2,15 @@ export const EXPERIENCE = {
     es: [
       {
         id: 'job1',
+        title: 'Epidata - Desarrolladora',
+        position: "Desarrolladora Trainee",
+        url: "",
+        startDate: 'Diciembre 2024',
+        endDate: "actualidad",
+        description: 'Diseñar, producir o mantener (programar, adaptar e integrar) componentes o subconjuntos de software (clases, módulos, pantallas, rutinas, subsistemas, programas en general) conforme a especificaciones (funcionales y técnicas) para ser integrados en aplicaciones.',
+      },
+      {
+        id: 'job2',
         title: 'Freelance - Colaboración en Sitio Juana Manso',
         position: "Diseñadora y Frontend Developer",
         url: "https://www.juanamanso.org/",
@@ -10,7 +19,7 @@ export const EXPERIENCE = {
         description: 'Rediseño del Home en WordPress utilizando Elementor, implementando un slider interactivo y nuevas secciones. Creación de nuevas páginas de contenido y modificación del footer, agregando una nueva sección. Aseguré la responsividad del sitio para una mejor experiencia en dispositivos móviles.',
       },
       {
-        id: 'job2',
+        id: 'job3',
         title: 'Freelance - Colaboración en ILK Abogados Argentina',
         position: "Frontend Developer",
         url: "https://ilk.com.ar/",
@@ -19,16 +28,16 @@ export const EXPERIENCE = {
         description: 'Desarrollo de un slider con video de fondo en la sección Hero de la homepage, utilizando WordPress y el constructor Divi. Aseguré que el diseño fuera totalmente responsivo para mejorar la experiencia en dispositivos móviles.',
       },
       {
-        id: 'job3',
+        id: 'job4',
         title: 'Publissoft - Web Developer',
         position: "Web Developer",
         url: "",
         startDate: 'Enero 2024',
-        endDate: "Actualidad",
+        endDate: "Diciembre 2024",
         description: 'Gestiono la integración de contenido y la publicación de artículos en diversos CMS como WordPress, Shopify, Wix, Prestashop y CPanel. Mi trabajo incluye la creación de páginas web, la optimización de contenido para mejorar la visibilidad y la experiencia del usuario, y la colaboración con equipos multidisciplinarios para asegurar que el contenido esté alineado con las estrategias y objetivos del negocio. Mantengo los sitios web actualizados y relevantes, adaptando el contenido a las necesidades cambiantes.',
       },
       {
-        id: 'job4',
+        id: 'job5',
         title: 'Freelance - Colaboración de Maquetación',
         position: "Frontend Developer",
         url: "https://www.goigro.com/es/",
@@ -40,6 +49,15 @@ export const EXPERIENCE = {
     en: [
       {
         id: 'job1',
+        title: 'Epidata - Developer',
+        position: "Trainee Developer",
+        url: "",
+        startDate: 'December 2024',
+        endDate: "present",
+        description: 'Design, produce, or maintain (program, adapt, and integrate) components or subsets of software (classes, modules, screens, routines, subsystems, programs in general) according to specifications (functional and technical) to be integrated into applications.',
+      },
+      {
+        id: 'job2',
         title: 'Freelance - Collaboration on Juana Manso Site',
         position: "Designer and Frontend Developer",
         url: "https://www.juanamanso.org/",
@@ -48,7 +66,7 @@ export const EXPERIENCE = {
         description: 'Redesign of the Home in WordPress using Elementor, implementing an interactive slider and new sections. Created new content pages and modified the footer by adding a new section. Ensured site responsiveness for a better experience on mobile devices.',
       },
       {
-        id: 'job2',
+        id: 'job3',
         title: 'Freelance - Collaboration on ILK Abogados Argentina',
         position: "Frontend Developer",
         url: "https://ilk.com.ar/",
@@ -57,16 +75,16 @@ export const EXPERIENCE = {
         description: 'Developed a slider with a video background in the Hero section of the homepage, using WordPress and the Divi builder. Ensured the design was fully responsive to improve the mobile experience.',
       },
       {
-        id: 'job3',
+        id: 'job4',
         title: 'Publissoft - Web Developer',
         position: "Web Developer",
         url: "",
         startDate: 'January 2024',
-        endDate: "Present",
+        endDate: "December 2024",
         description: 'Managed content integration and publication of articles on various CMS platforms such as WordPress, Shopify, Wix, Prestashop, and CPanel. My work includes creating web pages, optimizing content to improve visibility and user experience, and collaborating with cross-functional teams to ensure content aligns with business strategies and objectives. Kept websites updated and relevant by adapting content to evolving needs.',
       },
       {
-        id: 'job4',
+        id: 'job5',
         title: 'Freelance - Layout Collaboration',
         position: "Frontend Developer",
         url: "https://www.goigro.com/es/",
