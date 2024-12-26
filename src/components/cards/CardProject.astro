@@ -1,7 +1,10 @@
 ---
+import GithubCard from "../icons/GithubCard.astro";
+import Url from "../icons/Url.astro";
 
-const {slug, image, image2, title, description, tecnologias, link, classList = [] } = Astro.props;
+const {slug, image, image2, title, description, tecnologias, link, classList = [], github, url } = Astro.props;
 const lang = Astro.url.pathname.split('/')[1] || 'es';
+
 ---
 
 <a href={`/${lang}/${slug}`} class="link-detail-proyect">
@@ -13,7 +16,7 @@ const lang = Astro.url.pathname.split('/')[1] || 'es';
             <img src={image2} class="character" alt={`${title} character`} />                           
         </div>
         <div class="description-container">
-            <h4>{title}</h4>
+            <h4>{title}</h4>                  
             <p>{description}</p>
             <div>
                 <ul>
@@ -24,10 +27,14 @@ const lang = Astro.url.pathname.split('/')[1] || 'es';
             </div>
         </div>
         <div class="description-container span-container">
-        <span>{link}</span>
-        </div>  
+            <span class="link">{link}</span>
+        </div>
     </article>
 </a>
+<div class="icon-sites">
+  <a href={github} target="_blank"><GithubCard class="github"/></a>
+  {url && <a href={url} target="_blank"><Url class="url"/></a>}
+</div>
 
 <style> 
     .card-container{
@@ -204,36 +211,10 @@ const lang = Astro.url.pathname.split('/')[1] || 'es';
         -webkit-box-shadow: -1px -1px 2px rgba(0,0,0,0.4);
         box-shadow: -1px -1px 2px rgba(0,0,0,0.4);
     }
-
-
-
-    .icon-git{
-        display: inline-flex;
-        text-decoration: none;
-        width: 40px;
-        height: 40px;
-        color: #000;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-    }
-
-    .icon-git::before{
-        content: "";
-        position: absolute;
-        width: 50px;
-        height: 50px;
-        transition: 0.3s ease-in;
-    }
-
-    .icon-git:hover::before{
-        transform: scale(0);
-    }
-    
     .span-container{
         position: relative;
     }
-    span{
+    .link{
         position: absolute;
         top: 50%;
         left: 50%;
@@ -254,6 +235,36 @@ const lang = Astro.url.pathname.split('/')[1] || 'es';
     }
     .link-detail-proyect{
         text-decoration: none;
+    }
+
+    .icon-sites{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+    }
+    .icon-sites a{
+      cursor: pointer;
+    }
+
+    .github{
+      width: 40px;
+      height: 40px;
+      fill: rgb(0, 0, 0);
+      border-radius: 100%;
+      transition: transform 0.3s ease;
+    }
+
+    .url{
+      width: 37px;
+      height: 38px;
+      background: linear-gradient(-45deg, #6bc5f8, #cf59e6, #6bc5f8, #cf59e6);
+      border-radius: 100%;
+      transition: transform 0.3s ease;
+    }
+
+    .icon-sites a:hover .github, a:hover .url{
+      transform: translateY(-5px); 
     }
     
     body.open .link-detail-proyect, body.open h4, body.open p, body.open span  {

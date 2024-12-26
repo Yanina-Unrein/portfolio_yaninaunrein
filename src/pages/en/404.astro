@@ -14,7 +14,7 @@ Astro.response.status = 404;
             <h1 data-i18n="errorPage.title">{t('errorPage.title')}</h1>
             <h2 data-i18n="errorPage.subTitle">{t('errorPage.subTitle')}</h2>
             <figure>
-                <img src={t('errorPage.img_you')} alt="">
+                <img src={t('errorPage.img_you')} data-i18n="errorPage.subTitle" alt={t('img_alt')}>
             </figure>
             <span data-i18n="errorPage.you_message">{t('errorPage.you_message')}</span>
         </div>
@@ -70,18 +70,20 @@ Astro.response.status = 404;
         top: 12px;
         left: 5px;
         width: 125px;
-        height: 90px;
+        height: 75px;
         padding-left: 25px;
+        animation: float 3s ease-in-out infinite;
     }
 
     figure img{
         width: 100%;
         height: 100%;
+        display: block; /* Asegura que la imagen no tenga espacio extra debajo */
     }
 
     span{
         position: absolute;
-        top: 100px;
+        top: 85px;
         color: #ffffff;
         padding-left: 10px;
         font-size: 0.90rem;
@@ -89,7 +91,7 @@ Astro.response.status = 404;
 
     .back-container{
         position: absolute;
-        top: 500px;
+        top: 450px;
         width: 95%;
         color: #ffffff;
         padding: 30px 10px;
@@ -117,13 +119,29 @@ Astro.response.status = 404;
         box-shadow: rgba(225, 225, 225, 0.508) 0px 7px 29px 0px;
     }
 
+    @media(min-height:600px){
+        .back-container{
+            top: 400px;
+        }
+    }
+
     @media(min-width:768px){
         .back-container{
             width: 700px;
             margin: 0 auto;
             left: 50%; 
             transform: translateX(-50%);
-            top: 600px;
         }
     }
+
+
+    
+    @keyframes float {
+    0%, 100% {
+        transform: translateY(0); /* Posición original */
+    }
+    50% {
+        transform: translateY(-5px); /* Eleva la imagen 10px */
+    }
+}
 </style>
