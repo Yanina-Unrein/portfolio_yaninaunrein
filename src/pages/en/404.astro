@@ -119,16 +119,23 @@ Astro.response.status = 404;
         box-shadow: rgba(225, 225, 225, 0.508) 0px 7px 29px 0px;
     }
 
+    @media(min-height:600px){
+        .back-container{
+            top: 400px;
+        }
+    }
+
     @media(min-width:768px){
         .back-container{
             width: 700px;
             margin: 0 auto;
             left: 50%; 
             transform: translateX(-50%);
-            top: 600px;
         }
     }
 
+
+    
     @keyframes float {
     0%, 100% {
         transform: translateY(0); /* Posición original */

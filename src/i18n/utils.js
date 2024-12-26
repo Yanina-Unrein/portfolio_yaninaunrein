@@ -44,6 +44,8 @@ export function updateLanguage(lang) {
     updateCardProjectColaboration(lang);
     const slug = getCurrentProjectSlug();
     updateProjectDetails(lang, slug); 
+    updateCVDownload(lang); 
+    updateFormPlaceholders(lang);
 
     // Evitar cambiar la URL en la página 404
     const is404Page = window.location.pathname.includes('404');
@@ -129,6 +131,36 @@ function updateProjectDetails(lang, slug) {
     document.querySelector('.description').textContent = project.description;
     document.querySelector('.description-extend').textContent = project.descriptionExtend;
     document.querySelector('.responsability').textContent = project.rol;
+  }
+}
+
+export function updateCVDownload(lang) {
+  const downloadButton = document.querySelector('a[download*="YaninaUnrein_CV"]');
+  if (downloadButton) {
+    const cvPath = lang === 'en' ? '/CV_YaninaUnrein_EN.pdf' : '/CV_YaninaUnrein_ES.pdf';
+    const downloadFileName = `YaninaUnrein_CV_${lang.toUpperCase()}.pdf`;
+    
+    downloadButton.href = cvPath;
+    downloadButton.setAttribute('download', downloadFileName);
+  }
+}
+
+export function updateFormPlaceholders(lang) {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+
+  const t = translations[lang] || translations[defaultLang];
+  
+  // Update input placeholders
+  const nameInput = form.querySelector('#name');
+  const messageTextarea = form.querySelector('#message');
+  
+  if (nameInput) {
+    nameInput.placeholder = t.contactForm.namePlaceholder;
+  }
+  
+  if (messageTextarea) {
+    messageTextarea.placeholder = t.contactForm.messagePlaceholder;
   }
 }
 
