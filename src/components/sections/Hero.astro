@@ -12,8 +12,9 @@ const t = useTranslations(lang);
         <span class="name" data-i18n="hero.text">{t('hero.text')} 
             <span class="hand-icon">👋</span>
         </span>
-        <h1>FrontEnd</h1>
+        <h1>FullStack</h1>
         <h2>Developer</h2>
+        <span class="slogan-hero" data-i18n="hero.slogan">{t('hero.slogan')}</span>
         <SocialButtons class="social-buttons" />
     </div>
     </div>
@@ -23,9 +24,9 @@ const t = useTranslations(lang);
     import { gsap } from 'https://cdn.skypack.dev/gsap';
   
     function initAnimation() {
-      gsap.set(['.name', 'h1', 'h2'], { y: 100, opacity: 0, visibility: 'hidden' });
+      gsap.set(['.name', 'h1', 'h2', 'span'], { y: 100, opacity: 0, visibility: 'hidden' });
   
-      gsap.to(['.name', 'h1', 'h2'], {
+      gsap.to(['.name', 'h1', 'h2', 'span'], {
         opacity: 1,
         y: 0,
         visibility: 'visible',
@@ -57,7 +58,7 @@ const t = useTranslations(lang);
         background-attachment: fixed;
         width: 100%; 
         height: 900px; 
-        background-image: url("/img/hero-opacity.webp");
+        background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/img/hero-opacity.webp");
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -100,10 +101,20 @@ const t = useTranslations(lang);
         font-size: 1.3rem;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
+
+    .slogan-hero{
+        color: #fff;
+        font-weight: 600;
+        font-size: 1.3rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        padding-top: 25px;
+        max-width: 546px;
+    }
    
-    body.open h1, body.open h2, body.open .name, body.open .social-buttons  {
+    body.open h1, body.open h2, body.open .name,body.open .slogan-hero, body.open .social-buttons  {
         display: none;
     }
+
 
    .hand-icon {
         animation: wave  2.5s infinite;

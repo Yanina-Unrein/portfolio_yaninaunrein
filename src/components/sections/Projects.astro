@@ -9,10 +9,13 @@ import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const projects = PROJECTS[lang as keyof typeof PROJECTS] || [];
-const collaborationProjects = PROJECTSC[lang as keyof typeof PROJECTSC] || [];
+const allProjects = PROJECTS[lang as keyof typeof PROJECTS] || [];
 
-const isSingleProject = projects.length === 1;
+// Filtrar proyectos personales y colaboraciones
+const personalProjects = allProjects.filter(project => !project.collaborate);
+const collaborationProjects = allProjects.filter(project => project.collaborate);
+
+const isSingleProject = personalProjects.length === 1;
 ---
 
 <section id="proyectos" class="projects-section">
@@ -22,18 +25,20 @@ const isSingleProject = projects.length === 1;
             <h3 data-i18n="projects.subtitle_1">{t('projects.subtitle_1')}</h3>
         </div>   
         <div class={`cards-container ${isSingleProject ? 'single' : ''}`}>
-            {projects.map(project => (
+            {personalProjects.map(project => (
                 <CardProject classList={['card-project', 'project-element']} {...project} />
             ))}
         </div>
-        <div class="colaboration-container">
-            <h3 data-i18n="projects.subtitle_2">{t('projects.subtitle_2')}</h3>
-            <div class="cards-container colaborate">
-                {collaborationProjects.map(project => (
-                    <CardColaboracion classlist={['card-project', 'project-element']} {...project} />
-                ))}
+        {collaborationProjects.length > 0 && (
+            <div class="colaboration-container">
+                <h3 data-i18n="projects.subtitle_2">{t('projects.subtitle_2')}</h3>
+                <div class="cards-container colaborate">
+                    {collaborationProjects.map(project => (
+                        <CardProject classList={['card-project', 'project-element']} {...project} />
+                    ))}
+                </div>
             </div>
-        </div>
+        )}
     </div>
 </section>
 
