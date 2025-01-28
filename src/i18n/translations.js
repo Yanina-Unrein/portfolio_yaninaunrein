@@ -12,12 +12,16 @@ export const translations = {
         home: "Inicio",
         projects: "Proyectos",
         contact: "Contacto",
+        slogan: "Frontend-first, pero siempre lista para asumir cualquier desafío fullstack.",
         copyright_1: "Página hecha con el ❤️",
         alt_img: "Gato con gafas sentado sobre un portátil, mostrando una expresión curiosa y divertida.",
+
       },
       hero: {
         text: "Hola, soy Yanina Unrein",
+        slogan: "Frontend-first, pero siempre lista para asumir cualquier desafío fullstack.",
       },
+
       aboutMe: {
         title: "Sobre Mí",
         subTitle: "Hola, soy Yanina Unrein",
@@ -97,12 +101,16 @@ export const translations = {
           home: "Home",
           projects: "Projects",
           contact: "Contact",
+          slogan: "Frontend-first, but always ready to take on any fullstack challenge.",
           copyright_1: "Page made with ❤️",
           alt_img: "A cat donning glasses, comfortably seated on a laptop, showcasing a unique blend of intellect and playfulness.",
+
         },
         hero: {
           text: "Hello, I'm Yanina Unrein",
+          slogan: "Frontend-first, but always ready to take on any fullstack challenge.",
         },
+
         aboutMe: {
           title: "About Me",
           subTitle: "Hi, I'm Yanina Unrein",

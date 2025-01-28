@@ -1,13 +1,14 @@
 ---
 import GithubCard from "../icons/GithubCard.astro";
-import Url from "../icons/Url.astro";
 
-const {slug, image, image2, title, description, tecnologias, link, classList = [], github, url } = Astro.props;
+const {slug, image, image2, title, description, tecnologias, viewMore, classList = [], github, url, state } = Astro.props;
 const lang = Astro.url.pathname.split('/')[1] || 'es';
+
 
 ---
 
-<a href={`/${lang}/${slug}`} class="link-detail-proyect">
+<div class="card-section-container">
+  <a href={`/${lang}/${slug}`} class="link-detail-proyect">
     <article class={["card-container", ...classList].join(' ')}>
         <div class="card">
             <div class="wrapper">
@@ -16,7 +17,15 @@ const lang = Astro.url.pathname.split('/')[1] || 'es';
             <img src={image2} class="character" alt={`${title} character`} />                           
         </div>
         <div class="description-container">
-            <h4>{title}</h4>                  
+            <div class="title-container">
+                <h4>{title}</h4>
+                <div class="status-indicator" data-status={state}>
+                    <span class="tooltip">{lang === 'es' ? 
+                        (state === 'en-progreso' ? 'En Progreso' : 'Completado') : 
+                        (state === 'in-progress' ? 'In Progress' : 'Completed')}
+                    </span>
+                </div>
+            </div>
             <p>{description}</p>
             <div>
                 <ul>
@@ -27,21 +36,31 @@ const lang = Astro.url.pathname.split('/')[1] || 'es';
             </div>
         </div>
         <div class="description-container span-container">
-            <span class="link">{link}</span>
+            <span class="link view-more">{viewMore}</span>
         </div>
     </article>
 </a>
 <div class="icon-sites">
   <a href={github} target="_blank"><GithubCard class="github"/></a>
-  {url && <a href={url} target="_blank"><Url class="url"/></a>}
+  {url && <a href={url} target="_blank"><img src="/icons/link_project.svg" alt="Url" class="url"/></a>}
+</div>
 </div>
 
 <style> 
+
+    .card-section-container{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
     .card-container{
         display: flex;
         flex-direction: column;
         width: 300px;
     }
+
     
     .card {
         width: 300px;
@@ -197,20 +216,62 @@ const lang = Astro.url.pathname.split('/')[1] || 'es';
         border-width: 12px 12px 12px 0;        
     }
 
-    ul li::after{
+    .title-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .status-indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        position: relative;
+        cursor: pointer;
+        isolation: isolate;
+    }
+
+    .status-indicator[data-status="en-progreso"],
+    .status-indicator[data-status="in-progress"] {
+        background-color: #3498db;
+    }
+
+    .status-indicator[data-status="completado"],
+    .status-indicator[data-status="completed"] {
+        background-color: #2ecc71;
+    }
+
+    .tooltip {
+        display: none;
+        position: absolute;
+        background-color: #333;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        white-space: nowrap;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        pointer-events: none;
+        z-index: 1000;
+    }
+
+    .status-indicator:hover .tooltip {
+        display: block;
+    }
+
+    .tooltip::after {
         content: "";
         position: absolute;
-        top: 10px;
-        left: 1px;
-        float: left;
-        width: 5px;
-        height: 5px;
-        -webkit-border-radius: 50%;
-        border-radius: 50%;
-        background: #13151a;
-        -webkit-box-shadow: -1px -1px 2px rgba(0,0,0,0.4);
-        box-shadow: -1px -1px 2px rgba(0,0,0,0.4);
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #333 transparent transparent transparent;
     }
+
     .span-container{
         position: relative;
     }
@@ -258,8 +319,6 @@ const lang = Astro.url.pathname.split('/')[1] || 'es';
     .url{
       width: 37px;
       height: 38px;
-      background: linear-gradient(-45deg, #6bc5f8, #cf59e6, #6bc5f8, #cf59e6);
-      border-radius: 100%;
       transition: transform 0.3s ease;
     }
 

@@ -64,4 +64,27 @@ const currentLang = getCurrentLang();
 	p{
 		text-wrap: pretty;
 	}
+
+	/* Estilo para la barra de desplazamiento */
+	html::-webkit-scrollbar {
+	width: 8px; /* Ancho de la barra vertical */
+	height: 8px; /* Alto de la barra horizontal */
+	}
+
+	/* Fondo de la barra de desplazamiento */
+	html::-webkit-scrollbar-track {
+	background: #121212; /* Color de fondo de la pista */
+	border-radius: 4px; /* Bordes redondeados */
+	}
+
+	/* Color de la barra de desplazamiento */
+	html::-webkit-scrollbar-thumb {
+	background: #989b99a9; /* Color del "pulgar" (la barra que se mueve) */
+	border-radius: 4px; /* Bordes redondeados */
+	}
+
+	/* Cambiar color al pasar el cursor */
+	html::-webkit-scrollbar-thumb:hover {
+	background: #784BA0; /* Color más claro al hacer hover */
+	}
 </style>

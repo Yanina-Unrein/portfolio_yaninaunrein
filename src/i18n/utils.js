@@ -99,10 +99,13 @@ function updateCardProject(lang) {
     if (project) {
       item.querySelector('h4').textContent = project.title;
       item.querySelector('p').textContent = project.description;
-      item.querySelector('span').textContent = project.link; 
+      item.querySelector('.view-more').textContent = project.viewMore; 
+      item.querySelector('.tooltip').textContent = project.state;
     }
   });
 }
+
+
 
 function updateCardProjectColaboration(lang) {
   const cardProject = document.querySelectorAll('.card-colaboration');
