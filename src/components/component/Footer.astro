@@ -16,10 +16,14 @@ const t = useTranslations(lang);
         <div class="logo-container">
             <div class="text-container">
                 <a class="logo-name" href="/">Yanina Unrein</a>
-                <span class="subtitle-logo">FrontEnd Developer</span>
+                <span class="subtitle-logo">FullStack Developer</span>
+                <span class="slogan" data-i18n="footer.slogan">{t('footer.slogan')}</span>
             </div>
             <figure>
+
+
                 <img src="/img/logo-portfolio.png" data-i18n="footer.alt_img" alt={t('footer.message')}>
+
             </figure>
         </div>
         <div class="nav-container">
@@ -106,8 +110,13 @@ const t = useTranslations(lang);
    .logo-container{
         display: flex;
         align-items: center;
-        gap: 15px;
+        flex-wrap: wrap;
+        gap: 20px;
         padding: 0 10px;
+   }
+
+   .slogan{
+    max-width: 280px;
    }
 
    .text-container{
@@ -119,11 +128,13 @@ const t = useTranslations(lang);
    figure{
         width: 100px;
         height: 100px;
+        margin: 0 auto;
    }
    figure img{
         width: 100%;
         height: auto;
    }
+
 
    .nav-container{
     display: flex;

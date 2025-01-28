@@ -3,11 +3,11 @@ export const EXPERIENCE = {
       {
         id: 'job1',
         title: 'Epidata - Desarrolladora',
-        position: "Desarrolladora Trainee",
+        position: "Desarrolladora Junior",
         url: "",
         startDate: 'Diciembre 2024',
         endDate: "actualidad",
-        description: 'Diseñar, producir o mantener (programar, adaptar e integrar) componentes o subconjuntos de software (clases, módulos, pantallas, rutinas, subsistemas, programas en general) conforme a especificaciones (funcionales y técnicas) para ser integrados en aplicaciones.',
+        description: 'Desarrolladora Fullstack con enfoque en Frontend, trabajando con tecnologías como React, Vue y Java. Diseño, desarrollo y mantenimiento de componentes y módulos de software (clases, interfaces, pantallas, rutinas y subsistemas) siguiendo especificaciones técnicas y funcionales para su integración en aplicaciones empresariales.',
       },
       {
         id: 'job2',
@@ -34,7 +34,7 @@ export const EXPERIENCE = {
         url: "",
         startDate: 'Enero 2024',
         endDate: "Diciembre 2024",
-        description: 'Gestiono la integración de contenido y la publicación de artículos en diversos CMS como WordPress, Shopify, Wix, Prestashop y CPanel. Mi trabajo incluye la creación de páginas web, la optimización de contenido para mejorar la visibilidad y la experiencia del usuario, y la colaboración con equipos multidisciplinarios para asegurar que el contenido esté alineado con las estrategias y objetivos del negocio. Mantengo los sitios web actualizados y relevantes, adaptando el contenido a las necesidades cambiantes.',
+        description: 'Desarrollo de sitios web utilizando HTML, CSS, JavaScript, React y TypeScript. Gestión de la integración de contenido y publicación de artículos en diversos CMS como WordPress, Shopify, Wix, Prestashop y CPanel. Responsable de la optimización de contenido para mejorar la visibilidad y experiencia del usuario, así como la colaboración con equipos multidisciplinarios para alinear el contenido con las estrategias y objetivos del negocio. Mantenimiento y actualización continua de sitios web para adaptarlos a las necesidades cambiantes de los clientes.',
       },
       {
         id: 'job5',
@@ -50,11 +50,11 @@ export const EXPERIENCE = {
       {
         id: 'job1',
         title: 'Epidata - Developer',
-        position: "Trainee Developer",
+        position: "Junior Developer",
         url: "",
         startDate: 'December 2024',
         endDate: "present",
-        description: 'Design, produce, or maintain (program, adapt, and integrate) components or subsets of software (classes, modules, screens, routines, subsystems, programs in general) according to specifications (functional and technical) to be integrated into applications.',
+        description: 'Fullstack Developer with a Frontend focus, working with technologies such as React, Vue, and Java. Design, development, and maintenance of software components and modules (classes, interfaces, screens, routines, and subsystems) following technical and functional specifications for integration into enterprise applications.',
       },
       {
         id: 'job2',
@@ -81,7 +81,7 @@ export const EXPERIENCE = {
         url: "",
         startDate: 'January 2024',
         endDate: "December 2024",
-        description: 'Managed content integration and publication of articles on various CMS platforms such as WordPress, Shopify, Wix, Prestashop, and CPanel. My work includes creating web pages, optimizing content to improve visibility and user experience, and collaborating with cross-functional teams to ensure content aligns with business strategies and objectives. Kept websites updated and relevant by adapting content to evolving needs.',
+        description: 'Website development using HTML, CSS, JavaScript, React, and TypeScript. Managed content integration and publication of articles on various CMS platforms including WordPress, Shopify, Wix, Prestashop, and CPanel. Responsible for content optimization to enhance visibility and user experience, while collaborating with cross-functional teams to align content with business strategies and objectives. Continuous maintenance and updating of websites to adapt to evolving client needs.',
       },
       {
         id: 'job5',
