@@ -30,7 +30,7 @@ const isSingleProject = personalProjects.length === 1;
         {collaborationProjects.length > 0 && (
             <div class="colaboration-container">
                 <h3 data-i18n="projects.subtitle_2">{t('projects.subtitle_2')}</h3>
-                <div class="cards-container colaborate">
+                <div class={`cards-container ${isSingleProject ? 'single' : ''}`}>
                     {collaborationProjects.map(project => (
                         <CardProject classList={['card-project', 'project-element']} {...project} />
                     ))}
@@ -107,10 +107,6 @@ const isSingleProject = personalProjects.length === 1;
         padding: 50px 0 20px 0;
     }
 
-    .colaboration-container h3{
-        padding: 0 0 40px 0;
-    }
-
     body.open .projects-section, body.open .cards-container {
         display: none;
     }
@@ -133,11 +129,5 @@ const isSingleProject = personalProjects.length === 1;
         h3{
             font-size: 1.3rem;
         }
-
-        .colaborate{
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            justify-content: center;
-        }
-
     }
 </style>
