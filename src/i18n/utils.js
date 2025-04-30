@@ -81,7 +81,15 @@ function updateExperienceItems(lang) {
       item.querySelector('time').textContent = experience.endDate 
         ? `${experience.startDate} - ${experience.endDate}`
         : experience.startDate;
-      item.querySelector('p').textContent = experience.description;
+        const ul = item.querySelector('ul');
+        if (ul && Array.isArray(experience.description)) {
+          ul.innerHTML = ''; 
+          experience.description.forEach(desc => {
+            const li = document.createElement('li');
+            li.textContent = desc;
+            ul.appendChild(li);
+          });
+        }
       const link = item.querySelector('a');
       if (link) {
         link.href = experience.url;

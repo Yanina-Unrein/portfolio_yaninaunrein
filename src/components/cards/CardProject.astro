@@ -12,9 +12,9 @@ const lang = Astro.url.pathname.split('/')[1] || 'es';
     <article class={["card-container", ...classList].join(' ')}>
         <div class="card">
             <div class="wrapper">
-                <img src={image} class="cover-image" alt={`${title} cover`} />
+                <img src={image} loading="lazy" class="cover-image" alt={`${title} cover`} />
             </div>
-            <img src={image2} class="character" alt={`${title} character`} />                           
+            <img src={image2} loading="lazy" class="character" alt={`${title} character`} />                           
         </div>
         <div class="description-container">
             <div class="title-container">
