@@ -86,6 +86,13 @@ export const translations = {
         paragraph2: 'Te guiaremos para que no te pierdas',
         btn_back: 'REGRESAR',
 
+      },
+      seo: {
+        title: "Yanina Unrein - Fullstack Developer",
+        metadescription: "Desarrolladora Full Stack con experiencia en sitios web y aplicaciones escalables. Explora mis proyectos, las tecnologías que utilizo y conoce más sobre mí. Contáctame para colaborar en tu próximo desafío digital."
+      },
+      spinner: {
+        loading: "Cargando...",
       }
     },
     en: {
@@ -174,6 +181,13 @@ export const translations = {
           paragraph1: 'Do you know how to find your way back?',
           paragraph2: 'We’ll guide you so you don’t get lost',
           btn_back: 'GO BACK',
+        },
+        seo: {
+          title: "Yanina Unrein - Fullstack Developer",
+          metadescription: "Full Stack Developer with experience in building scalable websites and applications. Explore my projects, the technologies I use, and learn more about me. Contact me to collaborate on your next digital challenge."
+        },
+        spinner: {
+          loading: "Loading...",
         }
       },
     };
