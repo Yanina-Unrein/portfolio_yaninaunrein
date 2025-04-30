@@ -9,10 +9,10 @@ import Contact from '@/components/sections/Contact.astro';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<Layout title="Portfolio Yanina Unrein - Desarrolladora y Programadora Web"
-description="Descubre mi portfolio como desarrolladora Frontend junior. Explora mis proyectos y habilidades en diseño web, programación y desarrollo de interfaces interactivas.">
+<Layout title={t('seo.title')} description={t('seo.metadescription')}>
 	<main>
 		<Hero />
 		<Experience />
