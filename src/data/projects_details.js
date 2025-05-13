@@ -35,6 +35,23 @@ export const PROJECTS = {
         url: ''
       },
       {
+        slug: 'todo-app',
+        fecha: 'mayo 2025',
+        state: 'completado',
+        image: '/cardsImg/toDo/toDoC.webp',
+        image2: '/cardsImg/toDo/toDo-icon.svg',
+        imageD: '/cardsImg/toDo/toDo.webp',
+        collaborate: false,
+        title: 'ToDo App',
+        description: 'La Todo App es una aplicación de gestión de tareas que permite a los usuarios agregar, marcar como completadas y eliminar tareas',
+        descriptionExtend: 'La Todo App es una aplicación de gestión de tareas que permite a los usuarios agregar, marcar como completadas y eliminar tareas. Además, los usuarios pueden filtrar sus tareas por estado (completadas, pendientes o todas). La aplicación está diseñada para ser completamente funcional y responsiva, adaptándose a dispositivos móviles y de escritorio. La interfaz es sencilla y fácil de usar, lo que permite a los usuarios gestionar sus tareas de manera eficiente.',
+        rol: 'Desarrolladora frontend, responsable de la creación de una interfaz de usuario interactiva utilizando Angular, con componentes dinámicos para la gestión de tareas. Además, implementé funcionalidades de filtrado y manejo de estado para tareas pendientes, completadas y todas.',
+        tecnologias: ['Angular','HTML', 'CSS', 'JavaScript', 'TypeScript'],
+        viewMore: 'Ver más',
+        github: 'https://github.com/Yanina-Unrein/ToDo',
+        url: 'https://to-do-liard-pi.vercel.app/'
+      },
+      {
         slug: 'portfolio-samuel',
         fecha: 'diciembre 2024',
         state: 'completado',
@@ -86,6 +103,23 @@ export const PROJECTS = {
         viewMore: 'View more',
         github: 'https://github.com/Yanina-Unrein/Spotify_clone',
         url: ''
+      },
+      {
+        slug: 'todo-app',
+        fecha: 'May 2025',
+        state: 'completed',
+        image: '/cardsImg/toDo/toDoC.webp',
+        image2: '/cardsImg/toDo/toDo-icon.svg',
+        imageD: '/cardsImg/toDo/toDo.webp',
+        collaborate: false,
+        title: 'ToDo App',
+        description: 'The Todo App is a task management application that allows users to add, mark as completed, and delete tasks.',
+        descriptionExtend: 'The Todo App is a task management application that allows users to add, mark as completed, and delete tasks. Additionally, users can filter their tasks by status (completed, pending, or all). The application is designed to be fully functional and responsive, adapting to both mobile and desktop devices. The interface is simple and user-friendly, enabling efficient task management.',
+        rol: 'Frontend developer responsible for creating an interactive user interface using Angular, with dynamic components for task management. I also implemented filtering functionalities and state management for pending, completed, and all tasks.',
+        tecnologias: ['Angular','HTML', 'CSS', 'JavaScript', 'TypeScript'],
+        viewMore: 'View more',
+        github: 'https://github.com/Yanina-Unrein/ToDo',
+        url: 'https://to-do-liard-pi.vercel.app/' 
       },
       {
         slug: 'portfolio-samuel',
