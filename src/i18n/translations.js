@@ -14,7 +14,7 @@ export const translations = {
         contact: "Contacto",
         slogan: "Frontend-first, pero siempre lista para asumir cualquier desafío fullstack.",
         copyright_1: "Página hecha con el ❤️",
-        alt_img: "Gato con gafas sentado sobre un portátil, mostrando una expresión curiosa y divertida.",
+        alt_img: "Niña con laptop rosa en mano, rodeada de dos gatos que juegan a su alrededor, sonriendo hacia la cámara.",
 
       },
       hero: {
@@ -49,7 +49,7 @@ export const translations = {
       experience: {
         title: "Experiencia",
         description: "Aquí están algunos de mis roles anteriores y lo que he aprendido...",
-        alt_img: "Gato con gafas sentado sobre un portátil, mostrando una expresión curiosa y divertida.",
+        alt_img: "Niña con laptop rosa en mano, rodeada de dos gatos que juegan a su alrededor, sonriendo hacia la cámara.",
       },
       contact: {
         title: "Contáctame",        
@@ -110,7 +110,7 @@ export const translations = {
           contact: "Contact",
           slogan: "Frontend-first, but always ready to take on any fullstack challenge.",
           copyright_1: "Page made with ❤️",
-          alt_img: "A cat donning glasses, comfortably seated on a laptop, showcasing a unique blend of intellect and playfulness.",
+          alt_img: "A girl is holding a pink laptop, with two cats nearby, illustrating a charming moment of technology and pet companionship.",
 
         },
         hero: {
@@ -145,7 +145,7 @@ export const translations = {
         experience: {
           title: "Experience",
           description: "Here are some of my previous roles and what I have learned...",
-          alt_img: "A cat donning glasses, comfortably seated on a laptop, showcasing a unique blend of intellect and playfulness.",
+          alt_img: "A girl is holding a pink laptop, with two cats nearby, illustrating a charming moment of technology and pet companionship.",
         },
         contact: {
           title: "Contact Me",
