@@ -1,23 +1,6 @@
 export const PROJECTS = {
     es: [
       {
-        slug: 'avocado',
-        fecha: 'junio 2024',
-        state: 'completado',
-        image: '/cardsImg/avocado/avocadoFeed.webp',
-        image2: '/cardsImg/avocado/logo-palta.png',
-        imageD: '/cardsImg/avocado/avocadoFC.webp',
-        collaborate: false,
-        title: 'Avocado',
-        description: 'Red Social de Recetas realizado para la Tecnicatura en Desarrollo Web y Aplicaciones Digitales.',
-        descriptionExtend: 'Avocado es una aplicación web diseñada para que los usuarios registrados creen y compartan recetas con la comunidad y puedan adquirir suscripciones de servicios. Esto permite explorar nuevos sabores y fomentar la creatividad culinaria. Los usuarios pueden descubrir sugerencias en el feed de la aplicación y guardar sus recetas favoritas para un acceso conveniente. Además, pueden aprovechar las funciones de búsqueda y filtrado para resultados específicos en sus exploraciones culinarias. Nuestro enfoque estaba en crear una plataforma atractiva y funcional, trabajamos en estrecha colaboración para garantizar que el sitio web refleje la idea que teníamos en mente.',
-        rol: 'Desarrollé una interfaz de usuario dinámica y altamente interactiva utilizando Angular, creando componentes personalizados para mejorar tanto el atractivo visual como la funcionalidad. Además, me aseguré de que la página fuera totalmente adaptable a varios dispositivos, garantizando así una experiencia óptima para todos los usuarios.',
-        tecnologias: ['Angular', 'TypeScript', 'HTML5', 'CSS3', 'Node.js', 'Express', 'MySQL'],
-        viewMore: 'Ver más',
-        github: 'https://github.com/Nervios-de-Acero/Avocado-Frontend/tree/main',
-        url: ''
-      },
-      {
         slug: 'spotify-clone',
         fecha: 'diciembre 2024',
         state: 'en-progreso',
@@ -32,7 +15,7 @@ export const PROJECTS = {
         tecnologias: ['Angular', 'TypeScript', 'JavaScript', 'Node.js', 'Express', 'MySQL', 'HTML', 'CSS', 'Git', 'GitHub'],
         viewMore: 'Ver más',
         github: 'https://github.com/Yanina-Unrein/Spotify_clone',
-        url: ''
+        url: 'https://spoty-music-clon.vercel.app/'
       },
       {
         slug: 'todo-app',
@@ -50,6 +33,23 @@ export const PROJECTS = {
         viewMore: 'Ver más',
         github: 'https://github.com/Yanina-Unrein/ToDo',
         url: 'https://to-do-liard-pi.vercel.app/'
+      },
+       {
+        slug: 'avocado',
+        fecha: 'junio 2024',
+        state: 'completado',
+        image: '/cardsImg/avocado/avocadoFeed.webp',
+        image2: '/cardsImg/avocado/logo-palta.png',
+        imageD: '/cardsImg/avocado/avocadoFC.webp',
+        collaborate: true,
+        title: 'Avocado',
+        description: 'Red Social de Recetas realizado para la Tecnicatura en Desarrollo Web y Aplicaciones Digitales.',
+        descriptionExtend: 'Avocado es una aplicación web diseñada para que los usuarios registrados creen y compartan recetas con la comunidad y puedan adquirir suscripciones de servicios. Esto permite explorar nuevos sabores y fomentar la creatividad culinaria. Los usuarios pueden descubrir sugerencias en el feed de la aplicación y guardar sus recetas favoritas para un acceso conveniente. Además, pueden aprovechar las funciones de búsqueda y filtrado para resultados específicos en sus exploraciones culinarias. Nuestro enfoque estaba en crear una plataforma atractiva y funcional, trabajamos en estrecha colaboración para garantizar que el sitio web refleje la idea que teníamos en mente.',
+        rol: 'Desarrollé una interfaz de usuario dinámica y altamente interactiva utilizando Angular, creando componentes personalizados para mejorar tanto el atractivo visual como la funcionalidad. Además, me aseguré de que la página fuera totalmente adaptable a varios dispositivos, garantizando así una experiencia óptima para todos los usuarios.',
+        tecnologias: ['Angular', 'TypeScript', 'HTML5', 'CSS3', 'Node.js', 'Express', 'MySQL'],
+        viewMore: 'Ver más',
+        github: 'https://github.com/Nervios-de-Acero/Avocado-Frontend/tree/main',
+        url: ''
       },
       {
         slug: 'portfolio-samuel',
@@ -71,23 +71,6 @@ export const PROJECTS = {
     ],
     en: [
       {
-        slug: 'avocado',
-        fecha: 'June 2024',
-        state: 'completed',
-        image: '/cardsImg/avocado/avocadoFeed.webp',
-        image2: '/cardsImg/avocado/logo-palta.png',
-        imageD: '/cardsImg/avocado/avocadoFC.webp',
-        collaborate: false,
-        title: 'Avocado',
-        description: 'Recipe Social Network developed for the Web Development and Digital Applications Program.',
-        descriptionExtend: 'Avocado is a web application designed for registered users to create and share recipes with the community, as well as acquire subscription services. This allows users to explore new flavors and foster culinary creativity. Users can discover suggestions in the app\'s feed and save their favorite recipes for convenient access. They can also take advantage of search and filtering features for specific results in their culinary explorations. Our focus was on creating an attractive and functional platform, and we worked closely to ensure that the website reflected the idea we had in mind.',
-        rol: 'I developed a dynamic and highly interactive user interface using Angular, creating custom components to enhance both visual appeal and functionality. I also ensured that the page was fully responsive across various devices, thus guaranteeing an optimal experience for all users.',
-        tecnologias: ['Angular', 'TypeScript', 'HTML5', 'CSS3', 'Node.js', 'Express', 'MySQL'],
-        viewMore: 'View more',
-        github: 'https://github.com/Nervios-de-Acero/Avocado-Frontend/tree/main',
-        url: ''
-      },
-      {
         slug: 'spotify-clone',
         fecha: 'December 2024',
         state: 'in-progress',
@@ -102,7 +85,7 @@ export const PROJECTS = {
         tecnologias: ['Angular', 'TypeScript', 'JavaScript', 'Node.js', 'Express', 'MySQL', 'HTML', 'CSS', 'Git', 'GitHub'],
         viewMore: 'View more',
         github: 'https://github.com/Yanina-Unrein/Spotify_clone',
-        url: ''
+        url: 'https://spoty-music-clon.vercel.app/'
       },
       {
         slug: 'todo-app',
@@ -120,6 +103,23 @@ export const PROJECTS = {
         viewMore: 'View more',
         github: 'https://github.com/Yanina-Unrein/ToDo',
         url: 'https://to-do-liard-pi.vercel.app/' 
+      },
+       {
+        slug: 'avocado',
+        fecha: 'June 2024',
+        state: 'completed',
+        image: '/cardsImg/avocado/avocadoFeed.webp',
+        image2: '/cardsImg/avocado/logo-palta.png',
+        imageD: '/cardsImg/avocado/avocadoFC.webp',
+        collaborate: true,
+        title: 'Avocado',
+        description: 'Recipe Social Network developed for the Web Development and Digital Applications Program.',
+        descriptionExtend: 'Avocado is a web application designed for registered users to create and share recipes with the community, as well as acquire subscription services. This allows users to explore new flavors and foster culinary creativity. Users can discover suggestions in the app\'s feed and save their favorite recipes for convenient access. They can also take advantage of search and filtering features for specific results in their culinary explorations. Our focus was on creating an attractive and functional platform, and we worked closely to ensure that the website reflected the idea we had in mind.',
+        rol: 'I developed a dynamic and highly interactive user interface using Angular, creating custom components to enhance both visual appeal and functionality. I also ensured that the page was fully responsive across various devices, thus guaranteeing an optimal experience for all users.',
+        tecnologias: ['Angular', 'TypeScript', 'HTML5', 'CSS3', 'Node.js', 'Express', 'MySQL'],
+        viewMore: 'View more',
+        github: 'https://github.com/Nervios-de-Acero/Avocado-Frontend/tree/main',
+        url: ''
       },
       {
         slug: 'portfolio-samuel',
