@@ -1,7 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import { PROJECTS } from '@/data/projects_details';
-import Section from '@/components/Section.astro';
 import { useTranslations } from '@/i18n/utils';
 
 const { lang, slug } = Astro.params;
@@ -29,15 +28,16 @@ if (!project) {
 ---
 
 <Layout title={project.title} description={project.description}>
-    <Section>
       <section class="detail-section">
         <div class="detail-container">
           <div class="header-container">
             <span class="pre-title">FullStack developer</span>
             <span>{project.fecha}</span>
           </div>
-          <h1 class="title" id="title">{project.title}</h1>
-          <p class="description">{project.description}</p>
+         <div>
+           <h1 class="title" id="title">{project.title}</h1>
+            <p class="description">{project.description}</p>
+         </div>
           <figure class="img-container">
             <img src={project.imageD} alt={`${project.title} cover`} />
           </figure>
@@ -59,7 +59,6 @@ if (!project) {
           </div>
         </div>
     </section>
-  </Section>
 </Layout>
 
 <style>
@@ -80,7 +79,7 @@ if (!project) {
   .detail-container{
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     margin-inline: 15px;
     padding-bottom: 50px;
   }
