@@ -5,7 +5,7 @@ import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const cvPath = lang === 'en' ? '/Resume_YaninaUnrein.pdf' : '/CV_FullStack_YaninaUnrein.pdf';
+const cvPath = lang === 'en' ? '/Resume_YaninaUnrein.pdf' : '/FullStack_YaninaUnrein.pdf';
 const downloadFileName = `YaninaUnrein_CV_${lang.toUpperCase()}.pdf`;
 ---
 

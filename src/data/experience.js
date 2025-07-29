@@ -2,8 +2,8 @@ export const EXPERIENCE = {
     es: [
       {
         id: 'job1',
-        title: 'Epidata - Desarrolladora',
-        position: "Desarrolladora Junior",
+        title: 'FullStack Developer',
+        position: "Epidata",
         url: "",
         startDate: 'Diciembre 2024',
         endDate: "actualidad",
@@ -16,8 +16,8 @@ export const EXPERIENCE = {
       },
       {
         id: 'job2',
-        title: 'Freelance - Colaboración en Sitio Juana Manso',
-        position: "Diseñadora y Frontend Developer",
+        title: 'Diseñadora UI y Frontend Developer',
+        position: "Freelance - Colaboración en Sitio Juana Manso",
         url: "https://www.juanamanso.org/",
         startDate: 'Agosto 2024',
         endDate: "",
@@ -25,8 +25,8 @@ export const EXPERIENCE = {
       },
       {
         id: 'job3',
-        title: 'Freelance - Colaboración en ILK Abogados Argentina',
-        position: "Frontend Developer",
+        title: 'Frontend Developer',
+        position: "Freelance - Colaboración en ILK Abogados Argentina",
         url: "https://ilk.com.ar/",
         startDate: 'Marzo 2024',
         endDate: "",
@@ -34,8 +34,8 @@ export const EXPERIENCE = {
       },
       {
         id: 'job4',
-        title: 'Publissoft - Web Developer',
-        position: "Web Developer",
+        title: 'Desarrolladora Web',
+        position: "Publissoft",
         url: "",
         startDate: 'Enero 2024',
         endDate: "Diciembre 2024",
@@ -49,8 +49,8 @@ export const EXPERIENCE = {
       },
       {
         id: 'job5',
-        title: 'Freelance - Colaboración de Maquetación',
-        position: "Frontend Developer",
+        title: 'Frontend Developer',
+        position: "Freelance - Colaboración de Maquetación",
         url: "https://www.goigro.com/es/",
         startDate: 'Octubre 2023',  
         endDate: "", 
@@ -60,8 +60,8 @@ export const EXPERIENCE = {
     en: [
       {
         id: 'job1',
-        title: 'Epidata - Developer',
-        position: "Junior Developer",
+        title: 'FullStack Developer',
+        position: "Epidata",
         url: "",
         startDate: 'December 2024',
         endDate: "present",
@@ -74,8 +74,8 @@ export const EXPERIENCE = {
       },
       {
         id: 'job2',
-        title: 'Freelance - Collaboration on Juana Manso Site',
-        position: "Designer and Frontend Developer",
+        title: 'UI Designer and Frontend Developer',
+        position: "Freelance - Collaboration on Juana Manso Site",
         url: "https://www.juanamanso.org/",
         startDate: 'August 2024',
         endDate: "",
@@ -83,8 +83,8 @@ export const EXPERIENCE = {
       },
       {
         id: 'job3',
-        title: 'Freelance - Collaboration on ILK Abogados Argentina',
-        position: "Frontend Developer",
+        title: 'Frontend Developer',
+        position: "Freelance - Collaboration on ILK Abogados Argentina",
         url: "https://ilk.com.ar/",
         startDate: 'March 2024',
         endDate: "",
@@ -92,8 +92,8 @@ export const EXPERIENCE = {
       },
       {
         id: 'job4',
-        title: 'Publissoft - Web Developer',
-        position: "Web Developer",
+        title: 'Web Developer',
+        position: "Publissoft",
         url: "",
         startDate: 'January 2024',
         endDate: "December 2024",
@@ -107,8 +107,8 @@ export const EXPERIENCE = {
       },
       {
         id: 'job5',
-        title: 'Freelance - Layout Collaboration',
-        position: "Frontend Developer",
+        title: 'Frontend Developer',
+        position: "Freelance - Layout Collaboration",
         url: "https://www.goigro.com/es/",
         startDate: 'October 2023',
         endDate: "", 

@@ -21,7 +21,7 @@ const {title, position, url, startDate, endDate,  description } = Astro.props;
     <ul>
         {description.map((item: string) => <li>{item}</li>)}
     </ul>
-    {url && <a href={url}>Link</a>}
+    {url && <a href={url} target="_blank">Link</a>}
 </div>
 
 <script>
