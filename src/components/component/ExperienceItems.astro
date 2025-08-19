@@ -11,40 +11,65 @@ const {title, position, url, startDate, endDate,  description } = Astro.props;
 
 <div class="experience-item">
     <div class="dot"></div>
-    <div class="header-container">
+    <div class="header-container toggle-btn">
         <div>
             <h3>{title}</h3>
             <h4>{position}</h4>
         </div>
         <time>{endDate ? `${startDate} - ${endDate}` : startDate}</time>
     </div>
-    <ul>
-        {description.map((item: string) => <li>{item}</li>)}
-    </ul>
-    {url && <a href={url} target="_blank">Link</a>}
+    <div class="collapse">
+        <ul>
+            {description.map((item: string) => <li>{item}</li>)}
+        </ul>
+
+        {url && <a href={url} target="_blank">Link</a>}
+    </div>
 </div>
 
 <script>
-      document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
         const items = document.querySelectorAll('.experience-item');
 
         const observerOptions = {
-            root: null,
-            threshold: 0.5, // Activa cuando al menos el 50% del item esté visible
+        root: null,
+        threshold: 0.5,
         };
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                const dot = entry.target.querySelector('.dot') as HTMLDivElement; // Selecciona el .dot dentro del .experience-item
-                if (entry.isIntersecting) {
-                    dot.classList.add('active-dot');
-                } else {
-                    dot.classList.remove('active-dot');
-                }
-            });
+        entries.forEach((entry) => {
+            const dot = entry.target.querySelector('.dot');
+            if (dot && dot instanceof HTMLElement) {
+            if (entry.isIntersecting) {
+                dot.classList.add('active-dot');
+            } else {
+                dot.classList.remove('active-dot');
+            }
+            }
+        });
         }, observerOptions);
 
-        items.forEach((item) => observer.observe(item));
+        items.forEach((item) => {
+        observer.observe(item);
+
+        const header = item.querySelector('.toggle-btn');
+        const collapse = item.querySelector('.collapse');
+
+        if (header && collapse && collapse instanceof HTMLElement) {
+            header.addEventListener('click', () => {
+            if (collapse.classList.contains('open')) {
+                collapse.style.maxHeight = collapse.scrollHeight + 'px';
+                requestAnimationFrame(() => {
+                collapse.style.maxHeight = '0';
+                });
+                collapse.classList.remove('open');
+            } else {
+                collapse.style.maxHeight = collapse.scrollHeight + 'px';
+                collapse.classList.add('open');
+            }
+            });
+        }
+        });
     });
 </script>
 
@@ -83,6 +108,23 @@ const {title, position, url, startDate, endDate,  description } = Astro.props;
         align-items: flex-start;
         flex-direction: column;
         margin-bottom: 4px;
+    }
+
+    .collapse {
+        max-height: 0;
+        overflow: hidden;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 0.3s ease;
+    }
+
+    .toggle-btn{
+        cursor: pointer;
+    }
+
+    .collapse.open {
+        transform: scaleY(1);
+        max-height: none;
     }
 
     time {

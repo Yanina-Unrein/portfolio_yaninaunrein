@@ -8,7 +8,7 @@ export const EXPERIENCE = {
         startDate: 'Diciembre 2024',
         endDate: "actualidad",
         description: [
-          'Desarrollo y mantenimiento de aplicaciones utilizando Vue, React, JavaScript, TypeScript y Vite.',
+          'Desarrollo y mantenimiento de aplicaciones utilizando Vue.js, React, JavaScript, TypeScript y Vite.',
           'Desarrollo y mantenimiento de aplicaciones backend usando Spring Boot (Java 8 y 11).',
           'Complementación de lógica del servidor y optimización de bases de datos Informix para mejorar la performance general.',
           'Colaboración efectiva con equipos Funcionales, de QA y de UX/UI para asegurar una tasa de aprobación de entregas del 95%.'
@@ -41,7 +41,7 @@ export const EXPERIENCE = {
         endDate: "Diciembre 2024",
         description: [
         'Gestioné la integración de contenido en CMS como WordPress, Shopify, Wix, Prestashop y CPanel.',
-        'Desarrollé sitios web utilizando HTML, CSS, JavaScript, React y TypeScript, logrando aumentar el tráfico orgánico en un 30% a través de prácticas de SEO.',
+        'Desarrollé sitios web utilizando HTML, CSS, JavaScript, TypeScript, React y Vue.js, logrando aumentar el tráfico orgánico en un 30% a través de prácticas de SEO.',
         'Implementé optimización SEO de artículos y contenidos, mejorando la posición en buscadores para clientes clave.',
         'Colaboré en equipos multidisciplinarios logrando alinear más del 90% de los contenidos con los objetivos estratégicos del negocio.',
         'Capacité a 3 nuevos miembros del equipo, reduciendo su tiempo de onboarding en un 40%.'
@@ -66,7 +66,7 @@ export const EXPERIENCE = {
         startDate: 'December 2024',
         endDate: "present",
         description: [
-          'Development and maintenance of applications using Vue, React, JavaScript, TypeScript, and Vite.',
+          'Development and maintenance of applications using Vue.js, React, JavaScript, TypeScript, and Vite.',
           'Development and maintenance of backend applications using Spring Boot (Java 8 and 11).',
           'Implementation of server-side logic and optimization of Informix databases to enhance overall performance.',
           'Effective collaboration with Functional, QA, and UX/UI teams to ensure a 95% delivery approval rate.'
@@ -99,7 +99,7 @@ export const EXPERIENCE = {
         endDate: "December 2024",
         description: [
           'Managed content integration in CMS platforms such as WordPress, Shopify, Wix, Prestashop, and CPanel.',
-          'Developed websites using HTML, CSS, JavaScript, React, and TypeScript, achieving a 30% increase in organic traffic through SEO practices.',
+          'Developed websites using HTML, CSS, JavaScript, TypeScript, React, and Vue.js, achieving a 30% increase in organic traffic through SEO practices.',
           'Implemented SEO optimization for articles and content, improving search engine rankings for key clients.',
           'Collaborated in multidisciplinary teams, aligning over 90% of content with the company’s strategic objectives.',
           'Trained 3 new team members, reducing their onboarding time by 40%.'
