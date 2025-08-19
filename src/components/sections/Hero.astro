@@ -82,10 +82,11 @@ const t = useTranslations(lang);
         font-size: 4rem;
         font-weight: 800;
         background-color: #FF3CAC;
-        background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+        background-image: linear-gradient(225deg, #FF3CAC 0%, #9035df 50%, #1b8ee0 100%);
+        background-size: 200% auto;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        transition: all .2s;
+        animation: aurora 8s ease-in-out infinite alternate;
     }
 
     h2 {
@@ -165,6 +166,23 @@ const t = useTranslations(lang);
         }
         100% {
             transform: rotate(0deg);
+        }
+    }
+    @keyframes aurora {
+        0% {
+            background-position: 0% 50%;
+        }
+        25% {
+            background-position: 50% 100%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        75% {
+            background-position: 50% 0%;
+        }
+        100% {
+            background-position: 0% 50%;
         }
     }
 </style>
