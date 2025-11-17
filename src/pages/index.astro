@@ -6,10 +6,13 @@ import Projects from '@/components/sections/Projects.astro';
 import Experience from '@/components/sections/Experience.astro';
 import Technologies from '@/components/sections/Technologies.astro';
 import Contact from '@/components/sections/Contact.astro';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<Layout title="Portfolio Yanina Unrein - Desarrolladora y Programadora Web"
-description="Descubre mi portfolio como desarrolladora Frontend junior. Explora mis proyectos y habilidades en diseño web, programación y desarrollo de interfaces interactivas.">
+<Layout title={t('seo.title')} description={t('seo.metadescription')}>
 	<main>
 		<Hero />
 		<Experience />
@@ -20,3 +23,10 @@ description="Descubre mi portfolio como desarrolladora Frontend junior. Explora 
 	</main>
 </Layout>
 
+<script>
+	import { updateLanguage } from '@/i18n/utils';
+	
+	document.addEventListener('astro:page-load', () => {
+		updateLanguage(document.documentElement.lang);
+	});
+</script>

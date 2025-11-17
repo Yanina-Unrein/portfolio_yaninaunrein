@@ -1,35 +1,44 @@
 ---
 import CardProject from "@/components/cards/CardProject.astro";
-import { PROJECTS } from '@/data/projects_detail';
-import CardColaboracion from "@/components/cards/cardColaboracion.astro";
-import { PROJECTSC } from "@/data/projects_colaborate";
+import { PROJECTS } from '@/data/projects_details';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
-const isSingleProject = PROJECTS.length === 1;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const allProjects = PROJECTS[lang as keyof typeof PROJECTS] || [];
+
+// Filtrar proyectos personales y colaboraciones
+const personalProjects = allProjects.filter(project => !project.collaborate);
+const collaborationProjects = allProjects.filter(project => project.collaborate);
+
+const isSingleProject = personalProjects.length === 1;
 ---
 
 <section id="proyectos" class="projects-section">
     <div class="projects-container">
         <div class="title-container">
-            <h2>Proyectos</h2>
-            <h3>Trabajos seleccionados</h3>
+            <h2 data-i18n="projects.title">{t('projects.title')}</h2>
+            <h3 data-i18n="projects.subtitle_1">{t('projects.subtitle_1')}</h3>
         </div>   
         <div class={`cards-container ${isSingleProject ? 'single' : ''}`}>
-            {PROJECTS.map(project => (
+            {personalProjects.map(project => (
                 <CardProject classList={['card-project', 'project-element']} {...project} />
             ))}
         </div>
-        <div class="colaboration-container">
-            <h3>Colaboraciones</h3>
-            <div class="cards-container colaborate">
-                {PROJECTSC.map(project => (
-                    <CardColaboracion classlist={['card-project', 'project-element']} {...project} />
-                ))}
+        {collaborationProjects.length > 0 && (
+            <div class="colaboration-container">
+                <h3 data-i18n="projects.subtitle_2">{t('projects.subtitle_2')}</h3>
+                <div class={`cards-container ${isSingleProject ? 'single' : ''}`}>
+                    {collaborationProjects.map(project => (
+                        <CardProject classList={['card-project', 'project-element']} {...project} />
+                    ))}
+                </div>
             </div>
-        </div>
+        )}
     </div>
 </section>
-
-
 
 <style>
     .projects-section {
@@ -38,7 +47,8 @@ const isSingleProject = PROJECTS.length === 1;
         align-items: center;
         background-color: #13151a;
         max-width: 1100px;
-        margin: 0 auto 50px;
+        margin: 0 auto;
+        padding: 50px 0;
     }
 
     .projects-container {
@@ -95,11 +105,7 @@ const isSingleProject = PROJECTS.length === 1;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 50px 5px 20px 5px;
-    }
-
-    .colaboration-container h3{
-        padding: 0 0 40px 0;
+        padding: 50px 0 20px 0;
     }
 
     body.open .projects-section, body.open .cards-container {
@@ -124,11 +130,5 @@ const isSingleProject = PROJECTS.length === 1;
         h3{
             font-size: 1.3rem;
         }
-
-        .colaborate{
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            justify-content: center;
-        }
-
     }
 </style>

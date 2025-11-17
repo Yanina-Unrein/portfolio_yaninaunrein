@@ -1,31 +1,66 @@
 ---
-const {slug, image, image2, title, description, github, classList = [] } = Astro.props;
+import GithubCard from "../icons/GithubCard.astro";
+
+const {slug, image, image2, title, description, tecnologias, viewMore, classList = [], github, url, state } = Astro.props;
+const lang = Astro.url.pathname.split('/')[1] || 'es';
+
+
 ---
 
-<a href={`/proyecto/${slug}`} class="link-detail-proyect">
+<div class="card-section-container">
+  <a href={`/${lang}/${slug}`} class="link-detail-proyect">
     <article class={["card-container", ...classList].join(' ')}>
         <div class="card">
             <div class="wrapper">
-                <img src={image} class="cover-image" alt={`${title} cover`} />
+                <img src={image} loading="lazy" class="cover-image" alt={`${title} cover`} />
             </div>
-            <img src={image2} class="character" alt={`${title} character`} />                           
+            <img src={image2} loading="lazy" class="character" alt={`${title} character`} />                           
         </div>
         <div class="description-container">
-            <h4>{title}</h4>
+            <div class="title-container">
+                <h4>{title}</h4>
+                <div class="status-indicator" data-status={state}>
+                    <span class="tooltip">{lang === 'es' ? 
+                        (state === 'en-progreso' ? 'En Progreso' : 'Completado') : 
+                        (state === 'in-progress' ? 'In Progress' : 'Completed')}
+                    </span>
+                </div>
+            </div>
             <p>{description}</p>
+            <div>
+                <ul>
+                    {tecnologias.map((tecnologia: unknown) => (
+                        <li class="technologie">{tecnologia}</li>
+                      ))}
+                </ul>
+            </div>
         </div>
-        <div class="description-container">
-        <span>Ver más</span>
-        </div>  
+        <div class="description-container span-container">
+            <span class="link view-more">{viewMore}</span>
+        </div>
     </article>
 </a>
+<div class="icon-sites">
+  <a href={github} target="_blank"><GithubCard class="github"/></a>
+  {url && <a href={url} target="_blank"><img src="/icons/link_project.svg" alt="Url" class="url"/></a>}
+</div>
+</div>
 
 <style> 
+
+    .card-section-container{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
     .card-container{
         display: flex;
         flex-direction: column;
         width: 300px;
     }
+
     
     .card {
         width: 300px;
@@ -50,7 +85,7 @@ const {slug, image, image2, title, description, github, classList = [] } = Astro
         z-index: -1;
     }
 
-    .card:hover .wrapper {
+    .link-detail-proyect:hover .wrapper {
         transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
         box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
         -webkit-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
@@ -88,12 +123,12 @@ const {slug, image, image2, title, description, github, classList = [] } = Astro
         );
     }
 
-    .card:hover .wrapper::before,
+    .link-detail-proyect:hover .wrapper::before,
     .wrapper::after {
         opacity: 1;
     }
 
-    .card:hover .wrapper::after {
+    .link-detail-proyect:hover .wrapper::after {
         height: 120px;
     }
 
@@ -106,7 +141,7 @@ const {slug, image, image2, title, description, github, classList = [] } = Astro
         z-index: -1;
     }
 
-    .card:hover .character {
+    .link-detail-proyect:hover .character {
         opacity: 1;
         transform: translate3d(0%, -30%, 100px);
     }
@@ -124,7 +159,7 @@ const {slug, image, image2, title, description, github, classList = [] } = Astro
     }
 
     h4{
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         text-transform: uppercase;
         background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
         -webkit-background-clip: text;
@@ -135,44 +170,162 @@ const {slug, image, image2, title, description, github, classList = [] } = Astro
     p{
         font-size: 0.90rem;
         text-align: center;
+        letter-spacing: 0.05em;
     }
 
-    .icon-git{
-        display: inline-flex;
-        text-decoration: none;
-        width: 40px;
-        height: 40px;
-        color: #000;
+    ul{
+        display: flex;
+        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-        position: relative;
+        align-content: center;
+        padding: 5px 0;
+        margin-top: 0;
+        list-style: none;
     }
 
-    .icon-git::before{
+    ul li{
+        display: inline-block;
+        height: 25px;
+        line-height: 25px;
+        position: relative;
+        margin: 0 16px 8px 0;
+        padding: 0 10px 0 12px;
+        background: #00000088;    
+        -webkit-border-bottom-right-radius: 3px;    
+        border-bottom-right-radius: 3px;
+        -webkit-border-top-right-radius: 3px;    
+        border-top-right-radius: 3px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        color: #fff;
+        font-size: 0.90rem;
+        text-decoration: none;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+
+    ul li::before{
         content: "";
         position: absolute;
-        width: 50px;
-        height: 50px;
-        transition: 0.3s ease-in;
+        top:0;
+        left: -12px;
+        width: 0;
+        height: 0;
+        border-color: transparent #00000088 transparent transparent;
+        border-style: solid;
+        border-width: 12px 12px 12px 0;        
     }
 
-    .icon-git:hover::before{
-        transform: scale(0);
+    .title-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
-    
-    span{
-        color: #61aee5;
+
+    .status-indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        position: relative;
+        cursor: pointer;
+        isolation: isolate;
+    }
+
+    .status-indicator[data-status="en-progreso"],
+    .status-indicator[data-status="in-progress"] {
+        background-color: #3498db;
+    }
+
+    .status-indicator[data-status="completado"],
+    .status-indicator[data-status="completed"] {
+        background-color: #2ecc71;
+    }
+
+    .tooltip {
+        display: none;
+        position: absolute;
+        background-color: #333;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        white-space: nowrap;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        pointer-events: none;
+        z-index: 1000;
+    }
+
+    .status-indicator:hover .tooltip {
+        display: block;
+    }
+
+    .tooltip::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #333 transparent transparent transparent;
+    }
+
+    .span-container{
+        position: relative;
+    }
+    .link{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 12px 48px;
+        color: #fff;
+        background: linear-gradient(to right, #9f9f9f 0, #fff 10%, #868686 20%);
+        background-position: 0;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shine 2.5s infinite linear;
+        animation-fill-mode: forwards;
+        -webkit-text-size-adjust: none;
+        font-size: 1.2rem;
         font-weight: 600;
-        transition: 0.3s ease-in;
+        text-decoration: none;
+        white-space: nowrap;
     }
     .link-detail-proyect{
         text-decoration: none;
     }
-    .link-detail-proyect:hover span{
-        transform: translateY(-10px);
-        color: #FF3CAC;
+
+    .icon-sites{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+    }
+    .icon-sites a{
+      cursor: pointer;
     }
 
+    .github{
+      width: 40px;
+      height: 40px;
+      fill: rgb(0, 0, 0);
+      border-radius: 100%;
+      transition: transform 0.3s ease;
+    }
+
+    .url{
+      width: 37px;
+      height: 38px;
+      transition: transform 0.3s ease;
+    }
+
+    .icon-sites a:hover .github, a:hover .url{
+      transform: translateY(-5px); 
+    }
+    
     body.open .link-detail-proyect, body.open h4, body.open p, body.open span  {
         display: none;
    }
@@ -187,4 +340,50 @@ const {slug, image, image2, title, description, github, classList = [] } = Astro
             height: 350px;
         }
     }
+
+    @-moz-keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 180px;
+  }
+  100% {
+    background-position: 180px;
+  }
+}
+@-webkit-keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 180px;
+  }
+  100% {
+    background-position: 180px;
+  }
+}
+@-o-keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 180px;
+  }
+  100% {
+    background-position: 180px;
+  }
+}
+@keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 180px;
+  }
+  100% {
+    background-position: 180px;
+  }
+}
+
 </style>

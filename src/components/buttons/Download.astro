@@ -1,0 +1,42 @@
+---
+import DownloadI from "@/components/icons/DownloadI.astro";
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const cvPath = lang === 'en' ? '/Resume_YaninaUnrein.pdf' : '/FullStack_YaninaUnrein.pdf';
+const downloadFileName = `YaninaUnrein_CV_${lang.toUpperCase()}.pdf`;
+---
+
+<a href={cvPath} download={downloadFileName}>
+    <DownloadI />
+    <span data-i18n="aboutMe.btn_dowload">{t('aboutMe.btn_dowload')}</span>
+</a>
+<style>
+a {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 17px;
+  padding: 0.8em 1.5em 0.8em 1.2em;
+  color: #ffffff;
+  background: #784BA0;
+  background: linear-gradient(0deg, rgb(180, 19, 243) 0%, #FF3CAC 100%);
+  border-radius: 20em;
+  cursor: pointer;
+}
+
+a span{
+    padding-left: 5px;
+}
+
+a:hover {
+  border-color: #ffffff;
+  box-shadow: 0 0.5em 1.5em -0.5em #784BA0;
+}
+
+a:active {
+  box-shadow: 0 0.3em 1em -0.5em #d2a5fa;
+}
+</style>

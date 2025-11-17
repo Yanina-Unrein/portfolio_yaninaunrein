@@ -8,17 +8,20 @@ interface Props {
 const { title, description, hideNavbarFooter } = Astro.props;
 
 
-import Navbar from '@/components/sections/Navbar.astro';
-import Footer from '@/components/sections/Footer.astro';
+import Navbar from '@/components/component/Navbar.astro';
+import Footer from '@/components/component/Footer.astro';
+import { getCurrentLang } from '../i18n/utils';
+
+const currentLang = getCurrentLang();
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={currentLang} data-lang={currentLang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/img/logo.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js" defer></script>
@@ -38,6 +41,7 @@ import Footer from '@/components/sections/Footer.astro';
 	html {	
 		font-family: "Raleway", sans-serif;	
 		background: #13151a;
+		scroll-behavior: smooth;
 	}
 
 	body, figure{
@@ -59,5 +63,28 @@ import Footer from '@/components/sections/Footer.astro';
 
 	p{
 		text-wrap: pretty;
+	}
+
+	/* Estilo para la barra de desplazamiento */
+	html::-webkit-scrollbar {
+	width: 8px; /* Ancho de la barra vertical */
+	height: 8px; /* Alto de la barra horizontal */
+	}
+
+	/* Fondo de la barra de desplazamiento */
+	html::-webkit-scrollbar-track {
+	background: #121212; /* Color de fondo de la pista */
+	border-radius: 4px; /* Bordes redondeados */
+	}
+
+	/* Color de la barra de desplazamiento */
+	html::-webkit-scrollbar-thumb {
+	background: #989b99a9; /* Color del "pulgar" (la barra que se mueve) */
+	border-radius: 4px; /* Bordes redondeados */
+	}
+
+	/* Cambiar color al pasar el cursor */
+	html::-webkit-scrollbar-thumb:hover {
+	background: #784BA0; /* Color más claro al hacer hover */
 	}
 </style>

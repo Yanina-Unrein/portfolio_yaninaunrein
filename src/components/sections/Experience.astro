@@ -2,54 +2,60 @@
 import { EXPERIENCE } from "@/data/experience";
 import ExperienceItems from "@/components/component/ExperienceItems.astro";
 import Section from "@/components/Section.astro"
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const experiences = EXPERIENCE[lang as keyof typeof EXPERIENCE];
 ---
 
 <Section>
-    <section id="experiencia" class="experience-section">
+    <div id="experiencia" class="experience-section">
         <div class="title-container">
-            <h2>Experiencia</h2>
+            <h2 data-i18n="experience.title">{t('experience.title')}</h2>           
         </div>
         <div class="web-container">
             <ol class="timeline">
                 {
-                    EXPERIENCE.map((experience) =>
+                    experiences.map((experience) => (
                         <li>
-                        <ExperienceItems {...experience} />  
+                            <ExperienceItems {...experience} />
                         </li>
-                )
+                    ))
                 }   
             </ol>
             <div class="section-logo">
                 <figure>
-                    <img src="../../public/cardsImg/portfolio/logo-portfolio.png" alt="">
+                    <img src="/img/logo.svg" loading="lazy" data-i18n="experience.alt_img" alt={t('experience.message')}>
                 </figure>
             </div>
         </div>
-    </section>
+    </div>
 </Section>
 
 
 <style>
     .experience-section{
-        padding: 0 30px;  
         background-color: #13151a;
     }
     .timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
         position: relative;
-        border-left: 2px solid #ffffff; 
+        border-left: 2.5px solid #ff3caa70; 
         margin: 0;
         list-style: none;
     }
-
     .title-container{
-        padding: 30px 0 60px 0;
+        padding: 30px 0 20px 0;
     }
     h2{
         font-size: 2.5rem;
         display: inline-block;
         position: relative;
         color: #fff;
-        padding: 10px 0;
+        padding: 10px;
     }
 
     h2::before {
@@ -61,14 +67,14 @@ import Section from "@/components/Section.astro"
         border-bottom: 4px solid #fb4ea1; 
         white-space: nowrap; 
     }
-
     .section-logo{
         display: flex;
         justify-content: end;
+        padding-top: 20px;
     }
     figure{
-        width: 150px;
-        height: 150px;
+        width: 180px;
+        height: 180px;
     }
     figure img{
         width: 100%;
@@ -80,28 +86,16 @@ import Section from "@/components/Section.astro"
         display: none;
     }
 
-
     body.open h2 {
         display: none;
     }
     
-    @media(min-width:768px){
-        .experience-section{
-            padding: 0 80px;
-        }
-    }
-
     @media(min-width:1024px){
-        .experience-section{
-            padding: 40px 90px;
-        }
-
         .web-container{
             display: flex;
             justify-content: center;
             gap: 20px;
         }
-
         .section-logo{
             align-items: flex-end;
         }
