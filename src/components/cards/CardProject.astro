@@ -1,389 +1,304 @@
 ---
 import GithubCard from "../icons/GithubCard.astro";
 
-const {slug, image, image2, title, description, tecnologias, viewMore, classList = [], github, url, state } = Astro.props;
-const lang = Astro.url.pathname.split('/')[1] || 'es';
-
-
+const {
+  classList = [],
+  'data-tags': dataTags = '',
+  'data-collaborate': dataCollaborate = false,
+  slug,
+  image,
+  title,
+  description,
+  tecnologias,
+  github,
+  url,
+  collaborate,
+  viewMore,
+  fecha,
+  state,
+  image2,
+} = Astro.props;
 ---
 
-<div class="card-section-container">
-  <a href={`/${lang}/${slug}`} class="link-detail-proyect">
-    <article class={["card-container", ...classList].join(' ')}>
-        <div class="card">
-            <div class="wrapper">
-                <img src={image} loading="lazy" class="cover-image" alt={`${title} cover`} />
-            </div>
-            <img src={image2} loading="lazy" class="character" alt={`${title} character`} />                           
-        </div>
-        <div class="description-container">
-            <div class="title-container">
-                <h4>{title}</h4>
-                <div class="status-indicator" data-status={state}>
-                    <span class="tooltip">{lang === 'es' ? 
-                        (state === 'en-progreso' ? 'En Progreso' : 'Completado') : 
-                        (state === 'in-progress' ? 'In Progress' : 'Completed')}
-                    </span>
-                </div>
-            </div>
-            <p>{description}</p>
-            <div>
-                <ul>
-                    {tecnologias.map((tecnologia: unknown) => (
-                        <li class="technologie">{tecnologia}</li>
-                      ))}
-                </ul>
-            </div>
-        </div>
-        <div class="description-container span-container">
-            <span class="link view-more">{viewMore}</span>
-        </div>
-    </article>
-</a>
-<div class="icon-sites">
-  <a href={github} target="_blank"><GithubCard class="github"/></a>
-  {url && <a href={url} target="_blank"><img src="/icons/link_project.svg" alt="Url" class="url"/></a>}
-</div>
+<div 
+  class={['card-project', ...classList].join(' ')} 
+  data-tags={dataTags} 
+  data-collaborate={dataCollaborate}
+>
+  <div class="card-header">
+    <img 
+      src={image} 
+      alt={`Captura del proyecto ${title}`}
+      class="card-image"
+      loading="lazy"
+    />
+    <div class="card-badges">
+      {collaborate && <span class="badge collaborative" data-i18n="projects.collaborative">Colaborativo</span>}
+      <span class={`badge state ${state}`}>
+        {state === 'en-progreso' ? 'En Progreso' : 
+         state === 'completado' ? 'Completado' : state}
+      </span>
+    </div>
+  </div>
+
+  <!-- Contenido de la card -->
+  <div class="card-content">
+    <div class="card-meta">
+      <span class="card-date">{fecha}</span>
+      {image2 && <img src={image2} alt={`Logo ${title}`} class="card-logo" />}
+    </div>
+    
+    <h3 class="card-title">{title}</h3>
+    <p class="card-description">{description}</p>
+
+    <!-- Tecnologías -->
+    <div class="technologies">
+      {tecnologias.map((tech: any) => (
+        <span class="tech-tag">{tech}</span>
+      ))}
+    </div>
+
+    <!-- Acciones -->
+    <div class="card-actions">
+      <a 
+        href={github} 
+        class="btn btn-secondary"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Código fuente de ${title} en GitHub`}
+      >
+        <GithubCard class="btn-icon" />
+        GitHub
+      </a>
+      
+      {url && url !== '#' && (
+        <a 
+          href={url} 
+          class="btn btn-primary"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Ver proyecto ${title} en vivo`}
+        >
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+          </svg>
+          Ver Proyecto
+        </a>
+      )}
+    </div>
+  </div>
 </div>
 
-<style> 
+<style>
+  .card-project {
+    background: #1e1e1e;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    border: 1px solid #2a2a2a;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    height: 100%;
+  }
 
-    .card-section-container{
-      display: flex;
+  .card-project:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(251, 78, 161, 0.2);
+    border-color: #fb4ea1;
+  }
+
+  .card-header {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  /* Badges */
+  .card-badges {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .badge.collaborative {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+  }
+
+  .badge.state {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    backdrop-filter: blur(10px);
+  }
+
+  .badge.state.en-progreso {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  }
+
+  .badge.state.completado {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  }
+
+  /* Contenido */
+  .card-content {
+    padding: 10px 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-date {
+    color: #888;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .card-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .card-description {
+    color: #ccc;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 8px 0;
+    flex-grow: 1;
+  }
+
+  /* Tecnologías */
+  .technologies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  .tech-tag {
+    background: rgba(251, 78, 161, 0.1);
+    color: #fb4ea1;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid rgba(251, 78, 161, 0.3);
+    transition: all 0.2s ease;
+  }
+
+  .tech-tag:hover {
+    background: rgba(251, 78, 161, 0.2);
+    transform: scale(1.05);
+  }
+
+  /* Acciones */
+  .card-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: auto;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #fb4ea1 0%, #e03e8f 100%);
+    color: white;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(251, 78, 161, 0.4);
+  }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .btn-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .card-actions {
       flex-direction: column;
-      align-items: center;
-      gap: 30px;
-    }
-
-    .card-container{
-        display: flex;
-        flex-direction: column;
-        width: 300px;
-    }
-
-    
-    .card {
-        width: 300px;
-        height: 300px;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-        perspective: 8000px;       
-    }
-
-    .cover-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .wrapper {
-        transition: all 0.5s;
-        position: absolute;
-        width: 100%;
-        z-index: -1;
-    }
-
-    .link-detail-proyect:hover .wrapper {
-        transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
-        box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
-        -webkit-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
-        -moz-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
-    }
-
-    .wrapper::before,
-    .wrapper::after {
-        content: "";
-        opacity: 0;
-        width: 100%;
-        height: 80px;
-        transition: all 0.5s;
-        position: absolute;
-        left: 0;
-    }
-    .wrapper::before {
-        top: 0;
-        height: 100%;
-        background-image: linear-gradient(
-            to top,
-            transparent 46%,
-            rgba(12, 13, 19, 0.5) 68%,
-            rgba(12, 13, 19) 97%
-        );
-    }
-    .wrapper::after {
-        bottom: 0;
-        opacity: 1;
-        background-image: linear-gradient(
-            to bottom,
-            transparent 46%,
-            rgba(12, 13, 19, 0.5) 68%,
-            rgba(12, 13, 19) 97%
-        );
-    }
-
-    .link-detail-proyect:hover .wrapper::before,
-    .wrapper::after {
-        opacity: 1;
-    }
-
-    .link-detail-proyect:hover .wrapper::after {
-        height: 120px;
-    }
-
-    .character {
-        width: 50%;
-        height: auto;
-        opacity: 0;
-        transition: all 0.5s;
-        position: absolute;
-        z-index: -1;
-    }
-
-    .link-detail-proyect:hover .character {
-        opacity: 1;
-        transform: translate3d(0%, -30%, 100px);
-    }
-
-    .description-container{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        align-content: center;
-        flex-direction: column;
-        flex-wrap: wrap;
-        color: #fff;
-        padding:  10px 5px 0 5px;
-
-    }
-
-    h4{
-        font-size: 1.3rem;
-        text-transform: uppercase;
-        background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        transition: all .2s;
-    }
-
-    p{
-        font-size: 0.90rem;
-        text-align: center;
-        letter-spacing: 0.05em;
-    }
-
-    ul{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        align-content: center;
-        padding: 5px 0;
-        margin-top: 0;
-        list-style: none;
-    }
-
-    ul li{
-        display: inline-block;
-        height: 25px;
-        line-height: 25px;
-        position: relative;
-        margin: 0 16px 8px 0;
-        padding: 0 10px 0 12px;
-        background: #00000088;    
-        -webkit-border-bottom-right-radius: 3px;    
-        border-bottom-right-radius: 3px;
-        -webkit-border-top-right-radius: 3px;    
-        border-top-right-radius: 3px;
-        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-        box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-        color: #fff;
-        font-size: 0.90rem;
-        text-decoration: none;
-        text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    }
-
-    ul li::before{
-        content: "";
-        position: absolute;
-        top:0;
-        left: -12px;
-        width: 0;
-        height: 0;
-        border-color: transparent #00000088 transparent transparent;
-        border-style: solid;
-        border-width: 12px 12px 12px 0;        
-    }
-
-    .title-container {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .status-indicator {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        position: relative;
-        cursor: pointer;
-        isolation: isolate;
-    }
-
-    .status-indicator[data-status="en-progreso"],
-    .status-indicator[data-status="in-progress"] {
-        background-color: #3498db;
-    }
-
-    .status-indicator[data-status="completado"],
-    .status-indicator[data-status="completed"] {
-        background-color: #2ecc71;
-    }
-
-    .tooltip {
-        display: none;
-        position: absolute;
-        background-color: #333;
-        color: white;
-        padding: 5px 10px;
-        border-radius: 6px;
-        font-size: 12px;
-        white-space: nowrap;
-        top: -30px;
-        left: 50%;
-        transform: translateX(-50%);
-        pointer-events: none;
-        z-index: 1000;
-    }
-
-    .status-indicator:hover .tooltip {
-        display: block;
-    }
-
-    .tooltip::after {
-        content: "";
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        margin-left: -5px;
-        border-width: 5px;
-        border-style: solid;
-        border-color: #333 transparent transparent transparent;
-    }
-
-    .span-container{
-        position: relative;
-    }
-    .link{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        padding: 12px 48px;
-        color: #fff;
-        background: linear-gradient(to right, #9f9f9f 0, #fff 10%, #868686 20%);
-        background-position: 0;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: shine 2.5s infinite linear;
-        animation-fill-mode: forwards;
-        -webkit-text-size-adjust: none;
-        font-size: 1.2rem;
-        font-weight: 600;
-        text-decoration: none;
-        white-space: nowrap;
-    }
-    .link-detail-proyect{
-        text-decoration: none;
-    }
-
-    .icon-sites{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 15px;
-    }
-    .icon-sites a{
-      cursor: pointer;
-    }
-
-    .github{
-      width: 40px;
-      height: 40px;
-      fill: rgb(0, 0, 0);
-      border-radius: 100%;
-      transition: transform 0.3s ease;
-    }
-
-    .url{
-      width: 37px;
-      height: 38px;
-      transition: transform 0.3s ease;
-    }
-
-    .icon-sites a:hover .github, a:hover .url{
-      transform: translateY(-5px); 
     }
     
-    body.open .link-detail-proyect, body.open h4, body.open p, body.open span  {
-        display: none;
-   }
-
-    @media(min-width: 500px){
-        .card-container{
-            width: 400px;
-        }
-
-        .card {
-            width: 400px;
-            height: 350px;
-        }
+    .card-image {
+      height: 180px;
     }
+    
+    .card-content {
+      padding: 16px;
+    }
+  }
 
-    @-moz-keyframes shine {
-  0% {
-    background-position: 0;
+  @media (max-width: 480px) {
+    .card-badges {
+      flex-direction: row;
+      top: 8px;
+      right: 8px;
+    }
+    
+    .badge {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+    }
   }
-  60% {
-    background-position: 180px;
-  }
-  100% {
-    background-position: 180px;
-  }
-}
-@-webkit-keyframes shine {
-  0% {
-    background-position: 0;
-  }
-  60% {
-    background-position: 180px;
-  }
-  100% {
-    background-position: 180px;
-  }
-}
-@-o-keyframes shine {
-  0% {
-    background-position: 0;
-  }
-  60% {
-    background-position: 180px;
-  }
-  100% {
-    background-position: 180px;
-  }
-}
-@keyframes shine {
-  0% {
-    background-position: 0;
-  }
-  60% {
-    background-position: 180px;
-  }
-  100% {
-    background-position: 180px;
-  }
-}
-
 </style>

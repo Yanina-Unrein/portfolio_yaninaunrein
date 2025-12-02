@@ -1,12 +1,12 @@
 ---
-import { EXPERIENCE } from "@/data/experience";
 import ExperienceItems from "@/components/component/ExperienceItems.astro";
 import Section from "@/components/Section.astro"
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import type { Experience } from "@/types/Experience";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const experiences = EXPERIENCE[lang as keyof typeof EXPERIENCE];
+const experiences = t('experience.items') as Experience[];
 ---
 
 <Section>
@@ -17,18 +17,13 @@ const experiences = EXPERIENCE[lang as keyof typeof EXPERIENCE];
         <div class="web-container">
             <ol class="timeline">
                 {
-                    experiences.map((experience) => (
+                    experiences.map((experience: Experience) => (
                         <li>
                             <ExperienceItems {...experience} />
                         </li>
                     ))
                 }   
             </ol>
-            <div class="section-logo">
-                <figure>
-                    <img src="/img/logo.svg" loading="lazy" data-i18n="experience.alt_img" alt={t('experience.message')}>
-                </figure>
-            </div>
         </div>
     </div>
 </Section>
@@ -67,20 +62,6 @@ const experiences = EXPERIENCE[lang as keyof typeof EXPERIENCE];
         border-bottom: 4px solid #fb4ea1; 
         white-space: nowrap; 
     }
-    .section-logo{
-        display: flex;
-        justify-content: end;
-        padding-top: 20px;
-    }
-    figure{
-        width: 180px;
-        height: 180px;
-    }
-    figure img{
-        width: 100%;
-        height: auto;
-        filter: drop-shadow(0 0 10px rgba(84, 84, 84, 0.8));
-    }
 
     body.open .experience-section {
         display: none;
@@ -95,9 +76,6 @@ const experiences = EXPERIENCE[lang as keyof typeof EXPERIENCE];
             display: flex;
             justify-content: center;
             gap: 20px;
-        }
-        .section-logo{
-            align-items: flex-end;
         }
     }
 </style>

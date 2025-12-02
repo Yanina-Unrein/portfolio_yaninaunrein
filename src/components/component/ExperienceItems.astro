@@ -1,11 +1,15 @@
 ---
-import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import type { Experience } from '@/types/Experience';
 
-const lang = getLangFromUrl(Astro.url); // Obtener el idioma de la URL
-const t = useTranslations(lang); // Obtener la función de traducción
-
-
-const {title, position, url, startDate, endDate,  description } = Astro.props;
+const { 
+  id,
+  title,
+  position, 
+  url,
+  startDate,
+  endDate,
+  description 
+} = Astro.props as Experience;
 
 ---
 
@@ -98,8 +102,8 @@ const {title, position, url, startDate, endDate,  description } = Astro.props;
 
     .active-dot {
     background-color: #fb4ea1;
-    transform: scale(1.3); /* Le dará un efecto visual más destacado */
-    box-shadow: 0 0 10px #fb4ea1, 0 0 20px #fb4ea1, 0 0 30px #ff8ed6; /* Añadir un brillo */
+    transform: scale(1.3); 
+    box-shadow: 0 0 10px #fb4ea1, 0 0 20px #fb4ea1, 0 0 30px #ff8ed6;
 }
     
     .header-container{

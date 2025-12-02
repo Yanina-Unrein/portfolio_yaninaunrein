@@ -1,0 +1,1006 @@
+---
+import { chatbotData, keywords } from "@/data/ai-profile";
+import type { SemanticSearch } from "@/utils/semanticSearch";
+
+const iaImg = "/img/logo.svg";
+---
+
+<div id="ia-button" style={`background-image: url(${iaImg});`}></div>
+<div id="popup-msg"></div>
+
+<div id="chat-box">
+  <div id="chat-header">
+    <span id="header-title">💬 Preguntame sobre Yanina</span>
+    <div class="header-actions">
+      <button id="close-chat" aria-label="Cerrar chat">X</button>
+    </div>
+  </div>
+
+  <div id="messages"></div>
+
+  <div id="typing-indicator" style="display: none;">
+    <span></span><span></span><span></span> 
+  </div>
+
+  <div id="input-container">
+    <input
+      id="chat-input"
+      type="text"
+      placeholder="Escribe tu pregunta..."
+      maxlength="500"
+    />
+    <button id="send-button" aria-label="Enviar mensaje">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  import { chatbotData, keywords } from "@/data/ai-profile";
+  import { SemanticSearch } from "@/utils/semanticSearch";
+
+  // Definir tipos TypeScript
+  type Language = "es" | "en";
+
+  interface TextResources {
+    popup: string;
+    headerTitle: string;
+    placeholder: string;
+    welcome: string;
+    error: string;
+    sendLabel: string;
+    closeLabel: string;
+    noInfo: string;
+  }
+
+  interface TextsMap {
+    es: TextResources;
+    en: TextResources;
+  }
+
+  interface QuickSuggestionsMap {
+    es: string[];
+    en: string[];
+  }
+
+  const iaBtn = document.getElementById("ia-button") as HTMLDivElement;
+  const chatBox = document.getElementById("chat-box") as HTMLDivElement;
+  const messages = document.getElementById("messages") as HTMLDivElement;
+  const input = document.getElementById("chat-input") as HTMLInputElement;
+  const sendBtn = document.getElementById("send-button") as HTMLButtonElement;
+  const popup = document.getElementById("popup-msg") as HTMLDivElement;
+  const closeBtn = document.getElementById("close-chat") as HTMLButtonElement;
+  const typingIndicator = document.getElementById(
+    "typing-indicator"
+  ) as HTMLDivElement;
+  const headerTitle = document.getElementById(
+    "header-title"
+  ) as HTMLSpanElement;
+
+  let isOpen: boolean = false;
+  function getValidLanguage(lang: string | null): Language {
+    return lang === 'es' || lang === 'en' ? lang : 'es';
+  }
+
+  let currentLanguage: Language = getValidLanguage(localStorage.getItem('lang')) || 
+                               getValidLanguage(document.documentElement.lang) || 
+                               'es';
+  let searchEngine: SemanticSearch | null = null;
+
+  // Inicializar el motor de búsqueda
+  function initializeSearchEngine(): void {
+    searchEngine = new SemanticSearch(
+      chatbotData[currentLanguage],
+      keywords,
+      currentLanguage
+    );
+  }
+
+  const TEXTS: TextsMap = {
+    es: {
+      popup: "¿Querés saber más sobre mí? 😊",
+      headerTitle: "💬 Preguntame sobre Yanina",
+      placeholder: "Escribe tu pregunta...",
+      welcome:
+        "¡Hola! 👋 Soy la asistente virtual de Yanina. Preguntame sobre su experiencia, proyectos, habilidades o estudios.",
+      error: "⚠️ Error al procesar. Intentá de nuevo.",
+      sendLabel: "Enviar mensaje",
+      closeLabel: "Cerrar chat",
+      noInfo:
+        "No tengo esa información específica. Si querés, podés contactarla directamente a: unrein.syanina@gmail.com",
+    },
+    en: {
+      popup: "Want to know more about me? 😊",
+      headerTitle: "💬 Ask me about Yanina",
+      placeholder: "Type your question...",
+      welcome:
+        "Hi! 👋 I'm Yanina's virtual assistant. Ask me about her experience, projects, skills or education.",
+      error: "⚠️ Processing error. Try again.",
+      sendLabel: "Send message",
+      closeLabel: "Close chat",
+      noInfo:
+        "I don't have that specific information. If you want, you can contact her directly at: unrein.syanina@gmail.com",
+    },
+  };
+
+  // Sugerencias rápidas por idioma
+  const QUICK_SUGGESTIONS: QuickSuggestionsMap = {
+    es: [
+      "¿Qué experiencia tenés?",
+      "¿Qué tecnologías manejás?",
+      "Contame sobre tus estudios",
+      "¿Dónde puedo ver tus proyectos?",
+      "¿En qué empresas trabajaste?",
+    ],
+    en: [
+      "What's your experience?",
+      "What technologies do you know?",
+      "Tell me about your education",
+      "Where can I see your projects?",
+      "What companies have you worked for?",
+    ],
+  };
+
+    // Función para actualizar el idioma del chatbox
+  function updateChatboxLanguage(newLang: string): void {
+    const validLang = getValidLanguage(newLang);
+    console.log('Chatbox: Cambiando idioma a', validLang);
+    currentLanguage = validLang;
+    const texts: TextResources = TEXTS[validLang];
+
+    headerTitle.textContent = texts.headerTitle;
+    input.placeholder = texts.placeholder;
+    popup.textContent = texts.popup;
+    sendBtn.setAttribute('aria-label', texts.sendLabel);
+    closeBtn.setAttribute('aria-label', texts.closeLabel);
+
+    // Reinicializar el motor de búsqueda con el nuevo idioma
+    initializeSearchEngine();
+
+    // Actualizar mensaje de bienvenida si está abierto
+    if (isOpen) {
+      showWelcomeMessage();
+    }
+  }
+
+  function showWelcomeMessage(): void {
+    messages.innerHTML = `<div class="msg-ai welcome">${TEXTS[currentLanguage].welcome}</div>`;
+    showQuickSuggestions();
+  }
+
+  function showQuickSuggestions(): void {
+    const suggestions: string[] = QUICK_SUGGESTIONS[currentLanguage];
+    const suggestionsTitle = currentLanguage === 'es' ? 'Preguntas rápidas:' : 'Quick questions:';
+    
+    const suggestionsHTML = `
+      <div class="quick-suggestions">
+        <p class="suggestions-title">${suggestionsTitle}</p>
+        <div class="suggestion-buttons">
+          ${suggestions
+            .map(
+              (suggestion) =>
+                `<button class="suggestion-btn">${suggestion}</button>`
+            )
+            .join("")}
+        </div>
+      </div>
+    `;
+
+    messages.innerHTML += suggestionsHTML;
+
+    // Agregar event listeners a los botones de sugerencia
+    messages.querySelectorAll(".suggestion-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        input.value = btn.textContent || "";
+        sendMessage();
+      });
+    });
+
+    scrollToBottom();
+  }
+
+  function addMessage(
+    type: "user" | "ai",
+    content: string,
+    isHTML: boolean = false
+  ): void {
+    const messageDiv = document.createElement("div");
+    messageDiv.className = `msg-${type} ${type === "ai" ? "ai-response" : ""}`;
+
+    if (isHTML) {
+      // Para contenido HTML, usar innerHTML directamente
+      messageDiv.innerHTML = content;
+    } else {
+      // Para texto plano, crear un nodo de texto
+      const textNode = document.createTextNode(content);
+      messageDiv.appendChild(textNode);
+    }
+
+    messages.appendChild(messageDiv);
+    scrollToBottom();
+  }
+
+  function showTypingIndicator(): void {
+    typingIndicator.style.display = "flex";
+    scrollToBottom();
+  }
+
+  function hideTypingIndicator(): void {
+    typingIndicator.style.display = "none";
+  }
+
+  function scrollToBottom(): void {
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  async function sendMessage(): Promise<void> {
+    const text = input.value.trim();
+    if (!text) return;
+
+    // Limpiar sugerencias si existen
+    const suggestions = messages.querySelector(".quick-suggestions");
+    if (suggestions) {
+      suggestions.remove();
+    }
+
+    addMessage("user", text);
+    input.value = "";
+    input.disabled = true;
+    sendBtn.disabled = true;
+
+    showTypingIndicator();
+
+    const thanksRegex = /\b(gracias|muchas gracias|mil gracias|thanks|thank you|thx)\b/i;
+    if (thanksRegex.test(text)) {
+      // Respuestas por idioma (puedes editar textos)
+      const thanksRepliesEs = [
+        "¡De nada! 💜 Si querés preguntarme algo más, acá estoy.",
+        "¡A vos! Gracias por pasar 😊",
+        "¡Un gusto ayudarte! Si necesitás algo más, preguntame."
+      ];
+      const thanksRepliesEn = [
+        "You're welcome! 💜 If you want to ask anything else, I'm here.",
+        "No problem! Glad I could help 😊",
+        "Happy to help! Ask me anything else if you want."
+      ];
+
+      const pool = currentLanguage === "es" ? thanksRepliesEs : thanksRepliesEn;
+      const reply = pool[Math.floor(Math.random() * pool.length)];
+
+     // Pequeña demora para simular escritura
+      setTimeout(() => {
+        hideTypingIndicator();
+        addMessage("ai", reply);
+        input.disabled = false;
+        sendBtn.disabled = false;
+        input.focus();
+      }, 600);
+
+      return;
+    }
+
+    setTimeout(() => {
+      hideTypingIndicator();
+
+      try {
+        const response =
+          searchEngine?.findMatches(text) || TEXTS[currentLanguage].noInfo;
+        addMessage("ai", response, true);
+      } catch (error) {
+        console.error("Error:", error);
+        addMessage("ai", TEXTS[currentLanguage].error);
+      }
+
+      input.disabled = false;
+      sendBtn.disabled = false;
+      input.focus();
+    }, 800);
+  }
+
+  // Event Listeners
+  iaBtn.addEventListener("click", () => {
+    isOpen = !isOpen;
+    chatBox.style.display = isOpen ? "flex" : "none";
+
+    if (isOpen) {
+      // Inicializar motor si es la primera vez
+      if (!searchEngine) {
+        initializeSearchEngine();
+      }
+      showWelcomeMessage();
+      input.focus();
+    }
+  });
+
+  closeBtn.addEventListener("click", () => {
+    isOpen = false;
+    chatBox.style.display = "none";
+  });
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !input.disabled) {
+      sendMessage();
+    }
+  });
+
+  sendBtn.addEventListener("click", () => {
+    if (!sendBtn.disabled) {
+      sendMessage();
+    }
+  });
+
+  // Escuchar cambios de idioma desde el navbar
+  window.addEventListener('languageChanged', (event) => {
+    const customEvent = event as CustomEvent;
+    updateChatboxLanguage(customEvent.detail.lang);
+  });
+
+  // También escuchar cambios en el localStorage
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'lang') {
+      updateChatboxLanguage(e.newValue || 'es');
+    }
+  });
+
+  // Verificación periódica como fallback
+  setInterval(() => {
+    const savedLang = localStorage.getItem('lang') || document.documentElement.lang || 'es';
+    if (savedLang !== currentLanguage) {
+      updateChatboxLanguage(savedLang);
+    }
+  }, 500);
+
+  // Inicializar
+  updateChatboxLanguage(currentLanguage);
+  popup.textContent = TEXTS[currentLanguage].popup;
+
+  // Popup automático cada 25 segundos
+  setInterval(() => {
+    if (!isOpen) {
+      popup.style.opacity = "1";
+      setTimeout(() => {
+        popup.style.opacity = "0";
+      }, 4000);
+    }
+  }, 25000);
+</script>
+
+<style is:global>
+  #ia-button {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 120px;
+    height: 120px;
+    background-size: 100% 100%;
+    background-position: center;
+    cursor: pointer;
+    z-index: 9999;
+    transition: transform 0.2s ease;
+  }
+
+  #ia-button:hover {
+    transform: scale(1.1);
+  }
+
+  #chat-box {
+    position: fixed;
+    bottom: 160px;
+    right: 24px;
+    width: 380px;
+    height: 550px;
+    background: #1a1a1a;
+    border-radius: 16px;
+    display: none;
+    flex-direction: column;
+    z-index: 9999;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+  }
+
+  #chat-header {
+    background: #2c2c2c;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  #close-chat {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+  }
+
+  #messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    color: #fff;
+    font-size: 0.9rem;
+  }
+
+  .msg-user {
+    background: #4da3ff;
+    padding: 10px 14px;
+    border-radius: 12px 12px 0 12px;
+    margin: 8px 0 8px auto;
+    max-width: 80%;
+    width: fit-content;
+    word-wrap: break-word;
+    animation: slideInRight 0.3s ease;
+  }
+
+  .msg-ai {
+    background: #2c2c2c;
+    padding: 10px 14px;
+    border-radius: 12px 12px 12px 0;
+    margin: 8px auto 8px 0;
+    max-width: 80%;
+    width: fit-content;
+    color: #e0e0e0;
+    word-wrap: break-word;
+    line-height: 1.5;
+    animation: slideInLeft 0.3s ease;
+  }
+
+  .msg-ai.welcome {
+    background: #333;
+    border-left: 3px solid #4da3ff;
+  }
+
+  .msg-ai.ai-response {
+    background: #2c2c2c;
+    border: 1px solid #444;
+  }
+
+  .msg-ai strong {
+    color: #4da3ff;
+    font-weight: 600;
+  }
+
+  .msg-ai.error {
+    background: #ff4d4d;
+    color: white;
+  }
+
+  /* Sugerencias rápidas */
+  .quick-suggestions {
+    margin-top: 16px;
+    padding: 12px;
+    background: #2c2c2c;
+    border-radius: 12px;
+    border: 1px solid #444;
+  }
+
+  .suggestions-title {
+    margin: 0 0 10px 0;
+    font-size: 0.85rem;
+    color: #999;
+    text-align: center;
+  }
+
+  .suggestion-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .suggestion-btn {
+    background: #1a1a1a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: #e0e0e0;
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+  }
+
+  .suggestion-btn:hover {
+    background: #4da3ff;
+    color: white;
+    border-color: #4da3ff;
+  }
+
+  /* Indicador de typing */
+  #typing-indicator {
+    padding: 10px 14px;
+    display: flex;
+    gap: 4px;
+    margin-left: 16px;
+  }
+
+  #typing-indicator span {
+    width: 8px;
+    height: 8px;
+    background: #4da3ff;
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out;
+  }
+
+  /* Input container */
+  #input-container {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    background: #2c2c2c;
+    border-top: 1px solid #333;
+  }
+
+  #chat-input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 0.9rem;
+  }
+
+  #send-button {
+    background: #4da3ff;
+    border: none;
+    border-radius: 8px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+  }
+
+  /* Popup */
+  #popup-msg {
+    position: fixed;
+    bottom: 160px;
+    right: 10px;
+    background: #1a1a1a;
+    padding: 12px 16px;
+    border-radius: 12px;
+    color: white;
+    font-size: 0.85rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 9999;
+    pointer-events: none;
+  }
+
+  #popup-msg::after {
+    content: '';
+  position: absolute;
+  bottom: -8px;
+  right: 40px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #1a1a1a;
+}
+
+
+/* Estilos para mensajes formateados - MÁS ESPECÍFICOS */
+.msg-ai.ai-response .experience-section,
+.msg-ai.ai-response .skills-section, 
+.msg-ai.ai-response .education-section,
+.msg-ai.ai-response .courses-section,
+.msg-ai.ai-response .contact-section {
+  margin: 8px 0;
+  display: block !important;
+}
+
+.msg-ai.ai-response h4 {
+  margin: 0 0 16px 0 !important;
+  color: #4da3ff !important;
+  font-size: 1.1em !important;
+  font-weight: 600 !important;
+  display: block !important;
+}
+
+/* Estilos para experiencia laboral - MÁS ESPECÍFICOS */
+.msg-ai.ai-response .job-item {
+  background: #2a2a2a !important;
+  border: 1px solid #444 !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+  margin-bottom: 16px !important;
+  transition: border-color 0.2s !important;
+  display: block !important;
+}
+
+.msg-ai.ai-response .job-item:hover {
+  border-color: #4da3ff !important;
+}
+
+.msg-ai.ai-response .job-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  margin-bottom: 12px !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+}
+
+.msg-ai.ai-response .job-title {
+  color: #e0e0e0 !important;
+  font-size: 1em !important;
+  font-weight: 600 !important;
+  flex: 1 !important;
+  min-width: 200px !important;
+  display: block !important;
+}
+
+.msg-ai.ai-response .job-period {
+  color: #888 !important;
+  font-size: 0.85em !important;
+  background: #333 !important;
+  padding: 4px 8px !important;
+  border-radius: 12px !important;
+  white-space: nowrap !important;
+  display: inline-block !important;
+}
+
+.msg-ai.ai-response .job-description {
+  margin: 12px 0 !important;
+  padding-left: 16px !important;
+  display: block !important;
+}
+
+.msg-ai.ai-response .job-description li {
+  color: #ccc !important;
+  margin-bottom: 6px !important;
+  line-height: 1.4 !important;
+  font-size: 0.9em !important;
+  display: list-item !important;
+}
+
+.msg-ai.ai-response .job-technologies {
+  margin-top: 12px !important;
+  padding-top: 12px !important;
+  border-top: 1px solid #444 !important;
+  display: block !important;
+}
+
+.msg-ai.ai-response .job-technologies strong {
+  color: #4da3ff !important;
+  font-size: 0.9em !important;
+  display: block !important;
+  margin-bottom: 8px !important;
+}
+
+.msg-ai.ai-response .tech-tags {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+}
+
+.msg-ai.ai-response .tech-tag {
+  background: #4da3ff !important;
+  color: white !important;
+  padding: 4px 8px !important;
+  border-radius: 12px !important;
+  font-size: 0.8em !important;
+  font-weight: 500 !important;
+  display: inline-block !important;
+}
+
+/* Estilos para habilidades */
+.msg-ai.ai-response .skills-section {
+  background: #2a2a2a !important;
+  border: 1px solid #444 !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+  display: block !important;
+}
+
+.msg-ai.ai-response .skill-category {
+  margin-bottom: 16px !important;
+  display: block !important;
+}
+
+.msg-ai.ai-response .skill-category:last-child {
+  margin-bottom: 0 !important;
+}
+
+.msg-ai.ai-response .skill-category strong {
+  color: #4da3ff !important;
+  font-size: 0.95em !important;
+  display: block !important;
+  margin-bottom: 8px !important;
+}
+
+.msg-ai.ai-response .skill-tags {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+}
+
+.msg-ai.ai-response .skill-tag {
+  background: #333 !important;
+  color: #e0e0e0 !important;
+  padding: 4px 10px !important;
+  border-radius: 16px !important;
+  font-size: 0.85em !important;
+  border: 1px solid #555 !important;
+  transition: all 0.2s !important;
+  display: inline-block !important;
+}
+
+.msg-ai.ai-response .skill-tag:hover {
+  background: #4da3ff !important;
+  color: white !important;
+  border-color: #4da3ff !important;
+}
+
+/* Estilos para educación */
+.msg-ai.ai-response .education-section {
+  background: #2a2a2a !important;
+  border: 1px solid #444 !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+  display: block !important;
+}
+
+.msg-ai.ai-response .education-item {
+  margin-bottom: 20px !important;
+  padding-bottom: 16px !important;
+  border-bottom: 1px solid #444 !important;
+  display: block !important;
+}
+
+.msg-ai.ai-response .education-item:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  border-bottom: none !important;
+}
+
+.msg-ai.ai-response .edu-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  margin-bottom: 8px !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+}
+
+.msg-ai.ai-response .edu-title {
+  color: #e0e0e0 !important;
+  font-size: 1em !important;
+  font-weight: 600 !important;
+  flex: 1 !important;
+  min-width: 200px !important;
+  display: block !important;
+}
+
+.msg-ai.ai-response .edu-period {
+  color: #888 !important;
+  font-size: 0.85em !important;
+  background: #333 !important;
+  padding: 4px 8px !important;
+  border-radius: 12px !important;
+  white-space: nowrap !important;
+  display: inline-block !important;
+}
+
+.msg-ai.ai-response .edu-detail {
+  color: #ccc !important;
+  margin: 8px 0 !important;
+  font-size: 0.9em !important;
+  line-height: 1.4 !important;
+  display: block !important;
+}
+
+.msg-ai.ai-response .edu-projects {
+  margin-top: 12px !important;
+  display: block !important;
+}
+
+.msg-ai.ai-response .edu-projects strong {
+  color: #4da3ff !important;
+  font-size: 0.9em !important;
+  display: block !important;
+  margin-bottom: 8px !important;
+}
+
+.msg-ai.ai-response .project-list {
+  padding-left: 16px !important;
+  margin: 0 !important;
+  display: block !important;
+}
+
+.msg-ai.ai-response .project-list li {
+  color: #ccc !important;
+  margin-bottom: 6px !important;
+  line-height: 1.4 !important;
+  font-size: 0.9em !important;
+  display: list-item !important;
+}
+
+/* Estilos para cursos */
+.msg-ai.ai-response .courses-section {
+  background: #2a2a2a !important;
+  border: 1px solid #444 !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+  display: block !important;
+}
+
+.msg-ai.ai-response .course-item {
+  color: #ccc !important;
+  margin-bottom: 8px !important;
+  line-height: 1.4 !important;
+  font-size: 0.9em !important;
+  padding-left: 8px !important;
+  border-left: 2px solid #4da3ff !important;
+  display: block !important;
+}
+
+/* Estilos para contacto */
+.msg-ai.ai-response .contact-section {
+  background: #2a2a2a !important;
+  border: 1px solid #444 !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+  display: block !important;
+}
+
+.msg-ai.ai-response .contact-info {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+}
+
+.msg-ai.ai-response .contact-item {
+  color: #ccc !important;
+  font-size: 0.9em !important;
+  line-height: 1.4 !important;
+  display: block !important;
+}
+
+.msg-ai.ai-response .contact-item strong {
+  color: #4da3ff !important;
+}
+
+/* Experiencia individual */
+.msg-ai.ai-response .single-experience {
+  background: #2a2a2a !important;
+  border: 1px solid #444 !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+  display: block !important;
+}
+
+.msg-ai.ai-response .job-details {
+  margin: 12px 0 !important;
+  display: block !important;
+}
+
+.msg-ai.ai-response .job-details strong {
+  color: #4da3ff !important;
+  font-size: 0.9em !important;
+  display: block !important;
+  margin-bottom: 8px !important;
+}
+
+/* Scroll para contenido largo */
+.msg-ai.ai-response .experience-section,
+.msg-ai.ai-response .skills-section,
+.msg-ai.ai-response .education-section,
+.msg-ai.ai-response .courses-section,
+.msg-ai.ai-response .contact-section {
+  max-height: 400px !important;
+  overflow-y: auto !important;
+}
+
+.msg-ai.ai-response .experience-section::-webkit-scrollbar,
+.msg-ai.ai-response .skills-section::-webkit-scrollbar,
+.msg-ai.ai-response .education-section::-webkit-scrollbar,
+.msg-ai.ai-response .courses-section::-webkit-scrollbar,
+.msg-ai.ai-response .contact-section::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+.msg-ai.ai-response .experience-section::-webkit-scrollbar-track,
+.msg-ai.ai-response .skills-section::-webkit-scrollbar-track,
+.msg-ai.ai-response .education-section::-webkit-scrollbar-track,
+.msg-ai.ai-response .courses-section::-webkit-scrollbar-track,
+.msg-ai.ai-response .contact-section::-webkit-scrollbar-track {
+  background: #1a1a1a !important;
+  border-radius: 3px !important;
+}
+
+.msg-ai.ai-response .experience-section::-webkit-scrollbar-thumb,
+.msg-ai.ai-response .skills-section::-webkit-scrollbar-thumb,
+.msg-ai.ai-response .education-section::-webkit-scrollbar-thumb,
+.msg-ai.ai-response .courses-section::-webkit-scrollbar-thumb,
+.msg-ai.ai-response .contact-section::-webkit-scrollbar-thumb {
+  background: #4da3ff !important;
+  border-radius: 3px !important;
+}
+
+  /* Animaciones */
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes bounce {
+    0%,
+    80%,
+    100% {
+      transform: scale(0);
+    }
+    40% {
+      transform: scale(1);
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    #chat-box {
+      width: calc(100vw - 32px);
+      right: 16px;
+      left: 16px;
+      height: 70vh;
+      bottom: 150px;
+    }
+    #popup-msg {
+      right: 28px;
+      bottom: 150px;
+    }
+    #popup-msg::after {
+      right: 30px;
+    }
+    #ia-button {
+      right: 16px;
+      bottom: 16px;
+    }
+  }
+</style>

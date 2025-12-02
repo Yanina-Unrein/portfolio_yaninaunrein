@@ -166,26 +166,27 @@ const t = useTranslations(lang);
 
           .about-container{
                flex-direction: row;
+               justify-content: center;
           }
 
           .text-container{
                width: 50%;
+          }
+          .personal-img{
+               width: 250px;
+               height: 250px;
+          }
+
+          .personal-img::before{
+               top: 127px;
+               left: 125px;
           }
 
      }
 
      @media(min-width:1024px){
           .about-container{
-               justify-content: space-around;
-          }
-
-          .personal-img{
-               width: 250px;
-               height: 250px;
-          }
-          .personal-img::before{
-               top: 127px;
-               left: 125px;
+              gap: 100px;;
           }
 
           .text-container{

@@ -17,17 +17,14 @@ const t = useTranslations(lang);
             <div class="text-container">
                 <a class="logo-name" href="/">Yanina Unrein</a>
                 <span class="subtitle-logo">FullStack Developer</span>
-                <span class="slogan" data-i18n="footer.slogan">{t('footer.slogan')}</span>
+                <span class="slogan">{t('footer.slogan')}</span>
             </div>
-            <figure>
-                <img src="/img/logo.svg" loading="lazy" data-i18n="footer.alt_img" alt={t('footer.message')}>
-            </figure>
         </div>
         <div class="nav-container">
             <div class="links">
                 <a class="btn" href="/" data-i18n="footer.home">{t('footer.home')}</a>
-                <a class="btn" href="#proyectos" data-i18n="footer.projects">{t('footer.projects')}</a>
-                <a class="btn" href="#contacto" data-i18n="footer.contact">{t('footer.contact')}</a>
+                <a class="btn" href="#proyectos">{t('footer.projects')}</a>
+                <a class="btn" href="#contacto">{t('footer.contact')}</a>
             </div>
             <div class="links">
                 <a class="btn" href="https://www.linkedin.com/in/yaninaunrein/" target="_blank">LinkedIn</a>
@@ -36,7 +33,7 @@ const t = useTranslations(lang);
         </div>
     </section>
     <div class="copyright">
-        <span data-i18n="footer.copyright_1">{t('footer.copyright_1')}</span>
+        <span>{t('footer.copyright_1')}</span>
         <span>Yanina Unrein 2024</span>
     </div>
 </footer>

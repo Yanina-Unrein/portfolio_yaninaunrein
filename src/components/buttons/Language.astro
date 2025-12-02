@@ -1,8 +1,7 @@
 ---
-import { getCurrentLang } from '@/i18n/utils';
+import { getLangFromUrl } from '@/i18n/utils';
 
-// Establecer el idioma predeterminado como 'es' (español)
-const currentLang = getCurrentLang() || 'es';
+const currentLang = getLangFromUrl(Astro.url);
 const isEnglish = currentLang === 'en';
 ---
 
@@ -23,41 +22,50 @@ const isEnglish = currentLang === 'en';
     </label>
   </div>
   
-  <script>
-    import { updateLanguage, getCurrentLang } from '@/i18n/utils';
-   
+<script>
   document.addEventListener('DOMContentLoaded', () => {
     const checkbox = document.getElementById('checkbox') as HTMLInputElement;
     const languageText = document.getElementById('language-text') as HTMLSpanElement;
 
-    let currentLang = getCurrentLang() || 'es';
-
-    // Inicializar el idioma y el estado del switch
-    const initializeLanguage = () => {
-      const savedLang = localStorage.getItem('lang') || 'es';
-      currentLang = savedLang;
-      checkbox.checked = currentLang === 'en';
-      languageText.textContent = currentLang === 'en' ? 'En' : 'Es';
-      updateLanguage(currentLang);
-    };
-
-    // Función para alternar el idioma
-    const toggleLanguage = () => {
-      currentLang = checkbox.checked ? 'en' : 'es';
-      languageText.textContent = currentLang === 'en' ? 'En' : 'Es';
-      updateLanguage(currentLang);
-      localStorage.setItem('lang', currentLang); // Guardar el idioma en localStorage
-    };
-
-    // Inicializar el idioma al cargar la página
-    initializeLanguage();
-
-    // Evento para manejar el cambio de idioma al hacer clic en el switch
-    checkbox.addEventListener('change', toggleLanguage);
+    checkbox.addEventListener('change', () => {
+      const newLang = checkbox.checked ? 'en' : 'es';
+      const currentPath = window.location.pathname;
+      
+      let newPath;
+      
+      if (newLang === 'es') {
+        if (currentPath.startsWith('/en')) {
+          newPath = currentPath.replace('/en', '');
+          if (newPath === '') newPath = '/';
+        } else {
+          newPath = currentPath;
+        }
+      } else {
+        if (!currentPath.startsWith('/en')) {
+          newPath = '/en' + (currentPath === '/' ? '' : currentPath);
+        } else {
+          newPath = currentPath;
+        }
+      }
+      
+      // Guardar en localStorage
+      localStorage.setItem('lang', newLang);
+      
+      // Actualizar atributo lang del documento
+      document.documentElement.lang = newLang;
+      document.documentElement.setAttribute('data-lang', newLang);
+      
+      // Disparar evento personalizado para el chatbox
+      window.dispatchEvent(new CustomEvent('languageChanged', { 
+        detail: { lang: newLang } 
+      }));
+  
+      window.location.href = newPath;
+    });
   });
-  </script>
+</script>
 
-  <style>
+<style>
     #checkbox {
       display: none;
     }

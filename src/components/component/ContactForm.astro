@@ -1,43 +1,58 @@
 ---
-import { validateName, validateEmail, validateMessage, validateFormFields } from '@/utils/validateForm.js';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+// Pasar las traducciones al script
+const errorMessages = {
+  name_required: t('contactForm.errors.name_required'),
+  name_invalid: t('contactForm.errors.name_invalid'),
+  email_required: t('contactForm.errors.email_required'),
+  email_invalid: t('contactForm.errors.email_invalid'),
+  message_required: t('contactForm.errors.message_required')
+};
 ---
 
 <form id="contactForm" class="contact-form" action="https://formspree.io/f/xkgwrdpk" method="POST">
   <div class="form-group">
-    <label for="name" data-i18n="contactForm.name">{t('contactForm.name')}</label>
-    <input type="text" id="name" name="name" data-i18n="contactForm.namePlaceholder" placeholder={t('contactForm.namePlaceholder')} required />
+    <label for="name">{t('contactForm.name')}</label>
+    <input type="text" id="name" name="name" placeholder={t('contactForm.namePlaceholder')} required />
     <span class="error" id="nameError"></span>
   </div>
   <div class="form-group">
-    <label for="email" data-i18n="contactForm.mail">{t('contactForm.mail')}</label>
+    <label for="email">{t('contactForm.mail')}</label>
     <input type="email" id="email" name="email" placeholder="example@example.com" required />
     <span class="error" id="emailError"></span>
   </div>
   <div class="form-group">
-    <label for="message" data-i18n="contactForm.message">{t('contactForm.message')}</label>
+    <label for="message">{t('contactForm.message')}</label>
     <textarea id="message" name="message" placeholder={t('contactForm.messagePlaceholder')} required></textarea>
     <span class="error" id="messageError"></span>
   </div>
-  <button type="submit" data-i18n="contactForm.btn_submit">{t('contactForm.btn_submit')}</button>
+  <button type="submit">{t('contactForm.btn_submit')}</button>
 </form>
 
 <!-- Modal -->
 <div id="modal" class="modal">
   <div class="modal-content">
     <span id="closeModal" class="close">&times;</span>
-    <img src="/img/mail.svg" data-i18n="contactForm.alt_img" alt={t('contactForm.message')} class="modal-image" />
-    <p data-i18n="contactForm.message_submit">{t('contactForm.message_submit')}</p>
+    <img src="/img/mail.svg" alt={t('contactForm.alt_img')} class="modal-image" />
+    <p>{t('contactForm.message_submit')}</p>
   </div>
 </div>
 
-<script>
-  import { validateName, validateEmail, validateMessage, validateFormFields } from '@/utils/validateForm.js';
-  import { updateLanguage, getCurrentLang } from '@/i18n/utils';
+<div 
+  id="error-messages" 
+  data-name-required={errorMessages.name_required}
+  data-name-invalid={errorMessages.name_invalid}
+  data-email-required={errorMessages.email_required}
+  data-email-invalid={errorMessages.email_invalid}
+  data-message-required={errorMessages.message_required}
+  style="display: none;"
+></div>
 
+<script>
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contactForm') as HTMLFormElement;
     const name = document.getElementById('name') as HTMLInputElement;
@@ -49,98 +64,123 @@ const t = useTranslations(lang);
     const messageError = document.getElementById('messageError') as HTMLSpanElement;
     const modal = document.getElementById('modal') as HTMLDivElement;
     const closeModal = document.getElementById('closeModal') as HTMLSpanElement;
-  
+
+      // Obtener los mensajes de error desde los data attributes
+    const errorMessagesElement = document.getElementById('error-messages');
+    if (!errorMessagesElement) {
+      console.error('No se encontró el elemento error-messages');
+      return;
+    }
+
+    const errorMessages = {
+      name_required: errorMessagesElement.dataset.nameRequired || '',
+      name_invalid: errorMessagesElement.dataset.nameInvalid || '',
+      email_required: errorMessagesElement.dataset.emailRequired || '',
+      email_invalid: errorMessagesElement.dataset.emailInvalid || '',
+      message_required: errorMessagesElement.dataset.messageRequired || ''
+    };
+
+    // Funciones de validación con mensajes traducidos y tipos explícitos
+    const validateName = (nameValue: string): string => {
+      if (!nameValue.trim()) return errorMessages.name_required;
+      if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(nameValue)) return errorMessages.name_invalid;
+      return '';
+    };
+
+     const validateEmail = (emailValue: string): string => {
+      if (!emailValue.trim()) return errorMessages.email_required;
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) return errorMessages.email_invalid;
+      return '';
+    };
+
+    const validateMessage = (messageValue: string): string => {
+      if (!messageValue.trim()) return errorMessages.message_required;
+      return '';
+    };
+
+    const validateFormFields = (nameValue: string, emailValue: string, messageValue: string) => {
+      return {
+        nameErrorMessage: validateName(nameValue),
+        emailErrorMessage: validateEmail(emailValue),
+        messageErrorMessage: validateMessage(messageValue)
+      };
+    };
 
     if (form && name && email && message && nameError && emailError && messageError && modal && closeModal) {
-    form.addEventListener('submit', function (event) {
-      event.preventDefault(); // Prevent default form submission
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
 
-      const { nameErrorMessage, emailErrorMessage, messageErrorMessage } = validateFormFields(name.value, email.value, message.value);
+        const { nameErrorMessage, emailErrorMessage, messageErrorMessage } = validateFormFields(name.value, email.value, message.value);
 
-      // Reset previous error messages
-      nameError.innerText = nameErrorMessage;
-      emailError.innerText = emailErrorMessage;
-      messageError.innerText = messageErrorMessage;
+        // Mostrar mensajes de error
+        nameError.textContent = nameErrorMessage;
+        emailError.textContent = emailErrorMessage;
+        messageError.textContent = messageErrorMessage;
 
-      if (nameErrorMessage || emailErrorMessage || messageErrorMessage) {
-        // Mostrar errores
-        name.style.borderColor = nameErrorMessage ? 'red' : 'green';
-        email.style.borderColor = emailErrorMessage ? 'red' : 'green';
-        message.style.borderColor = messageErrorMessage ? 'red' : 'green';
-      } else {
-        // Form is valid, you can submit the form
-        const formData = new FormData(form);
-        fetch(form.action, {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.ok) {
-            modal.style.display = 'block'; // Show modal
-            form.reset(); // Reset the form fields
-          } else {
+        if (nameErrorMessage || emailErrorMessage || messageErrorMessage) {
+          name.style.borderColor = nameErrorMessage ? 'red' : 'green';
+          email.style.borderColor = emailErrorMessage ? 'red' : 'green';
+          message.style.borderColor = messageErrorMessage ? 'red' : 'green';
+        } else {
+          const formData = new FormData(form);
+          fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'Accept': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.ok) {
+              modal.style.display = 'block';
+              form.reset();
+              // Reset borders after successful submission
+              name.style.borderColor = '#414141';
+              email.style.borderColor = '#414141';
+              message.style.borderColor = '#414141';
+            } else {
+              alert('Ha ocurrido un error al enviar el mensaje');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
             alert('Ha ocurrido un error al enviar el mensaje');
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('Ha ocurrido un error al enviar el mensaje');
-        });
-      }
-    });
+          });
+        }
+      });
 
-    // Validación en tiempo real para el campo de nombre
-    name.addEventListener('input', () => {
-      const errorMessage = validateName(name.value);
-      nameError.innerText = errorMessage;
-      if (errorMessage) {
-        name.style.borderColor = 'red';
-      } else {
-        name.style.borderColor = 'green';
-      }
-    });
-
-    name.addEventListener('input', () => {
+      // Validación en tiempo real
+      name.addEventListener('input', () => {
         const errorMessage = validateName(name.value);
-        nameError.innerText = errorMessage;
+        nameError.textContent = errorMessage;
         name.style.borderColor = errorMessage ? 'red' : 'green';
       });
 
       email.addEventListener('input', () => {
         const errorMessage = validateEmail(email.value);
-        emailError.innerText = errorMessage;
+        emailError.textContent = errorMessage;
         email.style.borderColor = errorMessage ? 'red' : 'green';
       });
 
       message.addEventListener('input', () => {
         const errorMessage = validateMessage(message.value);
-        messageError.innerText = errorMessage;
+        messageError.textContent = errorMessage;
         message.style.borderColor = errorMessage ? 'red' : 'green';
       });
 
-    // Cerrar el modal
-    closeModal.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
-
-    // Cerrar el modal al hacer clic fuera de él
-    window.addEventListener('click', (event) => {
-      if (event.target === modal) {
+      // Cerrar el modal
+      closeModal.addEventListener('click', () => {
         modal.style.display = 'none';
-      }
-    });
-
-     // Actualizar las traducciones cuando cambie el idioma
-     document.addEventListener('languageChanged', () => {
-        updateLanguage(getCurrentLang());
       });
-    
-  }});
 
+      window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+    }
+  });
 </script>
 
 <style>
@@ -220,6 +260,7 @@ const t = useTranslations(lang);
     width: 100%; 
     height: 100%; 
     overflow: auto; 
+    background-color: rgba(0,0,0,0.4);
   }
 
   .modal-content {
@@ -238,13 +279,13 @@ const t = useTranslations(lang);
     float: right;
     font-size: 28px;
     font-weight: bold;
+    cursor: pointer;
   }
 
   .close:hover,
   .close:focus {
     color: black;
     text-decoration: none;
-    cursor: pointer;
   }
 
   .modal-image {
@@ -257,7 +298,6 @@ const t = useTranslations(lang);
   body.open form  {
     display: none;
   }
-
 
   @media(min-width:768px){
       .contact-form{
@@ -274,4 +314,4 @@ const t = useTranslations(lang);
           width: 50%;          
       }
   }
-</style> 
+</style>
