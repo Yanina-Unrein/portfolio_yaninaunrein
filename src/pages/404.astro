@@ -4,38 +4,25 @@ import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-
-// Forzar la ruta a /404 sin importar el idioma
-Astro.response.status = 404;
 ---
 
 <Layout title={t('errorPage.title')} description="" hideNavbarFooter={true}>
     <section>
         <div>
-            <h1 data-i18n="errorPage.title">{t('errorPage.title')}</h1>
-            <h2 data-i18n="errorPage.subTitle">{t('errorPage.subTitle')}</h2>
+            <h1>{t('errorPage.title')}</h1>
+            <h2>{t('errorPage.subTitle')}</h2>
             <figure>
-                <img src={t('errorPage.img_you')} data-i18n="errorPage.subTitle" alt={t('img_alt')}>
+                <img src={t('errorPage.img_you')} alt={t('img_alt')}>
             </figure>
-            <span data-i18n="errorPage.you_message">{t('errorPage.you_message')}</span>
+            <span>{t('errorPage.you_message')}</span>
         </div>
         <div class="back-container">
-            <p data-i18n="errorPage.paragraph1">{t('errorPage.paragraph1')}</p>
-            <p data-i18n="errorPage.paragraph2">{t('errorPage.paragraph2')}</p>
-            <a href="/" data-i18n="errorPage.btn_back">{t('errorPage.btn_back')}</a>
+            <p>{t('errorPage.paragraph1')}</p>
+            <p>{t('errorPage.paragraph2')}</p>
+            <a href="/">{t('errorPage.btn_back')}</a>
         </div>
     </section>
 </Layout>
-
-<script>
-    import { getCurrentLang, changeLanguage } from '@/i18n/utils';
-    
-    // Ensure this script runs only on the client-side
-    if (typeof window !== 'undefined') {
-        const currentLang = getCurrentLang();
-        changeLanguage(currentLang);
-    }
-</script>
 
 <style>
     section{
@@ -48,7 +35,6 @@ Astro.response.status = 404;
         padding: 150px 10px;
         width: 100%;
     }
-
 
     h1{
         font-size: 2rem;
@@ -79,7 +65,7 @@ Astro.response.status = 404;
     figure img{
         width: 100%;
         height: 100%;
-        display: block; /* Asegura que la imagen no tenga espacio extra debajo */
+        display: block; 
     }
 
     span{
@@ -135,13 +121,12 @@ Astro.response.status = 404;
             top: 600px;
         }
     }
-
     @keyframes float {
-    0%, 100% {
-        transform: translateY(0); /* Posición original */
-    }
-    50% {
-        transform: translateY(-5px); /* Eleva la imagen 10px */
+        0%, 100% {
+            transform: translateY(0); 
+        }
+        50% {
+            transform: translateY(-5px); 
     }
 }
 </style>

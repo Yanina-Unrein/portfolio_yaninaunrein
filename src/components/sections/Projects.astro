@@ -1,134 +1,155 @@
 ---
 import CardProject from "@/components/cards/CardProject.astro";
-import { PROJECTS } from '@/data/projects_details';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
-
+import Section from "../Section.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const allProjects = PROJECTS[lang as keyof typeof PROJECTS] || [];
-
-// Filtrar proyectos personales y colaboraciones
-const personalProjects = allProjects.filter(project => !project.collaborate);
-const collaborationProjects = allProjects.filter(project => project.collaborate);
-
-const isSingleProject = personalProjects.length === 1;
+const allProjects = t('projects.items') || [];
 ---
 
-<section id="proyectos" class="projects-section">
+<Section>
+  <section id="proyectos" class="projects-section">
     <div class="projects-container">
-        <div class="title-container">
-            <h2 data-i18n="projects.title">{t('projects.title')}</h2>
-            <h3 data-i18n="projects.subtitle_1">{t('projects.subtitle_1')}</h3>
-        </div>   
-        <div class={`cards-container ${isSingleProject ? 'single' : ''}`}>
-            {personalProjects.map(project => (
-                <CardProject classList={['card-project', 'project-element']} {...project} />
-            ))}
-        </div>
-        {collaborationProjects.length > 0 && (
-            <div class="colaboration-container">
-                <h3 data-i18n="projects.subtitle_2">{t('projects.subtitle_2')}</h3>
-                <div class={`cards-container ${isSingleProject ? 'single' : ''}`}>
-                    {collaborationProjects.map(project => (
-                        <CardProject classList={['card-project', 'project-element']} {...project} />
-                    ))}
-                </div>
-            </div>
-        )}
-    </div>
-</section>
+      <div class="title-container">
+        <h2>{t('projects.title')}</h2>
+      </div>   
+          <div class="filters">
+              <button class="filter-btn active" data-filter="all">{t('projects.filter_all')}</button>
+              <button class="filter-btn" data-filter="fullstack">{t('projects.filter_fullstack')}</button>
+              <button class="filter-btn" data-filter="frontend">{t('projects.filter_frontend')}</button>
+              <button class="filter-btn" data-filter="backend">{t('projects.filter_backend')}</button>
+              <button class="filter-btn" data-filter="colaborativo">{t('projects.filter_collaborative')}</button>
+          </div>
+          <div id="projects-list" class="cards-container">
+                {allProjects.map((project: any) => (
+                  <CardProject 
+                    classList={['card-project']}
+                    data-tags={project.tags?.join(',') || ''}
+                    data-collaborate={project.collaborate}
+                    {...project}
+                  />
+              ))}
+          </div>
+      </div>
+  </section>
+</Section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll(".filter-btn") as NodeListOf<HTMLButtonElement>;
+    const cards = document.querySelectorAll(".card-project") as NodeListOf<HTMLElement>;
+
+   buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        buttons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const filter = btn.dataset.filter || "all";
+
+        cards.forEach(card => {
+          const tags = card.dataset.tags || "";
+          const isCollaborative = card.dataset.collaborate === "true";
+
+          if (filter === "all") {
+            card.style.display = "flex";
+          } else if (filter === "colaborativo") {
+            card.style.display = isCollaborative ? "flex" : "none";
+          } else {
+            const hasTag = tags.split(',').includes(filter);
+            card.style.display = hasTag ? "flex" : "none";
+          }
+        });
+      });
+    });
+  });
+</script>
 
 <style>
-    .projects-section {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #13151a;
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 50px 0;
-    }
+  .projects-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #13151a;
+    margin: 0 auto;
+  }
 
-    .projects-container {
-        width: 90%;
-        max-width: 1900px;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        row-gap: 40px;
-    }
+  .projects-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 40px;
+  }
 
-    .title-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-    }
+  h2{
+    font-size: 2.5rem;
+    display: inline-block;
+    position: relative;
+    color: #fff;
+    padding: 10px;
+  }
 
-    h2 {
-        font-size: 2.5rem;
-        padding: 5px 0;
-        display: inline-block;
-        position: relative;
-        color: #fff;
-    }
+  h2::before {
+    content: '';
+    position: absolute;
+    bottom: 0.80px; 
+    left: 0;
+    width: 20%; 
+    border-bottom: 4px solid #fb4ea1; 
+    white-space: nowrap; 
+  }
 
-    h2::before {
-        content: '';
-        position: absolute;
-        bottom: 0.80px; 
-        left: 0;
-        width: 20%; 
-        border-bottom: 4px solid #fb4ea1; 
-        white-space: nowrap; 
-    }
+  .filters {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
-    h3 {
-        color: #fff;
-        font-size: 1rem;
-    }
+  .filter-btn {
+    padding: 8px 18px;
+    border: 1px solid #fb4ea1;
+    color: #fff;
+    background: transparent;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
 
+  .filter-btn.active,
+  .filter-btn:hover {
+    background: #fb4ea1;
+  }
+
+  .cards-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px 20px;
+    justify-items: center;
+  }
+
+  body.open .projects-section {
+        display: none;
+  }
+
+  @media (min-width: 600px) {
+  .cards-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+   @media (min-width:900px) {
     .cards-container {
-        width: 100%;
-        max-width: 1100px;
-        display: grid;
-        grid-template-columns: auto;
-        place-content: center;
-        justify-items: center;
-        gap: 30px 20px;
+      grid-template-columns: repeat(3, 1fr);
     }
+  }
 
-    .colaboration-container{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 50px 0 20px 0;
+  @media (min-width: 1220px) {
+    .cards-container {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px 20px;
     }
+  }
 
-    body.open .projects-section, body.open .cards-container {
-        display: none;
-    }
-
-    body.open h2, body.open h3  {
-        display: none;
-   }
-
-    @media(min-width: 950px){
-        .cards-container {
-            grid-template-columns: 1fr 1fr;
-            justify-content: center;
-        }
-
-        .cards-container.single {
-            grid-template-columns: 1fr;
-            justify-items: center;
-        }
-
-        h3{
-            font-size: 1.3rem;
-        }
-    }
 </style>

@@ -1,6 +1,7 @@
 ---
 import DownloadI from "@/components/icons/DownloadI.astro";
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import Star from "../icons/Star.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -9,34 +10,112 @@ const cvPath = lang === 'en' ? '/Resume_YaninaUnrein.pdf' : '/FullStack_YaninaUn
 const downloadFileName = `YaninaUnrein_CV_${lang.toUpperCase()}.pdf`;
 ---
 
-<a href={cvPath} download={downloadFileName}>
+<a href={cvPath} download={downloadFileName} class="magic-btn">
     <DownloadI />
     <span data-i18n="aboutMe.btn_dowload">{t('aboutMe.btn_dowload')}</span>
+      <div class="star star-1"><Star /></div>
+  <div class="star star-2"><Star /></div>
+  <div class="star star-3"><Star /></div>
+  <div class="star star-4"><Star /></div>
+  <div class="star star-5"><Star /></div>
+  <div class="star star-6"><Star /></div>
 </a>
 <style>
-a {
-  display: flex;
+.magic-btn {
+   position: relative;
+  display: inline-flex;
   align-items: center;
+  gap: 6px;
+  padding: 12px 30px;
   font-weight: 500;
   font-size: 17px;
-  padding: 0.8em 1.5em 0.8em 1.2em;
   color: #ffffff;
-  background: #784BA0;
   background: linear-gradient(0deg, rgb(180, 19, 243) 0%, #FF3CAC 100%);
   border-radius: 20em;
   cursor: pointer;
+  border: none;
+  transition: all 0.3s ease-in-out;
 }
 
-a span{
-    padding-left: 5px;
+.magic-btn:hover {
+  background: transparent;
+  color: #FF3CAC;
+  box-shadow: 0 0 25px #ff3cac7a;
+  border: 2px solid #FF3CAC;
 }
 
-a:hover {
-  border-color: #ffffff;
-  box-shadow: 0 0.5em 1.5em -0.5em #784BA0;
+.magic-btn svg {
+  width: 20px;
+  height: 20px;
 }
 
-a:active {
-  box-shadow: 0 0.3em 1em -0.5em #d2a5fa;
+.star {
+  position: absolute;
+  width: 15px;
+  filter: drop-shadow(0 0 0 #fffdef);
+  z-index: 5;   
+  pointer-events: none; 
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 1s ease;
+}
+
+.star svg {
+  width: 100%;
+  height: auto;
+}
+
+.star svg path {
+  fill: #fffdef !important; 
+}
+/* POSICIÓN INICIAL */
+.star-1 { top: 20%; left: 20%; transition: var(--t1); }
+.star-2 { top: 45%; left: 45%; width: 10px; transition: var(--t2); }
+.star-3 { top: 40%; left: 40%; width: 5px; transition: var(--t2); }
+.star-4 { top: 20%; left: 40%; width: 8px; transition: var(--t3); }
+.star-5 { top: 25%; left: 45%; width: 12px; transition: var(--t3); }
+.star-6 { top: 5%;  left: 50%; width: 5px; transition: var(--t1); }
+
+/* Transiciones (más limpias) */
+:root {
+  --t1: 1s cubic-bezier(0.05, 0.83, 0.43, 0.96);
+  --t2: 1s cubic-bezier(0, 0.4, 0, 1.01);
+  --t3: 0.8s cubic-bezier(0, 0.4, 0, 1.01);
+}
+
+/* POSICIONES EN HOVER (salida de estrellas) */
+.magic-btn:hover .star-1 { 
+  top: -80%; left: -30%; 
+  filter: drop-shadow(0 0 10px #fffdef); 
+  opacity: 1; /* 🔥 Ahora aparece */ 
+}
+
+.magic-btn:hover .star-2 { 
+  top: -25%; left: 10%; 
+  filter: drop-shadow(0 0 10px #fffdef); 
+  opacity: 1; 
+}
+
+.magic-btn:hover .star-3 { 
+  top: 55%; left: 25%; 
+  filter: drop-shadow(0 0 10px #fffdef); 
+  opacity: 1; 
+}
+
+.magic-btn:hover .star-4 { 
+  top: 30%; left: 80%; 
+  filter: drop-shadow(0 0 10px #fffdef); 
+  opacity: 1; 
+}
+
+.magic-btn:hover .star-5 { 
+  top: 25%; left: 115%; 
+  filter: drop-shadow(0 0 10px #fffdef); 
+  opacity: 1; 
+}
+
+.magic-btn:hover .star-6 { 
+  top: 5%; left: 60%; 
+  filter: drop-shadow(0 0 10px #fffdef); 
+  opacity: 1; 
 }
 </style>
