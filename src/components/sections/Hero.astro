@@ -12,8 +12,8 @@ const t = useTranslations(lang);
         <span class="name" data-i18n="hero.text">{t('hero.text')} 
             <span class="hand-icon">👋</span>
         </span>
-        <h1>FullStack</h1>
-        <h2>Developer</h2>
+        <h1 class="title-hero">FullStack</h1>
+        <h2 class="subtitle-hero">Developer</h2>
         <span class="slogan-hero" data-i18n="hero.slogan">{t('hero.slogan')}</span>
         <SocialButtons class="social-buttons" />
     </div>
@@ -24,9 +24,9 @@ const t = useTranslations(lang);
     import { gsap } from 'https://cdn.skypack.dev/gsap';
   
     function initAnimation() {
-      gsap.set(['.name', 'h1', 'h2', 'span'], { y: 100, opacity: 0, visibility: 'hidden' });
+      gsap.set(['.name', '.title-hero', '.subtitle-hero', '.slogan-hero'], { y: 100, opacity: 0, visibility: 'hidden' });
   
-      gsap.to(['.name', 'h1', 'h2', 'span'], {
+      gsap.to(['.name', '.title-hero', '.subtitle-hero', '.slogan-hero'], {
         opacity: 1,
         y: 0,
         visibility: 'visible',
