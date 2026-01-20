@@ -98,6 +98,9 @@ export default {
   },
   projects: {
     title: "Projects",
+    role_title: "Role",
+    technologies_titles: "Technologies",
+    description: "Description",
     filter_all: "All",
     filter_collaborative: "Collaborative",
     filter_fullstack: "Fullstack",

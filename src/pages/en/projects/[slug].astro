@@ -1,0 +1,40 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import i18n from '../../../i18n/en';
+import Section from '@/components/Section.astro';
+
+const { slug } = Astro.params;
+
+const projects = i18n.projects.items;
+const project = projects.find(p => p.slug === slug);
+
+if (!project) {
+  throw new Error('Project not found');
+}
+---
+
+<Layout title={`${project.title} | Projects`} description={project.description}>
+    <Section>
+        <div class="project-detail">
+            <h1>{project.title}</h1>
+            <p class="date">{project.fecha}</p>
+
+            <img src={project.image} alt={project.title} />
+
+            <p>{project.descriptionExtend}</p>
+
+            <h3>Role</h3>
+            <p>{project.rol}</p>
+
+            <h3>Technologies</h3>
+            <ul>
+            {project.tecnologias.map((tech) => (
+                <li>{tech}</li>
+            ))}
+            </ul>
+        </div>
+    </Section>
+</Layout>
+
+
+

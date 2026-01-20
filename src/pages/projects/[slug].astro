@@ -1,0 +1,173 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import i18n from '../../i18n/es';
+import Section from '@/components/Section.astro';
+
+const { slug } = Astro.params;
+
+// todas las cards
+const projects = i18n.projects.items;
+
+// proyecto actual
+const project = projects.find(p => p.slug === slug);
+
+if (!project) {
+  throw new Error('Proyecto no encontrado');
+}
+---
+
+<Layout title={`${project.title} | Projects`} description={project.description}>
+    <Section>
+        <div class="project-detail">
+            <h1 class="title-project-page">{project.title}</h1>
+            <p class="date">{project.fecha}</p>
+
+            <img src={project.image} alt={project.title} />
+
+            <p>{project.descriptionExtend}</p>
+
+            <h3 class="subtitle_projects">{i18n.projects.role_title}</h3>
+            <p>{project.rol}</p>
+
+            <h3 class="subtitle_projects">{i18n.projects.technologies_titles}</h3>
+            <div class="tech-pills">
+                {project.tecnologias.map((tech) => (
+                    <span class="tech-pill">{tech}</span>
+                ))}
+            </div>
+        </div>
+    </Section>
+</Layout>
+
+<style>
+    .project-detail {
+        margin: 30px auto;
+        padding: 2rem;
+    }
+
+    .title-project-page {
+        margin: auto;
+        font-size: 2rem;
+        font-weight: 300;
+        animation: lights 5s 750ms linear infinite;
+    }
+
+    .project-detail .date {
+        color: #666;
+        margin-bottom: 1.5rem;
+    }
+
+    .project-detail img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+    }
+
+    .project-detail p {
+        font-size: 1.125rem;
+        color: #ffffff;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .subtitle_projects {
+        font-size: 1.6rem;
+        color: #ffffff;
+        margin: 30px 0;
+        padding: 20px 0 10px 0;
+        position: relative;
+    }
+
+    .subtitle_projects::before {
+        content: '';
+        position: absolute;
+        bottom: 0.80px; 
+        left: 0;
+        width: 10%; 
+        border-bottom: 4px solid #fb4ea1; 
+        white-space: nowrap; 
+     }
+
+    .tech-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .tech-pill {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: #fff;
+        border-radius: 999px;
+        background: linear-gradient(
+            135deg,
+            rgba(235, 88, 159, 0.399),
+            rgba(120, 75, 160, 0.25)
+        );
+        border: 1px solid rgba(251, 78, 161, 0.35);
+        backdrop-filter: blur(10px);
+        transition: all 0.25s ease;
+    }
+
+    .tech-pill:hover {
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 0 18px rgba(251, 78, 161, 0.45);
+    }
+
+    @media(min-width:768px){
+        .subtitle_projects::before {
+            width: 5%;           
+        }
+    }
+
+    @keyframes lights {
+        0% {
+            color: hsl(230, 40%, 80%);
+            text-shadow:
+            0 0 1em hsla(320, 100%, 50%, 0.2),
+            0 0 0.125em hsla(320, 100%, 60%, 0.3),
+            -1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
+            1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
+        }
+        
+        30% { 
+            color: hsl(230, 80%, 90%);
+            text-shadow:
+            0 0 1em hsla(320, 100%, 50%, 0.5),
+            0 0 0.125em hsla(320, 100%, 60%, 0.5),
+            -0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2),
+            0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
+        }
+        
+        40% { 
+            color: hsl(230, 100%, 95%);
+            text-shadow:
+            0 0 1em hsla(320, 100%, 50%, 0.5),
+            0 0 0.125em hsla(320, 100%, 90%, 0.5),
+            -0.25em -0.125em 0.125em hsla(40, 100%, 60%, 0.2),
+            0.25em 0.125em 0.125em hsla(200, 100%, 60%, 0.4);
+        }
+        
+        70% {
+            color: hsl(230, 80%, 90%);
+            text-shadow:
+            0 0 1em hsla(320, 100%, 50%, 0.5),
+            0 0 0.125em hsla(320, 100%, 60%, 0.5),
+            0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2),
+            -0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
+        }
+        
+        100% {
+            color: hsl(230, 40%, 80%);
+            text-shadow:
+            0 0 1em hsla(320, 100%, 50%, 0.2),
+            0 0 0.125em hsla(320, 100%, 60%, 0.3),
+            1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
+            -1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
+        }   
+    }
+</style>
