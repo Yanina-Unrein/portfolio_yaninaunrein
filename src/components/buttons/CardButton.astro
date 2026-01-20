@@ -1,0 +1,75 @@
+---
+const {
+  href = '#',
+  label,
+  variant = 'secondary', 
+  icon: Icon,
+  external = true,
+} = Astro.props;
+---
+
+<a
+  href={href}
+  class={`btn btn-${variant}`}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener noreferrer' : undefined}
+>
+  {Icon && <Icon class="btn-icon" />}
+  <span>{label}</span>
+</a>
+
+<style>
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #fb4ea1 0%, #e03e8f 100%);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(251, 78, 161, 0.4);
+  }
+
+  /* Botón full width (Ver más) */
+  .btn-full {
+    width: 100%;
+    background: transparent;
+    border: 1px dashed rgba(255, 255, 255, 0.25);
+    color: #fb4ea1;
+    margin-top: 12px;
+  }
+
+  .btn-full:hover {
+    background: rgba(251, 78, 161, 0.08);
+  }
+
+  .btn-icon {
+    width: 16px;
+    height: 16px;
+  }
+</style>
