@@ -6,11 +6,10 @@ import Star from "../icons/Star.astro";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const cvPath = lang === 'en' ? '/Resume_YaninaUnrein.pdf' : '/FullStack_YaninaUnrein.pdf';
-const downloadFileName = `YaninaUnrein_CV_${lang.toUpperCase()}.pdf`;
+const cvPath = lang === 'en' ? '/Resume_FullStack_YaninaUnrein.pdf' : '/CV_FullStack_YaninaUnrein.pdf';
 ---
 
-<a href={cvPath} download={downloadFileName} class="magic-btn">
+<a href={cvPath} download class="magic-btn">
     <DownloadI />
     <span data-i18n="aboutMe.btn_dowload">{t('aboutMe.btn_dowload')}</span>
       <div class="star star-1"><Star /></div>
