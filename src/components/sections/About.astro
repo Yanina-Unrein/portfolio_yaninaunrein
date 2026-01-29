@@ -2,19 +2,25 @@
 import Section from "@/components/Section.astro"
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import Download from "@/components/buttons/Download.astro";
-
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
-
 <Section>
      <section id="about" class="about-section">
           <h2 data-i18n="aboutMe.title">{t('aboutMe.title')}</h2>
           <div class="about-container">    
                <div class="img-container">             
-                    <figure class="personal-img">
-                         <img src="/img/aboutMe.webp" loading="lazy" alt="Yanina Unrein">
-                    </figure>
+                    <div class="card-flip">
+                         <div class="card-inner">
+                              <div class="border-wrapper"></div>
+                              <div class="card-front">
+                                   <img src="/img/aboutMe.webp" loading="lazy" alt="Yanina Unrein">
+                              </div>
+                              <div class="card-back">
+                                   <img src="/img/aboutMe-animated.webp" loading="lazy" alt="Yanina Unrein">
+                              </div>
+                         </div>
+                    </div>
                </div>
                <div class="text-container">
                     <h3 data-i18n="aboutMe.subTitle">{t('aboutMe.subTitle')}</h3>
@@ -35,7 +41,6 @@ const t = useTranslations(lang);
      </section>
 </Section>
 
-
 <style>
      .about-section{   
           display: flex;
@@ -43,59 +48,98 @@ const t = useTranslations(lang);
           justify-content: center;
           background-color: #13151a;
      }
-
      .about-container{
           display: flex;
           flex-direction: column;
           color: #fff;
           gap: 25px;
      }
-
      .img-container{
           display: flex;
           align-items: center;
           justify-content: center;
           padding-bottom: 25px;
+          perspective: 1000px;
      }
-
-     .personal-img{
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: column;
-          margin: auto;
+     
+     .card-flip {
           width: 200px;
-          height: 200px;  
+          height: 280px; 
           position: relative;
-          z-index: 1;  
+     }
+     
+     .card-inner {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          transform-style: preserve-3d;
+          animation: flipCard 6s ease-in-out infinite;
+          z-index: 1;
+     }
+     
+     /* Borde que gira CON el flip y TAMBIÉN rota sobre sí mismo */
+    .border-wrapper {
+          position: absolute;
+          inset: -6px;
+          border-radius: 35px;
+          pointer-events: none;
+          z-index: 0;
      }
 
-     .personal-img::before {
+     .border-wrapper::before {
           content: '';
           position: absolute;
-          top: 101px;
-          left: 99px;
-          width: 110%;
-          height: 110%;
-          border-radius: 50%;
-          border: 3px solid transparent;
-          border-top: 3px solid #FF3CAC; 
-          border-right: 3px solid #784BA0; 
-          border-bottom: 3px solid #2B86C5; 
-          box-sizing: border-box;
-          transform: translate(-50%, -50%);
-          animation: spin 2s linear infinite;
-          z-index: 0;  
+          inset: 0;
+          border-radius: inherit;
+          padding: 3px;
+
+          background: linear-gradient(
+          90deg,
+          transparent 0%,
+          #FF3CAC 30%,
+          #784BA0 50%,
+          #2B86C5 70%,
+          transparent 100%
+          );
+
+          background-size: 200% 100%;
+          animation: borderDash 2.5s linear infinite;
+
+          /* Mostrar SOLO el borde */
+          -webkit-mask:
+          linear-gradient(#000 0 0) content-box,
+          linear-gradient(#000 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+     }
+     
+     .card-front,
+     .card-back {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          backface-visibility: hidden;
+          border-radius: 30px; 
+          overflow: hidden;
+          z-index: 2;
+     }
+     
+     .card-front {
+          z-index: 2;
+     }
+     
+     .card-back {
+          transform: rotateY(180deg);
+     }
+     
+     .card-front img,
+     .card-back img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 30px;
      }
  
-     .personal-img img{
-          width: 100%;
-          height: auto;
-          border-radius: 100%;
-          position: relative;
-          z-index: 1;  
-     }
-
      h2{
         font-size: 2.5rem;
         padding: 20px 0 10px 0;
@@ -114,13 +158,11 @@ const t = useTranslations(lang);
         border-bottom: 4px solid #fb4ea1; 
         white-space: nowrap; 
      }
-
      h3{
           font-size: 1.3rem;
           text-align: center;
           color: #784BA0;
      }
-
      p{
           font-size: 1rem;
           line-height: 1.6;        
@@ -132,7 +174,6 @@ const t = useTranslations(lang);
           color: #f97eba;
           font-weight: 400;
      }
-
      .cv-container{
           display: flex;
           flex-direction: column;
@@ -140,79 +181,81 @@ const t = useTranslations(lang);
           gap: 15px;
           padding: 20px 0 0 0;
      }
-
      .cv-container p{
           color: #ffffff;
           text-align: center;
      }
-
      body.open .about-container {
-     visibility: hidden;
+          visibility: hidden;
      }
-
      body.open .about-section {
           display: none;
      }    
-
-
+     
      @media(min-width:768px){
           .about-section{
                justify-content: center;
           }
-
           h2::before {
                width: 5%;           
           }
-
           .about-container{
                flex-direction: row;
                justify-content: center;
           }
-
           .text-container{
                width: 50%;
           }
-          .personal-img{
-               width: 250px;
-               height: 250px;
+          .card-flip{
+               width: 280px;
+               height: 380px;
           }
-
-          .personal-img::before{
-               top: 127px;
-               left: 125px;
-          }
-
      }
-
+     
      @media(min-width:1024px){
           .about-container{
-              gap: 100px;;
+              gap: 100px;
           }
-
           .text-container{
                display: flex;
                flex-direction: column;
                justify-content: center;
           }
-
-          .text-container h3 , p {
+          .text-container h3, p {
                text-align: left;
+          }
+
+          .text-container p{
+               font-size: 1.1rem;
           }
           
           .cv-container a{
                padding: 20px;
                width: 180px;
           }
-
      }
-
-     @keyframes spin {
-          0% {
-          transform: translate(-50%, -50%) rotate(0deg);
+     
+     @keyframes borderDash {
+  0% {
+    background-position: 200% 0%;
+  }
+  100% {
+    background-position: -200% 0%;
+  }
+}
+     
+     @keyframes flipCard {
+          0%, 100% {
+               transform: rotateY(0deg);
           }
-          100% {
-          transform: translate(-50%, -50%) rotate(360deg);
+          25% {
+               transform: rotateY(0deg);
+          }
+          50% {
+               transform: rotateY(180deg);
+          }
+          75% {
+               transform: rotateY(180deg);
           }
      }
-
 </style>
