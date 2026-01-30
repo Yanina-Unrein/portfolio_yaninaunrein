@@ -2,6 +2,7 @@
 import Section from "@/components/Section.astro"
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import Download from "@/components/buttons/Download.astro";
+import Star from "../icons/Star.astro";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
@@ -23,7 +24,14 @@ const t = useTranslations(lang);
                     </div>
                </div>
                <div class="text-container">
-                    <h3 data-i18n="aboutMe.subTitle">{t('aboutMe.subTitle')}</h3>
+                    <h3 data-i18n="aboutMe.subTitle">
+                         {t('aboutMe.subTitle')}
+                          <span class="stars-container">
+                              <span class="star star-1"><Star /></span>
+                              <span class="star star-2"><Star /></span>
+                              <span class="star star-3"><Star /></span>
+                         </span>
+                    </h3>                   
                     <p data-i18n="aboutMe.description_1">{t('aboutMe.description_1')}</p>
                     <p data-i18n="aboutMe.description_2">{t('aboutMe.description_2')} 
                          <span data-i18n="aboutMe.description_3">{t('aboutMe.description_3')}</span> 
@@ -162,6 +170,56 @@ const t = useTranslations(lang);
           font-size: 1.3rem;
           text-align: center;
           color: #784BA0;
+          position: relative;
+          display: inline-block;
+          width: 100%;
+     }
+
+     .stars-container {
+          position: absolute;
+          top: 5%;
+          transform: translateY(-50%);
+     }
+     
+     .star {
+          position: absolute;
+          display: inline-block;
+          width: 18px;
+          height: 18px;
+          margin: 0 3px;
+          animation: twinkle 2s ease-in-out infinite;
+     }
+     
+     .star :global(svg) {
+          width: 100%;
+          height: 100%;
+     }
+     
+      /* Estrella arriba */
+     .star-1 {
+          width: 14px;
+          height: 14px;
+          top: -20px;
+          right: -10px;
+          animation-delay: 0s;
+     }
+     
+     /* Estrella medio */
+     .star-2 {
+          width: 10px;
+          height: 10px;
+          top: -8px;
+          right: -17px;
+          animation-delay: 0.5s;
+     }
+     
+     /* Estrella abajo a la misma línea aprox */
+     .star-3 {
+          width: 12px;
+          height: 12px;
+          top: -28px;
+          right: -25px;
+          animation-delay: 1s;
      }
      p{
           font-size: 1rem;
@@ -191,6 +249,17 @@ const t = useTranslations(lang);
      body.open .about-section {
           display: none;
      }    
+
+      @keyframes twinkle {
+          0%, 100% {
+               opacity: 1;
+               transform: scale(1);
+          }
+          50% {
+               opacity: 0.3;
+               transform: scale(0.7);
+          }
+     }
      
      @media(min-width:768px){
           .about-section{
@@ -223,6 +292,27 @@ const t = useTranslations(lang);
           }
           .text-container h3, p {
                text-align: left;
+          }
+
+          .star-1 {
+               top: -20px;
+               right: -10px;
+          }
+
+          /* Estrella medio */
+          .star-2 {
+               top: -4px;
+               right: -8px;
+          }
+          
+          /* Estrella abajo a la misma línea aprox */
+          .star-3 {
+               top: -28px;
+               right: 9px;
+          }
+
+          .stars-container {
+               margin-left: 15px;
           }
 
           .text-container p{
