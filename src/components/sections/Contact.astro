@@ -2,51 +2,155 @@
 import ContactForm from "@/components/component/ContactForm.astro";
 import Section from "@/components/Section.astro"
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import Linkedin from "../icons/Linkedin.astro";
+import GithubCard from "../icons/GithubCard.astro";
+import SocialExpandButton from "../buttons/SocialExpandButton.astro";
+import LinkedinContact from "../icons/LinkedinContact.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 <Section>
-    <div id="contacto" class="contact-container">
+    <section id="contacto" class="contact-container">
         <h2>{t('contact.title')}</h2>
-        <ContactForm />
-    </div>
+
+        <div class="contact-grid">
+
+        <div class="contact-left">
+            <p class="contact-paragraph">{t('contact.parrafo')}</p>
+            <img 
+            src="/img/about_hero.webp" 
+            alt="Contacto Yanina Unrein"
+            loading="lazy"
+            />
+
+           <div class="social-buttons">
+            <SocialExpandButton
+                href="https://www.linkedin.com/in/yaninaunrein/"
+                label="LinkedIn"
+                variant="linkedin"
+            >
+                <LinkedinContact />
+            </SocialExpandButton>
+
+            <SocialExpandButton
+                href="https://github.com/Yanina-Unrein"
+                label="GitHub"
+                variant="github"
+            >
+                <GithubCard />
+            </SocialExpandButton>
+            </div>
+        </div>
+
+        <div class="contact-right">
+            <ContactForm />
+        </div>
+
+        </div>
+    </section>
 </Section>
 
 <style>
-    .contact-container {
+.contact-container {
+  margin-bottom: 140px;
+}
+
+.contact-container h2 {
+  font-size: 2.5rem;
+  color: #fff;
+  margin: 30px 0;
+  position: relative;
+}
+
+.contact-container h2::before {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: #fb4ea1;
+}
+
+/* GRID PRINCIPAL */
+.contact-grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 50px 0 20px;
+}
+
+/* IZQUIERDA */
+.contact-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.contact-paragraph {
+  color: #e5e7eb;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 520px;
+  opacity: 0;
+  transform: translateY(15px);
+  animation: contactFadeIn 1s ease forwards;
+  animation-delay: 0.2s;
+}
+
+
+/* ANIMACIÓN DE ENTRADA */
+@keyframes contactFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.contact-left img {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 16px;
+  box-shadow: rgba(0,0,0,0.3) 0px 20px 50px;
+}
+
+/* DERECHA */
+.contact-right {
+  display: flex;
+  justify-content: center;
+}
+
+.social-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+  }
+
+  .contact-left {
+    align-items: flex-start;
+  }
+
+  .contact-left img{
+    width: 400px;
+  }
+  
+   .contact-right {
+        width: 100%;
         display: flex;
-        flex-direction: column;  
-        background-color: #13151a;
-        margin-bottom: 140px;
     }
-
-    h2{
-        font-size: 2.5rem;
-        padding: 20px 0 10px 0;
-        display: inline-block;
-        position: relative;
-        color: #fff;
-        margin: 30px 0;
-    }
-
-    h2::before {
-        content: '';
-        position: absolute;
-        bottom: 0.80px; 
-        left: 0;
-        width: 15%; 
-        border-bottom: 4px solid #fb4ea1; 
-        white-space: nowrap; 
-    }
-
-    body.open .contact-container {
-        display: none;
-    }
-
-    @media(min-width:768px){
-        .contact-container{
-            align-items: center;          
-        }
-    }
+}
 </style>

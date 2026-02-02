@@ -301,6 +301,7 @@ export default {
   },
   contact: {
     title: "Contact Me",
+    parrafo: "If you think we could work together, write to me — one message can be the start of something great.."
   },
   contactForm: {
     name: "Full Name",

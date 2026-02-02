@@ -300,7 +300,8 @@ export default {
     btn_dowload: "Descargar CV",
   },
   contact: {
-    title: "Contáctame",        
+    title: "Contáctame",    
+    parrafo: "Si creés que podemos trabajar juntos, escribime: un mensaje puede ser el inicio de algo grande."    
   },
   contactForm: {
     name: "Nombre y Apellido", 
