@@ -1,0 +1,85 @@
+---
+const { href, label, variant } = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  class={`btn-social ${variant}`}
+  aria-label={label}
+>
+  <span class="icon">
+    <slot />
+  </span>
+  <span class="text">{label}</span>
+</a>
+
+<style>
+.btn-social {
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  text-decoration: none;
+}
+
+/* ICONO */
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+  z-index: 99;
+}
+
+.icon :global(svg),
+.icon :global(svg path) {
+  width: 18px;
+  height: 18px;
+  fill: #fff !important;
+}
+
+/* TEXTO */
+.text {
+  position: absolute;
+  white-space: nowrap;
+  color: white;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* ANIMACIÓN */
+.btn-social:hover {
+  width: 120px;
+  border-radius: 30px;
+}
+
+.btn-social:hover .text {
+  opacity: 1;
+}
+
+.btn-social:hover .icon {
+  opacity: 0;
+}
+
+/* ===== COLORES POR RED ===== */
+.btn-social.linkedin {
+  background-color: #0A66C2;
+}
+
+.btn-social.github {
+  background-color: #24292e;
+}
+</style>
+

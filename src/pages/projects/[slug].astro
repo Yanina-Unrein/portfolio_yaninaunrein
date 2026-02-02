@@ -2,6 +2,8 @@
 import Layout from '@/layouts/Layout.astro';
 import i18n from '../../i18n/es';
 import Section from '@/components/Section.astro';
+import ExternalLinkIcon from '@/components/icons/ExternalLinkIcon.astro';
+import GithubCard from '@/components/icons/GithubCard.astro';
 
 const { slug } = Astro.params;
 
@@ -17,157 +19,314 @@ if (!project) {
 ---
 
 <Layout title={`${project.title} | Projects`} description={project.description}>
-    <Section>
-        <div class="project-detail">
-            <h1 class="title-project-page">{project.title}</h1>
-            <p class="date">{project.fecha}</p>
+  <Section>
+    <div class="project-detail">
 
-            <img src={project.image} alt={project.title} />
+      <!-- HEADER -->
+      <div class="project-header">
+        <div class="project-info">
+          <h1 class="title-project-page">{project.title}</h1>
+          <p class="date">{project.fecha}</p>
+        </div>
+        <div class="project-logo">
+          <img src={project.image2} alt={`Logo ${project.title}`} />
+        </div>
+      </div>
 
-            <p>{project.descriptionExtend}</p>
+      <!-- IMAGEN PRINCIPAL -->
+      <img src={project.image} alt={project.title} class="main-image" />
 
-            <h3 class="subtitle_projects">{i18n.projects.role_title}</h3>
-            <p>{project.rol}</p>
+       <div class="badges-container">
+            <span class={`state ${project.state.toLowerCase().replace(/\s+/g, '-')}`}>
+                {project.state}
+            </span>
 
-            <h3 class="subtitle_projects">{i18n.projects.technologies_titles}</h3>
-            <div class="tech-pills">
-                {project.tecnologias.map((tech) => (
-                    <span class="tech-pill">{tech}</span>
+            <div class="tags">
+                {project.tags.map(tag => (
+                <span class="tag">{tag}</span>
                 ))}
             </div>
+       </div>
+
+      <!-- DESCRIPCIÓN -->
+      <p>{project.descriptionExtend}</p>
+
+      <!-- ROL -->
+      <h3 class="subtitle_projects">{i18n.projects.role_title}</h3>
+      <p>{project.rol}</p>
+
+      <!-- TECNOLOGÍAS -->
+      <h3 class="subtitle_projects">{i18n.projects.technologies_titles}</h3>
+      <div class="tech-pills">
+        {project.tecnologias.map((tech) => (
+          <span class="tech-pill">{tech}</span>
+        ))}
+      </div>
+
+        <div class="project-links">
+            {project.github && (
+                <a href={project.github} target="_blank" rel="noopener noreferrer" class="btn btn-github">
+                    <GithubCard />
+                    GitHub
+                </a>
+            )}
+
+            {project.url && (
+                <a href={project.url} target="_blank" rel="noopener noreferrer" class="btn btn-live">
+                    <ExternalLinkIcon />
+                    Ver proyecto
+                </a>
+            )}
         </div>
-    </Section>
+
+    </div>
+  </Section>
 </Layout>
 
 <style>
-    .project-detail {
-        margin: 30px auto;
-        padding: 2rem;
-    }
+/* CONTENEDOR */
+.project-detail {
+  margin: 30px auto;
+  padding: 2rem 0;
+}
 
-    .title-project-page {
-        margin: auto;
-        font-size: 2rem;
-        font-weight: 300;
-        animation: lights 5s 750ms linear infinite;
-    }
+/* HEADER */
+.project-header {
+  display: grid;
+  align-items: center;
+  margin-bottom: 3rem;
+}
 
-    .project-detail .date {
-        color: #666;
-        margin-bottom: 1.5rem;
-    }
+.project-info {
+  display: flex;
+  flex-direction: column;
+}
 
-    .project-detail img {
-        width: 100%;
-        height: auto;
-        margin-bottom: 1rem;
-        border-radius: 8px;
-    }
+.project-logo {
+  display: flex;
+  justify-content: center;
+}
 
-    .project-detail p {
-        font-size: 1.125rem;
-        color: #ffffff;
-        line-height: 1.6;
-        margin-bottom: 1.5rem;
-    }
+.project-logo img {
+  max-width: 140px;
+  width: 100%;
+  filter: drop-shadow(0 10px 25px rgba(251, 78, 161, 0.35));
+  transition: transform 0.4s ease;
+}
 
-    .subtitle_projects {
-        font-size: 1.6rem;
-        color: #ffffff;
-        margin: 30px 0;
-        padding: 20px 0 10px 0;
-        position: relative;
-    }
+.project-logo img:hover {
+  transform: rotate(-3deg) scale(1.05);
+}
 
-    .subtitle_projects::before {
-        content: '';
-        position: absolute;
-        bottom: 0.80px; 
-        left: 0;
-        width: 10%; 
-        border-bottom: 4px solid #fb4ea1; 
-        white-space: nowrap; 
-     }
+/* TITULO */
+.title-project-page {
+  font-size: 2rem;
+  font-weight: 300;
+  animation: lights 5s 750ms linear infinite;
+}
 
-    .tech-pills {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-    }
+/* FECHA */
+.date {
+  color: #aaa;
+}
 
-    .tech-pill {
-        padding: 8px 14px;
-        font-size: 0.85rem;
-        font-weight: 500;
-        color: #fff;
-        border-radius: 999px;
-        background: linear-gradient(
-            135deg,
-            rgba(235, 88, 159, 0.399),
-            rgba(120, 75, 160, 0.25)
-        );
-        border: 1px solid rgba(251, 78, 161, 0.35);
-        backdrop-filter: blur(10px);
-        transition: all 0.25s ease;
-    }
+.badges-container{
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
 
-    .tech-pill:hover {
-        transform: translateY(-2px) scale(1.05);
-        box-shadow: 0 0 18px rgba(251, 78, 161, 0.45);
-    }
+/* STATE */
+.state {
+  width: fit-content;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
 
-    @media(min-width:768px){
-        .subtitle_projects::before {
-            width: 5%;           
-        }
-    }
+.state.completado {
+  background: rgba(16, 185, 129, 0.15);
+  color: #1fc908;
+}
 
-    @keyframes lights {
-        0% {
-            color: hsl(230, 40%, 80%);
-            text-shadow:
-            0 0 1em hsla(320, 100%, 50%, 0.2),
-            0 0 0.125em hsla(320, 100%, 60%, 0.3),
-            -1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
-            1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
-        }
-        
-        30% { 
-            color: hsl(230, 80%, 90%);
-            text-shadow:
-            0 0 1em hsla(320, 100%, 50%, 0.5),
-            0 0 0.125em hsla(320, 100%, 60%, 0.5),
-            -0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2),
-            0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
-        }
-        
-        40% { 
-            color: hsl(230, 100%, 95%);
-            text-shadow:
-            0 0 1em hsla(320, 100%, 50%, 0.5),
-            0 0 0.125em hsla(320, 100%, 90%, 0.5),
-            -0.25em -0.125em 0.125em hsla(40, 100%, 60%, 0.2),
-            0.25em 0.125em 0.125em hsla(200, 100%, 60%, 0.4);
-        }
-        
-        70% {
-            color: hsl(230, 80%, 90%);
-            text-shadow:
-            0 0 1em hsla(320, 100%, 50%, 0.5),
-            0 0 0.125em hsla(320, 100%, 60%, 0.5),
-            0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2),
-            -0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
-        }
-        
-        100% {
-            color: hsl(230, 40%, 80%);
-            text-shadow:
-            0 0 1em hsla(320, 100%, 50%, 0.2),
-            0 0 0.125em hsla(320, 100%, 60%, 0.3),
-            1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
-            -1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
-        }   
-    }
+.state.en-progreso {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+}
+
+/* Inglés */
+.state.completed {
+  background: rgba(16, 185, 129, 0.15);
+  color: #1fc908;
+}
+
+.state.in-progress {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+}
+
+/* TAGS */
+.tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 0.7rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ddd;
+}
+
+/* LINKS */
+.project-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 3rem 0;
+  flex-wrap: wrap;
+   border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 1.5rem;
+}
+
+/* Base */
+.project-links .btn {
+  font-size: 0.85rem;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.project-links .btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* GitHub */
+.btn-github {
+  background: rgba(15, 23, 42, 0.8); /* slate oscuro */
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  color: #e5e7eb;
+}
+
+.btn-github:hover {
+  background: rgba(30, 41, 59, 0.95);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Live / Deploy */
+.btn-live {
+  background: linear-gradient(
+    135deg,
+    #fb4ea1,
+    #784ba0
+  );
+  color: #fff;
+  border: none;
+}
+
+.btn-live:hover {
+  box-shadow: 0 0 25px rgba(251, 78, 161, 0.55);
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* IMAGEN */
+.main-image {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+/* TEXTO */
+.project-detail p {
+  font-size: 1.125rem;
+  color: #ffffff;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* SUBTITULOS */
+.subtitle_projects {
+  font-size: 1.6rem;
+  color: #ffffff;
+  margin: 30px 0;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.subtitle_projects::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 10%;
+  border-bottom: 4px solid #fb4ea1;
+}
+
+/* TECHS */
+.tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tech-pill {
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #fff;
+  border-radius: 999px;
+  background: linear-gradient(
+    135deg,
+    rgba(235, 88, 159, 0.4),
+    rgba(120, 75, 160, 0.25)
+  );
+  border: 1px solid rgba(251, 78, 161, 0.35);
+  backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+}
+
+.tech-pill:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 0 18px rgba(251, 78, 161, 0.45);
+}
+
+/* DESKTOP */
+@media (min-width: 768px) {
+  .project-header {
+    grid-template-columns: 1fr auto;
+  }
+
+  .subtitle_projects::before {
+    width: 5%;
+  }
+}
+
+/* ANIMACION TITULO */
+@keyframes lights {
+  0% {
+    color: hsl(230, 40%, 80%);
+    text-shadow: 0 0 1em hsla(320, 100%, 50%, 0.2);
+  }
+  50% {
+    color: hsl(230, 100%, 95%);
+    text-shadow: 0 0 1em hsla(320, 100%, 60%, 0.6);
+  }
+  100% {
+    color: hsl(230, 40%, 80%);
+    text-shadow: 0 0 1em hsla(320, 100%, 50%, 0.2);
+  }
+}
 </style>
