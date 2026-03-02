@@ -1,7 +1,8 @@
 ---
-import {ICONS} from "@/data/iconsTecnologies";
+import { CORE_ICONS, ADDITIONAL_ICONS } from "@/data/iconsTecnologies";
 import Carrousel from "@/components/component/Carrousel.astro";
-import Section from "@/components/Section.astro"
+import Section from "@/components/Section.astro";
+import Technologie from "@/components/icons/Technologie.astro";
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
@@ -9,86 +10,111 @@ const t = useTranslations(lang);
 ---
 
 <Section>
-    <div id="technologies" class="section-tecnologies">
-        <div class="technologies-container">
-            <h2>{t('technologies.title')}</h2>
-            <p>{t('technologies.description_1')}</p>
-            <p>{t('technologies.description_2')}</p>
-            <p>
-                {t('technologies.linkTextPrefix')}
-                <a href="https://www.linkedin.com/in/yaninaunrein/" target="_blank">LinkedIn</a>
-                <span>{t('technologies.linkTextSuffix')}</span>
-            </p>
-        </div>
-        <Carrousel classlist={['project-element']} icons={ICONS} />
+  <div id="technologies" class="section-technologies">
+
+    <div class="technologies-container">
+      <h2>{t('technologies.title')}</h2>
+      <p>{t('technologies.description_1')}</p>
+      <p>{t('technologies.description_2')}</p>
+      <p>
+        {t('technologies.linkTextPrefix')}
+        <a href="https://www.linkedin.com/in/yaninaunrein/" target="_blank">LinkedIn</a>
+        <span>{t('technologies.linkTextSuffix')}</span>
+      </p>
     </div>
+
+    {/* CORE STACK */}
+    <Carrousel icons={CORE_ICONS} />
+
+    {/* ADDITIONAL */}
+    <h3 class="additional-title">
+      {lang === 'es' ? 'También he trabajado con' : 'Also Worked With'}
+    </h3>
+
+    <div class="additional-grid">
+      {ADDITIONAL_ICONS.map(icon => (
+        <div class="icon-wrapper">
+          <Technologie svgPath={icon.svgPath} />
+          <p class="icon-name">{icon.name}</p>
+        </div>
+      ))}
+    </div>
+
+  </div>
 </Section>
 
 <style>
-    .section-tecnologies {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;  
-        background-color: #13151a;
-        text-align: center;
-    }
+  .section-technologies {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #13151a;
+    text-align: center;
+    padding-bottom: 60px;
+  }
 
-    h2{
-        font-size: 2rem;
-        padding: 20px 0 10px 0;
-        display: inline-block;
-        position: relative;
-        color: #fff;
-        margin: 10px 0;
-    }
+  h2 {
+    font-size: 2rem;
+    padding: 20px 0 10px 0;
+    color: #fff;
+    position: relative;
+  }
 
-    h2::before {
-        content: '';
-        position: absolute;
-        bottom: 0.80px; 
-        left: 0;
-        width: 15%; 
-        border-bottom: 4px solid #fb4ea1; 
-        white-space: nowrap; 
-    }
+  h2::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 15%;
+    border-bottom: 4px solid #fb4ea1;
+  }
 
-    p{
-        font-size: 1.1rem;
-        line-height: 1.6;
-        text-align: center;
-        color: #fff;
-    }
-    a{
-        color: #61aee5;
-        transition: 0.3s ease-in;
-    }
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #fff;
+  }
 
-    a:hover{
-        cursor: pointer;
-        transform: translateY(-10px);
-        color: #FF3CAC;
-        text-decoration: underline;
+  a {
+    color: #61aee5;
+    transition: 0.3s ease;
+  }
+
+  a:hover {
+    color: #FF3CAC;
+    text-decoration: underline;
+  }
+
+  .additional-title {
+    margin-top: 50px;
+    font-size: 1.2rem;
+    color: #bbb;
+  }
+
+  .additional-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 30px;
+    margin-top: 25px;
+    max-width: 800px;
+    width: 100%;
+  }
+
+  .additional-grid .icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .additional-grid .icon-name {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #ccc;
+  }
+
+  @media(min-width: 1024px) {
+    .technologies-container {
+      max-width: 900px;
     }
-
-    body.open .section-tecnologies, body.open .project-element {
-        display: none;
-    }
-
-    body.open h2, body.open p {
-        display: none;
-   }
-
-
-    @media(min-width:768px){
-        .technologies-container{
-            max-width: 500px;       
-        }
-    }
-
-     @media(min-width:1024px){
-        .technologies-container{
-            max-width: 950px;       
-        }
-    }
+  }
 </style>

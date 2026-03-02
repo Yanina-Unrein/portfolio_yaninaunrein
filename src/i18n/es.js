@@ -1,7 +1,7 @@
 export default {
   seo: {
-    title: "Yanina Unrein - Fullstack Developer",
-    metadescription: "Desarrolladora Full Stack con experiencia en sitios web y aplicaciones escalables. Explora mis proyectos, las tecnologías que utilizo y conoce más sobre mí. Contáctame para colaborar en tu próximo desafío digital."
+    title: "Yanina Unrein | FullStack Developer | Angular • React • Node.js",
+    metadescription: "FullStack Developer con experiencia en desarrollo de aplicaciones web modernas utilizando Angular, React, Node.js y NestJS. Especializada en Frontend y arquitectura FullStack."
   },
   lang: "es",
   navbar: {
@@ -14,7 +14,7 @@ export default {
   },
   hero: {
     text: "Hola, soy Yanina Unrein",
-    slogan: "Frontend-first, pero siempre lista para asumir cualquier desafío fullstack.",
+    slogan: "Desarrolladora FullStack con enfoque en Frontend, construyendo aplicaciones web escalables.",
   },
   experience: {
     title: "Experiencia",
@@ -28,14 +28,13 @@ export default {
         startDate: 'Octubre 2025',
         endDate: "actualidad",
         description: [
-          'Diseñar e implementar interfaces web responsivas y accesibles',
-          'Integrar con APIs y servicios backend',
-          'Mantener coherencia visual y optimizar el rendimiento',
-          'Crear aplicaciones móviles multiplataforma',
-          'Participar en diseño técnico y definición de estándares',
-          'Control de versiones y buenas prácticas de desarrollo',
-          'Detección y resolución de errores',
-          'Mejora continua del código y automatización de despliegues'
+          'Desarrollo de aplicaciones web utilizando Angular y React.',
+          'Integración con APIs REST y servicios backend corporativos.',
+          'Implementación de componentes reutilizables y arquitectura modular.',
+          'Desarrollo de aplicaciones móviles multiplataforma con React Native.',
+          'Optimización de rendimiento y mejora de experiencia de usuario.',
+          'Participación en diseño técnico, definición de estándares y buenas prácticas.',
+          'Trabajo bajo metodologías ágiles (Scrum).'
         ]
       },
       {
@@ -46,10 +45,11 @@ export default {
         startDate: 'Diciembre 2024',
         endDate: "Octubre 2025",
         description: [
-          'Desarrollo y mantenimiento de aplicaciones utilizando Vue.js, React, JavaScript, TypeScript y Vite.',
-          'Desarrollo y mantenimiento de aplicaciones backend usando Spring Boot (Java 8 y 11).',
-          'Complementación de lógica del servidor y optimización de bases de datos Informix para mejorar la performance general.',
-          'Colaboración efectiva con equipos Funcionales, de QA y de UX/UI para asegurar una tasa de aprobación de entregas del 95%.'
+          'Desarrollo y mantenimiento de aplicaciones frontend utilizando React, Vue.js, TypeScript y Vite.',
+          'Implementación y mantenimiento de APIs backend y lógica de negocio con Spring Boot (Java 8/11).',
+          'Optimización de consultas y rendimiento en bases de datos Informix.',
+          'Integración frontend-backend asegurando consistencia y performance.',
+          'Trabajo colaborativo con equipos Funcionales, QA y UX/UI bajo metodologías ágiles.'
         ]
       },
       {
@@ -107,6 +107,23 @@ export default {
     filter_frontend: "Frontend", 
     filter_backend: "Backend",
     items: [
+      {
+        slug: 'sistema-gestora',
+        fecha: 'Enero 2026',
+        state: 'en-progreso',
+        image: '/cardsImg/gestora/logingestora.webp',
+        image2: '/cardsImg/gestora/logo-gestora.svg',
+        collaborate: false,
+        title: 'Gestora - Sistema de Gestión',
+        description: 'Sistema de gestión fullstack con dashboard, autenticación y CRUD de entidades.',
+        descriptionExtend: 'Sistema integral de gestión comercial desarrollado con NestJS, MySQL y TypeORM. Incluye autenticación JWT, arquitectura modular, documentación Swagger y procesamiento asíncrono con Bull. Permite gestión de clientes, productos, presupuestos, facturación electrónica y reportes. Diseñado con enfoque de producción aplicando patrones backend profesionales.',
+        rol: 'FullStack Developer responsable del diseño de la arquitectura, desarrollo frontend en Angular, construcción de APIs backend, manejo de base de datos e implementación del sistema completo.',
+        tecnologias: ['Angular', 'TypeScript', 'Angular Material', 'Node.js', 'NestJS', 'SQL', 'TypeORM', 'JWT', 'Swagger'],
+        viewMore: 'Ver más',
+        tags: ["fullstack","frontend","backend"],
+        github: '',
+        url: ''
+      },
       {
         slug: 'startup-crm',
         fecha: 'octubre 2025',
@@ -239,7 +256,7 @@ export default {
         rol: 'Como desarrolladora fullstack, soy responsable de todo el desarrollo del proyecto, incluyendo el diseño de la interfaz de usuario, la implementación del backend, la gestión de la base de datos y la integración de todas las funcionalidades.',
         tecnologias: ['Angular', 'TypeScript', 'JavaScript', 'Node.js', 'Express', 'MySQL', 'HTML', 'CSS', 'Git', 'GitHub', 'Vercel'],
         viewMore: 'Ver más',
-        tags: ["fullstack"],
+        tags: ["fullstack", "frontend", "backend"],
         github: 'https://github.com/Yanina-Unrein/Spotify_clone',
         url: 'https://spoty-music-clon.vercel.app/'
       },
@@ -281,15 +298,15 @@ export default {
   },
   technologies: {
     title: "Tecnologías",
-    description_1: "Mi área principal de especialización es el desarrollo Frontend pero mi formación es FullStack.",
-    description_2: "HTML, CSS, JS, creación de aplicaciones web pequeñas y medianas con Angular o React, complementos personalizados, funciones, animaciones y codificación de diseños interactivos. También tengo experiencia como desarrolladora con CMS como WordPress, Shopify, CPanel, Wix.",
+    description_1: "Especializada en desarrollo Frontend con Angular y experiencia en construcción de soluciones FullStack modernas.",
+    description_2: "Desarrollo interfaces robustas y escalables utilizando Angular y TypeScript, integradas con APIs REST construidas en Node.js y NestJS. Aplico principios de arquitectura modular, buenas prácticas y optimización de rendimiento para entregar aplicaciones mantenibles y orientadas a producto.",
     linkTextPrefix: "Visita mi ",
-    linkTextSuffix: " para más detalles.",
+    linkTextSuffix: " para más detalles."
   },
   aboutMe: {
     title: "Sobre Mí",
     subTitle: "Hola, soy Yanina Unrein",
-    description_1: "FullStack Developer con 2 años y 3 meses de experiencia especializada en React, Angular y Vue.js. Mi enfoque principal está en el desarrollo Frontend, creando interfaces web modernas, responsivas y accesibles que brindan experiencias de usuario excepcionales.",
+    description_1: "FullStack Developer con más de 2 años de experiencia especializada en React, Angular y Vue.js. Mi enfoque principal está en el desarrollo Frontend, creando interfaces web modernas, responsivas y accesibles que brindan experiencias de usuario excepcionales.",
     description_2: "Poseo sólida experiencia fullstack con Node.js, Java Spring Boot y bases de datos SQL. He trabajado en metodologías ágiles con capacidad comprobada para adaptarme rápidamente a nuevas tecnologías y colaborar efectivamente en equipos multidisciplinarios.",
     description_3: "En julio del 2024 me recibí como",
     description_4: "Técnica en Desarrollo Web y Aplicaciones Digitales",
