@@ -1,76 +1,99 @@
 ---
-import {ICONS} from "../../data/iconsTecnologies";
 import Technologie from "../icons/Technologie.astro";
+
+const { icons, classlist = [] } = Astro.props;
 ---
 
-<div id="linearGradientCarrucel" class="carousel-container">
-  <div id="carrucel" class="carousel">
-    {ICONS.map(icon => (
-        <div class="icon-wrapper">
-          <Technologie svgPath={icon.svgPath} />
-          <p class="icon-name">{icon.name}</p>
-        </div>
+<div class={`carousel-container ${classlist.join(' ')}`}>
+  <div id="carousel" class="carousel">
+    {icons.map((icon: { svgPath: unknown; name: unknown; }) => (
+      <div class="icon-wrapper">
+        <Technologie svgPath={icon.svgPath} />
+        <p class="icon-name">{icon.name}</p>
+      </div>
     ))}
-    {ICONS.map(icon => (
-        <div class="icon-wrapper">
-          <Technologie svgPath={icon.svgPath} />
-          <p class="icon-name">{icon.name}</p>
-        </div>
+
+    {/* duplicado para loop infinito */}
+    {icons.map((icon: { svgPath: unknown; name: unknown; }) => (
+      <div class="icon-wrapper">
+        <Technologie svgPath={icon.svgPath} />
+        <p class="icon-name">{icon.name}</p>
+      </div>
     ))}
   </div>
 </div>
 
 <style>
   .carousel-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     overflow: hidden;
-    padding: 20px 0;
+    padding: 30px 0;
+    position: relative;
+  }
+
+  /* fade lateral elegante */
+  .carousel-container::before,
+  .carousel-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 80px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .carousel-container::before {
+    left: 0;
+    background: linear-gradient(to right, #13151a 0%, transparent 100%);
+  }
+
+  .carousel-container::after {
+    right: 0;
+    background: linear-gradient(to left, #13151a 0%, transparent 100%);
   }
 
   .carousel {
     display: flex;
-    flex-direction: row;
-    gap: 60px; /* Espacio entre iconos */
-    white-space: nowrap; /* Asegúrate de que no haya saltos de línea */
+    gap: 60px;
+    white-space: nowrap;
   }
 
   .icon-wrapper {
-    width: 40px;
+    width: 60px;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
   }
 
   .icon-name {
-    margin-top: 8px; 
-    font-size: 12px;
-    text-align: center;
-    color: #ffffff; 
+    margin-top: 10px;
+    font-size: 13px;
+    color: #ffffff;
+    opacity: 0.8;
+  }
+
+  /* pausa en hover */
+  .carousel-container:hover .carousel {
+    animation-play-state: paused;
   }
 </style>
 
 <script type="module">
   import { gsap } from 'https://cdn.skypack.dev/gsap';
 
-  function initCarrousel() {
-    const carrucel = document.querySelector('#carrucel');
-    const totalWidth = carrucel.scrollWidth / 2; // Ancho total del carrusel
-    const duration = 15; // Cambia esto según tus necesidades
+  function initCarousel() {
+    const carousel = document.querySelector('#carousel');
+    const totalWidth = carousel.scrollWidth / 2;
 
-    // Mueve el carrusel continuamente
-    gsap.to(carrucel, {
+    gsap.to(carousel, {
       x: -totalWidth,
-      duration: duration,
+      duration: 25, // más lento = más elegante
       ease: 'linear',
-      repeat: -1, // Repite la animación infinitamente
-      
+      repeat: -1,
     });
   }
 
-  document.addEventListener('DOMContentLoaded', initCarrousel);
+  document.addEventListener('DOMContentLoaded', initCarousel);
 </script>

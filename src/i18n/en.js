@@ -1,7 +1,7 @@
 export default {
   seo: {
-    title: "Yanina Unrein - Fullstack Developer",
-    metadescription: "Full Stack Developer with experience in building scalable websites and applications. Explore my projects, the technologies I use, and learn more about me. Contact me to collaborate on your next digital challenge."
+    title: "Yanina Unrein | FullStack Developer | Angular & Node.js",
+    metadescription: "FullStack Developer specialized in Angular, React, and Node.js. I build modern, scalable web applications with a strong focus on Frontend and clean architecture."
   },
   lang: "en",
   navbar: {
@@ -14,7 +14,7 @@ export default {
   },
   hero: {
     text: "Hello, I'm Yanina Unrein",
-    slogan: "Frontend-first, but always ready to take on any fullstack challenge.",
+    slogan: "Frontend-focused FullStack Developer building scalable web applications.",
   },
   experience: {
     title: "Experience",
@@ -28,14 +28,13 @@ export default {
         startDate: 'October 2025',
         endDate: "present",
         description: [
-          'Design and implement responsive and accessible web interfaces',
-          'Integrate with APIs and backend services',
-          'Maintain visual consistency and optimize performance',
-          'Create cross-platform mobile applications',
-          'Participate in technical design and definition of standards',
-          'Version control and development best practices',
-          'Bug detection and resolution',
-          'Continuous code improvement and deployment automation'
+          'Developing web applications using Angular and React.',
+          'Integrating REST APIs and backend corporate services.',
+          'Building reusable components and applying modular architecture.',
+          'Developing cross-platform mobile applications with React Native.',
+          'Improving application performance and user experience.',
+          'Participating in technical design decisions and development standards.',
+          'Working in Agile (Scrum) environments.'
         ]
       },
       {
@@ -46,10 +45,11 @@ export default {
         startDate: 'December 2024',
         endDate: "October 2025",
         description: [
-          'Development and maintenance of applications using Vue.js, React, JavaScript, TypeScript, and Vite.',
-          'Development and maintenance of backend applications using Spring Boot (Java 8 and 11).',
-          'Implementation of server-side logic and optimization of Informix databases to enhance overall performance.',
-          'Effective collaboration with Functional, QA, and UX/UI teams to ensure a 95% delivery approval rate.'
+          'Developed and maintained frontend applications using React, Vue.js, TypeScript, and Vite.',
+          'Implemented and maintained backend APIs and business logic with Spring Boot (Java 8/11).',
+          'Optimized database queries and improved overall system performance in Informix environments.',
+          'Ensured seamless frontend-backend integration and application consistency.',
+          'Collaborated with Functional, QA, and UX/UI teams within Agile methodologies.'
         ]
       },
       {
@@ -107,6 +107,23 @@ export default {
     filter_frontend: "Frontend", 
     filter_backend: "Backend",
     items: [
+      {
+        slug: 'sistema-gestora',
+        fecha: 'January 2026',
+        state: 'in-progress',
+        image: '/cardsImg/gestora/logingestora.webp',
+        image2: '/cardsImg/gestora/logo-gestora.svg',
+        collaborate: false,
+        title: 'Gestora - Management System',
+        description: 'Fullstack management system with dashboard, authentication, and CRUD operations.',
+        descriptionExtend: 'Comprehensive commercial management system built with NestJS, MySQL, and TypeORM. Features JWT authentication, modular architecture, Swagger API documentation, and asynchronous processing with Bull. Supports client management, product administration, quotations, electronic invoicing, and reporting. Designed with a production-oriented approach following professional backend architecture patterns.',
+        rol: 'FullStack Developer responsible for system architecture design, Angular frontend development, backend API implementation, database management, and end-to-end system delivery.',
+        tecnologias: ['Angular', 'TypeScript', 'Angular Material', 'Node.js', 'NestJS', 'SQL', 'TypeORM', 'JWT', 'Swagger'],
+        viewMore: 'View more',
+        tags: ["fullstack","frontend","backend"],
+        github: '',
+        url: ''
+      },
       {
         slug: 'startup-crm',
         fecha: 'October 2025',
@@ -239,7 +256,7 @@ export default {
         rol: 'As a fullstack developer, I am responsible for the entire project development, including user interface design, backend implementation, database management, and integration of all functionalities.',
         tecnologias: ['Angular', 'TypeScript', 'JavaScript', 'Node.js', 'Express', 'MySQL', 'HTML', 'CSS', 'Git', 'GitHub', 'Vercel'],
         viewMore: 'View more',
-        tags: ["fullstack"],
+        tags: ["fullstack", "frontend", "backend"],
         github: 'https://github.com/Yanina-Unrein/Spotify_clone',
         url: 'https://spoty-music-clon.vercel.app/'
       },
@@ -281,15 +298,15 @@ export default {
   },
   technologies: {
     title: "Technologies",
-    description_1: "My main area of expertise is Frontend development, but my training is FullStack.",
-    description_2: "HTML, CSS, JS, creating small and medium web applications with Angular or React, custom plugins, functions, animations, and coding interactive designs. I also have experience as a developer with CMS such as WordPress, Shopify, CPanel, Wix.",
-    linkTextPrefix: "Visit my  ",
-    linkTextSuffix: " for more details.",
+    description_1: "Specialized in Frontend development with Angular, with experience building modern FullStack solutions.",
+    description_2: "I develop robust and scalable interfaces using Angular and TypeScript, integrated with REST APIs built in Node.js and NestJS. I apply modular architecture principles, clean code practices, and performance optimization to deliver maintainable, product-oriented applications.",
+    linkTextPrefix: "Visit my ",
+    linkTextSuffix: " for more details."
   },
   aboutMe: {
     title: "About Me",
     subTitle: "Hi, I'm Yanina Unrein",
-    description_1: "FullStack Developer with 2 years and 3 months of experience specialized in React, Angular, and Vue.js. My main focus is on Frontend development, creating modern, responsive, and accessible web interfaces that deliver exceptional user experiences.",
+    description_1: "FullStack Developer with over 2 years of experience specializing in React, Angular, and Vue.js. My main focus is Frontend development, building modern, responsive, and accessible web interfaces that deliver exceptional user experiences.",
     description_2: "I have solid fullstack experience with Node.js, Java Spring Boot, and SQL databases. I've worked in agile methodologies with proven ability to quickly adapt to new technologies and collaborate effectively in multidisciplinary teams.",
     description_3: "In July 2024, I graduated as a",
     description_4: "Web Development and Digital Applications Technician",
